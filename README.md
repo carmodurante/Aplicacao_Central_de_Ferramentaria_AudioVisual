@@ -1,0 +1,2 @@
+# Aplicacao_Central_de_Ferramentaria_AudioVisual
+Aplicação Desktop para Gerenciamento de Recursos de Ferramentaria AudioVisual
