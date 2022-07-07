@@ -87,8 +87,6 @@ Desenvolver uma aplicação para gerenciamento de ferramentas em um ambiente de 
 
     * >
 
-
-
 ## Tabela de Objetos e Relacionamentos
 ---
 #### **Tabela de Ferramentas**
@@ -105,6 +103,7 @@ Desenvolver uma aplicação para gerenciamento de ferramentas em um ambiente de 
 |tipo|Tipo da Ferramenta|string|Nao|elétrica, mecânica, segurança|
 |material|Material da Ferramenta|string|Nao|ferro, madeira, plástico, borracha|
 |tempo_reserva|Tempo máximo de reserva|string|Nao|Mascara para Horas|
+|status_reserva| Status Reserva |boolean|Nao|Se está reservado ou não|
 
 ---
 
@@ -112,14 +111,30 @@ Desenvolver uma aplicação para gerenciamento de ferramentas em um ambiente de 
 #### **Tabela de Técnicos**
 | Nome Campo | Descrição | Tipo | Chave? | Informações |
 | -------- | -------- | -------- | -------- | -------- |
-| id_ferramenta | ID Sequencial Ferramenta     | int     | Sim     |  Text     |
+| id_cpf | CPF   | int     | Sim     |  Mascara de CPF   |
+| nome | Nome   | string     | Nao     |  Texto Livre  |
+| telefone | Telefone  | int     | Nao     |  Mascara para Celular  |
+| turno | Turno   | string     | Nao     |  ListBox - manhã, tarde ou noite  |
+| nome_equipe | Nome da Equipe   | string     | Nao     |  Texto Livre  |
 
 ---
 #### **Tabela de Reservas**
 | Nome Campo | Descrição | Tipo | Chave? | Informações |
 | -------- | -------- | -------- | -------- | -------- |
-| id_ferramenta | ID Sequencial Ferramenta     | int     | Sim     |  Text     |
+| id_reserva |ID Sequencial da reserva| int| Sim     |  Código gerado de forma automática pelo sistema|
+| id_ferramenta | ID Sequencial da Ferramenta     | int| Sim |Código gerado de forma automática pelo sistema|
+| id_cpf | CPF do Técnico   | int     | Sim     |  Mascara de CPF|
+| data_reserva |Data que foi planejada a reserva|date|Nao|Mascara de Datas|
+| hora_reserva |Hora que foi planejada a reserva|time|Nao|Mascara de Horas|
+| data_retirada_reserva |Data ferramenta retirada|date|Nao|Mascara de Datas|
+| hora_retirada_reserva |Hora ferramente retirada|time|Nao|Mascara de Horas|
+| data_devolução_reserva |Data ferramenta devolvida|date|Nao|Mascara de Datas|
+| hora_devolução_reserva |Hora ferramente devolvida|time|Nao|Mascara de Horas|
+| data_devolução_programada |Data ferramenta programada pra devolução|date|Nao|Mascara de Datas|
+| hora_devolução_programada |Hora ferramente programada pra devolucao|time|Nao|Mascara de Horas|
+| status |Status da Reserva|string|Nao|Em andamento, Em atraso, Reservado (Valor gerado de acordo com as datas) |
 
+---
 ## Linha do Tempo do Projeto
 ---
 ```mermaid
