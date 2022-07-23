@@ -159,9 +159,4 @@ gantt
     Integração   :after a1  , 30d
 ```
 
-## Links e Referências
----
-1.  **Referências** 
- >[name=Carmo Durante Neto]
-
 ###### tags: `Documentation` `Projects` `Python`
