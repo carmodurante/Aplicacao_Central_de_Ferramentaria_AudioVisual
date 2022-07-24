@@ -18,7 +18,7 @@ def progress_bar():
 
 ## Salvar Usuário em arquivo
 def salvar_novo_usuario(username, password, email, admin):
-    with open("/data/usuarios.csv", "a") as arquivo_usuarios:
+    with open("data/usuarios.csv", "a") as arquivo_usuarios:
         usuario = [f'\n{username}', f';{password}', f';{email}', f';{admin}']
         arquivo_usuarios.writelines(usuario)
 
@@ -27,7 +27,7 @@ def salvar_novo_usuario(username, password, email, admin):
 def carregar_usuarios(username, password):
     lista_usuarios = []
     validado = False
-    with open("/data/usuarios.csv", "r") as arquivo_usuarios:
+    with open("data/usuarios.csv", "r") as arquivo_usuarios:
         for linha in arquivo_usuarios:
             linha_limpa = linha.strip()
             lista_split = linha_limpa.split(';')
@@ -77,6 +77,7 @@ def create_account():
 
                 except:
                     sg.popup("Operação Cancelada", title='Error', font=8)
+                    break
     window.close()
 
 
@@ -115,10 +116,10 @@ def login():
             sg.popup("Preencha todos os campos!", title='Error', font=8)
 
     window.close()
-    # return logado, admin, window
+    return logado, admin
 
 if __name__ == '__main__':
     try:
-        login()
+        logado, admin = login()
     except:
         print('Erro')

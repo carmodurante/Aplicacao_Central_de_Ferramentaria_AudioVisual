@@ -1,2 +1,0 @@
-CarmoDurante;1234;carmo.durante@gmail.com;True
-gustavo;1234;asdasdasd@gmail.com;True
