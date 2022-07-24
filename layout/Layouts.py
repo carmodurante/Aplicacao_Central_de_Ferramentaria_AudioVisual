@@ -119,28 +119,39 @@ def layout_consulta():
     return tabgrp_consulta
 
 
-def layout_principal(lista_cadastrado_ferramentas, lista_cadastrado_tecnicos, lista_cadastrado_reservas):
-    ########## Definição Tela Principal ##########
-    tabgroup_menu = [
-        # Dados Cabeçalho
-        [sg.T('Central de Ferramentaria AudioVisual', font='_ 16', justification='c', expand_x=True,
-              border_width=10, background_color='white', text_color='black')],
+def layout_principal(lista_cadastrado_ferramentas, lista_cadastrado_tecnicos, lista_cadastrado_reservas,
+                     usuario_logado):
+    # Definição Tela Principal
 
-        # Dados TabGroup Principal
-        [sg.TabGroup([[
-            # TabGroup de Cadastros
-            sg.Tab('Cadastros', layout_cadastro(lista_cadastrado_ferramentas,
-                                                lista_cadastrado_tecnicos,
-                                                lista_cadastrado_reservas),
-                   border_width=5, element_justification='left'),
+    layout_cabecalho = [sg.T('Central de Ferramentaria AudioVisual', font='_ 16', justification='c', expand_x=True,
+                             border_width=10, background_color='white', text_color='black')]
 
-            # TabGroup de Consultas
-            sg.Tab('Consultas', layout_consulta(), border_width=5, element_justification='left')]],
-            tab_location=sg.TAB_LOCATION_TOP, border_width=12, font='_ 12')],
+    layout_footer = [sg.Text('Usuário Logado:', size=(12, 1)),
+                     sg.Text(usuario_logado[0], size=(18, 1), text_color='green'),
+                     sg.Text('Admin: ', size=(5, 1)), sg.Text(usuario_logado[2], size=(18, 1), text_color='red'),
+                     sg.Push(), sg.Text('@DevTeam_05', size=(15, 1), text_color='purple')]
 
-        # Dados Footer
-        [sg.Text('Usuário Logado:', size=(12, 1)), sg.Text('CarmoDurante', size=(18, 1), text_color='green'),
-         sg.Text('Admin: ', size=(5, 1)), sg.Text('False', size=(18, 1), text_color='red'),
-         sg.Push(), sg.Text('@DevTeam_05', size=(15, 1), text_color='purple')]]
+    layout_cadastros = [sg.Tab('Cadastros', layout_cadastro(lista_cadastrado_ferramentas,
+                                                            lista_cadastrado_tecnicos,
+                                                            lista_cadastrado_reservas),
+                               border_width=5, element_justification='left')]
 
-    return tabgroup_menu
+    layout_consultas = [sg.Tab('Consultas', layout_consulta(), border_width=5, element_justification='left')]
+
+    if usuario_logado[2]:
+        tabgroup_menu_admin = [layout_cabecalho,
+                               [sg.TabGroup([
+                                   layout_cadastros,
+                                   layout_consultas],
+                                   tab_location=sg.TAB_LOCATION_TOP, border_width=12, font='_ 12')],
+                               [layout_footer]]
+
+        return tabgroup_menu_admin
+
+    else:
+        tabgroup_menu = [layout_cabecalho,
+                         [sg.TabGroup([layout_consultas],
+                                      tab_location=sg.TAB_LOCATION_TOP, border_width=12, font='_ 12')],
+                         [layout_footer]]
+
+        return tabgroup_menu

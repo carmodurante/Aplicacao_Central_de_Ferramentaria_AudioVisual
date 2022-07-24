@@ -20,23 +20,21 @@ lista_cadastrado_reservas = []
 if __name__ == '__main__':
     usuario_logado = login()
 
-## Define Layout Principal
-layout_principal( lista_cadastrado_ferramentas, lista_cadastrado_tecnicos, lista_cadastrado_reservas)
+    # Define Window
+    window = sg.Window('App Central de Ferramentaria AudioVisual',
+                       layout_principal( lista_cadastrado_ferramentas,
+                                         lista_cadastrado_tecnicos,
+                                         lista_cadastrado_reservas,
+                                         usuario_logado),
+                       resizable=True)
 
-## Define Window
-window = sg.Window('App Central de Ferramentaria AudioVisual',
-                   layout_principal( lista_cadastrado_ferramentas,
-                                     lista_cadastrado_tecnicos,
-                                     lista_cadastrado_reservas),
-                   resizable=True)
-
-## Eventos
-while True:
-    # Read values entered by user
-    try:
-        event, values = window.read()
-    except:
-        break
-    print(event)
-    if event == sg.WIN_CLOSED:  # always, always give a way out!
-        break
+    ## Eventos
+    while True:
+        # Read values entered by user
+        try:
+            event, values = window.read()
+        except:
+            break
+        print(event)
+        if event == sg.WIN_CLOSED:  # always, always give a way out!
+            break
