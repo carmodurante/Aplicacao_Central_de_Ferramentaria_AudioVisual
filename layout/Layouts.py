@@ -2,7 +2,7 @@ import PySimpleGUI as sg
 
 
 def layout_cadastro(lista_cadastrado_ferramentas, lista_cadastrado_tecnicos, lista_cadastrado_reservas):
-    ############ Define Layout Cadastro Ferramentas ############
+    # Define Layout Cadastro Ferramentas
     header_cadastro_ferramentas = ['ID Ferramenta', 'Descrição', 'Fabricante', 'Voltagem', 'Cód. Fabricante',
                                    'Tamanho', 'Unidade Medida', 'Material', 'Tempo Max Reserva', 'Reservado?']
 
@@ -44,7 +44,7 @@ def layout_cadastro(lista_cadastrado_ferramentas, lista_cadastrado_tecnicos, lis
                                         enable_click_events=True,
                                         vertical_scroll_only=False)]]
 
-    ############ Define Layout Cadastro Tecnicos ############
+    # Define Layout Cadastro Tecnicos
     header_cadastro_tecnicos = ['CPF', 'Nome Técnico', 'Telefone/Celular', 'Turno/Período', 'Nome da Equipe']
 
     buttons_cadastro_tecnico = [[sg.Button('Cadastrar', key='CadastrarTecnico', pad=(15, 7), expand_x=True),
@@ -70,7 +70,7 @@ def layout_cadastro(lista_cadastrado_ferramentas, lista_cadastrado_tecnicos, lis
                                     row_height=35,
                                     enable_click_events=True)]]
 
-    ############ Define Layout Cadastro Reservas ############
+    # Define Layout Cadastro Reservas
     layout_cad_reserva = [[sg.Text('Last Job', size=(10, 1)), sg.Input('', key='eLastJ')],
                           [sg.Text('From Date', size=(10, 1)), sg.Input('', key='eJFdt')],
                           [sg.Text('To Date', size=(10, 1)), sg.Input('', key='eJTdt')],
@@ -88,21 +88,21 @@ def layout_cadastro(lista_cadastrado_ferramentas, lista_cadastrado_tecnicos, lis
 
 
 def layout_consulta():
-    ############ Define Layout Consulta Ferramentas ############
+    # Define Layout Consulta Ferramentas
     layout_con_ferramentas = [[sg.Text('Name', size=(10, 1)), sg.Input('', key='eName')],
                               [sg.Text('Date of Birth', size=(10, 1)), sg.Input('', key='eDob')],
                               [sg.Text('Phone No', size=(10, 1)), sg.Input('', key='ePhone')],
                               [sg.Text('Email ID', size=(10, 1)), sg.Input('', key='eEmail')],
                               [sg.Button('Save Personal Details')]]
 
-    ############ Define Layout Consulta Tecnicos ############
+    # Define Layout Consulta Tecnicos
     layout_con_tecnico = [[sg.Text('Highest Qualfication', size=(15, 1)), sg.Input('', key='eQual')],
                           [sg.Text('Year of Qualifying', size=(15, 1)), sg.Input('', key='eYoq')],
                           [sg.Text('Grade', size=(15, 1)), sg.Input('', key='eGrade')],
                           [sg.Text('University/College', size=(15, 1)), sg.Input('', key='eQUniv')],
                           [sg.Button('Save Education Details')]]
 
-    ############ Define Layout Consulta Reservas ############
+    # Define Layout Consulta Reservas
     layout_con_reserva = [[sg.Text('Last Job', size=(10, 1)), sg.Input('', key='eLastJ')],
                           [sg.Text('From Date', size=(10, 1)), sg.Input('', key='eJFdt')],
                           [sg.Text('To Date', size=(10, 1)), sg.Input('', key='eJTdt')],
