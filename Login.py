@@ -1,6 +1,7 @@
 import PySimpleGUI as sg
 
-## Barra de Progresso
+
+# Barra de Progresso
 def progress_bar():
     sg.theme('Black')
     layout = [[sg.Text('Criando sua conta...')],
@@ -16,15 +17,16 @@ def progress_bar():
     window.close()
 
 
-## Salvar Usuário em arquivo
+# Salvar Usuário em arquivo
 def salvar_novo_usuario(username, password, email, admin):
     with open("data/usuarios.csv", "a") as arquivo_usuarios:
-        usuario = [f'\n{username}', f';{password}', f';{email}', f';{admin}']
-        arquivo_usuarios.writelines(usuario)
+        usuario_arquivo = [f'\n{username}', f';{password}', f';{email}', f';{admin}']
+        arquivo_usuarios.writelines(usuario_arquivo)
 
 
-## Carregar Usuários
+# Carregar Usuários
 def carregar_usuarios(username, password):
+    admin = False
     lista_usuarios = []
     validado = False
     with open("data/usuarios.csv", "r") as arquivo_usuarios:
@@ -36,11 +38,13 @@ def carregar_usuarios(username, password):
     for linha in lista_usuarios:
         if username == linha[0] and password == linha[1]:
             validado = True
+            admin = linha[3]
 
-    return validado
+    usuario_validado = [username, validado, admin]
+    return usuario_validado
 
 
-## Criar Conta
+# Criar Conta
 def create_account():
     sg.theme('Black')
     layout = [[sg.T("Cadastrar Usuário", size=(18, 1), font=40, justification='c', expand_x=True, border_width=10,
@@ -81,7 +85,7 @@ def create_account():
     window.close()
 
 
-## Logar
+# Logar
 def login():
     sg.theme("Black")
 
@@ -94,8 +98,7 @@ def login():
                sg.Button("Cadastrar", pad=(10, 20), key='CadastrarUsuario', auto_size_button=True, expand_x=True)]]
 
     window = sg.Window("Log In", layout)
-    logado = False
-
+    usuario_logado = []
     while True:
         try:
             event, values = window.read()
@@ -103,12 +106,12 @@ def login():
                 break
             else:
                 if event == "SubmitLogin":
-                    if carregar_usuarios(values['UsernameLogin'], values['PasswordLogin']) == True:
+                    usuario_logado = carregar_usuarios(values['UsernameLogin'], values['PasswordLogin'])
+                    if usuario[1]:
                         print('logado')
-                        logado = True
                         break
                     else:
-                        sg.popup("Login inválido", title='Erro Log In', font=8,)
+                        sg.popup("Login inválido", title='Erro Log In', font=8, )
 
                 elif event == 'CadastrarUsuario':
                     create_account()
@@ -116,10 +119,8 @@ def login():
             sg.popup("Preencha todos os campos!", title='Error', font=8)
 
     window.close()
-    return logado, admin
+    return usuario_logado
+
 
 if __name__ == '__main__':
-    try:
-        logado, admin = login()
-    except:
-        print('Erro')
+    usuario = login()
