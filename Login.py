@@ -8,7 +8,7 @@ def progress_bar():
               [sg.ProgressBar(1800, orientation='h', size=(30, 30), key='progbar')],
               [sg.Cancel()]]
 
-    window = sg.Window('Cadastrando...', layout)
+    window = sg.Window('Executando...', layout)
     for i in range(1800):
         event, values = window.read(timeout=1)
         if event == 'Cancel' or event == sg.WIN_CLOSED:
@@ -16,6 +16,20 @@ def progress_bar():
         window['progbar'].update_bar(i + 1)
     window.close()
 
+# Barra de Progresso para Login
+def progress_bar_login():
+    sg.theme('Black')
+    layout = [[sg.Text('Entrando na aplicação...')],
+              [sg.ProgressBar(1800, orientation='h', size=(30, 30), key='progbar')],
+              [sg.Cancel()]]
+
+    window = sg.Window('Executando...', layout)
+    for i in range(1800):
+        event, values = window.read(timeout=1)
+        if event == 'Cancel' or event == sg.WIN_CLOSED:
+            break
+        window['progbar'].update_bar(i + 1)
+    window.close()
 
 # Salvar Usuário em arquivo
 def salvar_novo_usuario(username, password, email, admin):
@@ -40,7 +54,7 @@ def carregar_usuarios(username, password):
             validado = True
             admin = linha[3]
 
-    usuario_validado = [username, validado, admin]
+    usuario_validado = {'username':username, 'validado':validado, 'admin':admin}
     return usuario_validado
 
 
@@ -98,7 +112,7 @@ def login():
                sg.Button("Cadastrar", pad=(10, 20), key='CadastrarUsuario', auto_size_button=True, expand_x=True)]]
 
     window = sg.Window("Log In", layout)
-    usuario_logado = []
+    usuario_logado = {}
     while True:
         try:
             event, values = window.read()
@@ -107,7 +121,7 @@ def login():
             else:
                 if event == "SubmitLogin":
                     usuario_logado = carregar_usuarios(values['UsernameLogin'], values['PasswordLogin'])
-                    if usuario_logado[1]:
+                    if usuario_logado['validado']:
                         print('logado')
                         break
                     else:
@@ -121,6 +135,3 @@ def login():
     window.close()
     return usuario_logado
 
-
-# if __name__ == '__main__':
-#     usuario = login()

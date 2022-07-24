@@ -122,13 +122,18 @@ def layout_consulta():
 def layout_principal(lista_cadastrado_ferramentas, lista_cadastrado_tecnicos, lista_cadastrado_reservas,
                      usuario_logado):
     # Definição Tela Principal
+    color = ''
+    if usuario_logado['admin'] == 'True':
+        color = 'green'
+    else:
+        color = 'red'
 
     layout_cabecalho = [sg.T('Central de Ferramentaria AudioVisual', font='_ 16', justification='c', expand_x=True,
                              border_width=10, background_color='white', text_color='black')]
 
     layout_footer = [sg.Text('Usuário Logado:', size=(12, 1)),
-                     sg.Text(usuario_logado[0], size=(18, 1), text_color='green'),
-                     sg.Text('Admin: ', size=(5, 1)), sg.Text(usuario_logado[2], size=(18, 1), text_color='red'),
+                     sg.Text(usuario_logado['username'], size=(18, 1), text_color='green'),
+                     sg.Text('Admin: ', size=(5, 1)), sg.Text(usuario_logado['admin'], size=(18, 1), text_color=color),
                      sg.Push(), sg.Text('@DevTeam_05', size=(15, 1), text_color='purple')]
 
     layout_cadastros = [sg.Tab('Cadastros', layout_cadastro(lista_cadastrado_ferramentas,
@@ -138,7 +143,7 @@ def layout_principal(lista_cadastrado_ferramentas, lista_cadastrado_tecnicos, li
 
     layout_consultas = [sg.Tab('Consultas', layout_consulta(), border_width=5, element_justification='left')]
 
-    if usuario_logado[2]:
+    if usuario_logado['admin'] == 'True':
         tabgroup_menu_admin = [layout_cabecalho,
                                [sg.TabGroup([
                                    layout_cadastros,
