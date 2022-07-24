@@ -1,5 +1,7 @@
 import PySimpleGUI as sg
-from Layouts import layout_principal
+from layout.Layouts import layout_principal
+from Login import login
+
 
 # Define o tema
 sg.theme('Black')
@@ -14,6 +16,9 @@ lista_cadastrado_tecnicos = [['46794179865', 'Carmo Durante Neto', '16992180889'
                              ['12345678910', 'Jose Carlos', '1699111111', 'Noite', 'Titans']]
 
 lista_cadastrado_reservas = []
+
+if __name__ == '__main__':
+    usuario_logado = login()
 
 ## Define Layout Principal
 layout_principal( lista_cadastrado_ferramentas, lista_cadastrado_tecnicos, lista_cadastrado_reservas)

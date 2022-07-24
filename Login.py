@@ -107,7 +107,7 @@ def login():
             else:
                 if event == "SubmitLogin":
                     usuario_logado = carregar_usuarios(values['UsernameLogin'], values['PasswordLogin'])
-                    if usuario[1]:
+                    if usuario_logado[1]:
                         print('logado')
                         break
                     else:
@@ -122,5 +122,5 @@ def login():
     return usuario_logado
 
 
-if __name__ == '__main__':
-    usuario = login()
+# if __name__ == '__main__':
+#     usuario = login()
