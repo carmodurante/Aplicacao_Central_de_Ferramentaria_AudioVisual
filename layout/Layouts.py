@@ -68,7 +68,8 @@ def layout_cadastro(lista_cadastrado_ferramentas, lista_cadastrado_tecnicos, lis
                                     num_rows=6,
                                     key='-TABLE_CAD_TECNICOS-',
                                     row_height=35,
-                                    enable_click_events=True)]]
+                                    enable_click_events=True,
+                                    expand_x=True)]]
 
     # Define Layout Cadastro Reservas
     layout_cad_reserva = [[sg.Text('Last Job', size=(10, 1)), sg.Input('', key='eLastJ')],
