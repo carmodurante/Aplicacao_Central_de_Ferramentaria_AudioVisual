@@ -2,6 +2,11 @@ import PySimpleGUI as sg
 
 
 def layout_cadastro(lista_cadastrado_ferramentas, lista_cadastrado_tecnicos, lista_cadastrado_reservas):
+
+    file_types = [("JPEG (*.jpeg)", "*.jpeg"),
+                  ("JPG (*.jpg)", "*.jpg"),
+                  ("PNG (*.png)", "*.png")]
+
     # Define Layout Cadastro Ferramentas
     header_cadastro_ferramentas = ['ID Ferramenta', 'Descrição', 'Fabricante', 'Voltagem', 'Cód. Fabricante',
                                    'Tamanho', 'Unidade Medida', 'Material', 'Tempo Max Reserva', 'Reservado?']
@@ -18,18 +23,18 @@ def layout_cadastro(lista_cadastrado_ferramentas, lista_cadastrado_tecnicos, lis
                                sg.Text('(Volts)', size=(7, 1)),
                                sg.VerticalSeparator(pad=((180,15), (1,1)) ),
                                sg.Text('Código no Fabricante', size=(18, 1)), sg.Input('', key='fFabricante', size=25)],
-                              [sg.Text('Tamanho', size=(18, 1)), sg.Input('', key='fTamanho', size=20),  # Listbox
+                              [sg.Text('Tamanho', size=(18, 1)), sg.Input('', key='fTamanho', size=20),
                                sg.VerticalSeparator(pad=((193, 15), (1, 1))),
-                               sg.Text('Unidade de Medida', size=(18, 1)), sg.Input('', key='fUnidade', size=25)],  # Listbox
-                              [sg.Text('Tipo da Ferramenta', size=(18, 1)), sg.Input('', key='fTipo', size=35),  # Listbox
+                               sg.Text('Unidade de Medida', size=(18, 1)), sg.Input('', key='fUnidade', size=25)],
+                              [sg.Text('Tipo da Ferramenta', size=(18, 1)), sg.Input('', key='fTipo', size=35),
                                sg.VerticalSeparator(pad=((88, 15), (1, 1))),
                                sg.Text('Material da Ferramenta', size=(18, 1)), sg.Input('', key='fMaterial')],
-                              # Listbox
                               [sg.Text('Tempo Max. de Reserva', size=(18, 1)),
                                sg.Input('', key='fTempoReserva', size=6, ),
                                sg.Text('(Horas)', size=(7, 1)),
-                               sg.VerticalSeparator(pad=((221, 15), (1, 1)))],
-
+                               sg.VerticalSeparator(pad=((221, 15), (1, 1))),
+                               sg.Text('Imagem da Ferramenta', size=(18, 1)), sg.Input('', key="fImagem"),
+                               sg.FileBrowse(file_types=file_types, button_text='Carregar Imagem', auto_size_button=True)],
                               [sg.Frame('Opções de Cadastro de Ferramentas', layout=buttons_cadastro_ferramentas,
                                         element_justification='left', expand_x=True, pad=(10, 10))],
                               [sg.Table(values=lista_cadastrado_ferramentas,
@@ -56,7 +61,10 @@ def layout_cadastro(lista_cadastrado_ferramentas, lista_cadastrado_tecnicos, lis
                           [sg.Text('Celular/Rádio', size=(18, 1)), sg.Input('', key='tTelefone', size=11)],
                           [sg.Text('Turno', size=(18, 1)), sg.Combo(['Manhã', 'Tarde', 'Noite'],
                                                                     default_value='Manhã', key='fTurno', size=9)],
-                          [sg.Text('Nome da Equipe', size=(18, 1)), sg.Input('', key='tEquipe')],
+                          [sg.Text('Nome da Equipe', size=(18, 1)), sg.Input('', key='tEquipe'),
+                           sg.VerticalSeparator(pad=((18, 15), (1, 1))),
+                           sg.Text('Imagem do Técnico', size=(18, 1)), sg.Input('', key="tImagem"),
+                           sg.FileBrowse(file_types=file_types, button_text='Carregar Imagem', auto_size_button=True)],
                           [sg.Frame('Opções de Cadastro de Técnicos', layout=buttons_cadastro_tecnico,
                                     element_justification='left', expand_x=True, pad=(10, 10))],
                           [sg.Table(values=lista_cadastrado_tecnicos,
