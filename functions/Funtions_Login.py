@@ -35,7 +35,7 @@ def progress_bar_login():
 
 # Salvar Usuário em arquivo
 def salvar_novo_usuario(username, password, email, admin):
-    with open("../content/data/usuarios.csv", "a") as arquivo_usuarios:
+    with open("content/data/usuarios.csv", "a") as arquivo_usuarios:
         usuario_arquivo = [f'\n{username}', f';{password}', f';{email}', f';{admin}']
         arquivo_usuarios.writelines(usuario_arquivo)
 
@@ -45,7 +45,7 @@ def carregar_usuarios(username, password):
     admin = False
     lista_usuarios = []
     validado = False
-    with open("../content/data/usuarios.csv", "r") as arquivo_usuarios:
+    with open("content/data/usuarios.csv", "r") as arquivo_usuarios:
         for linha in arquivo_usuarios:
             linha_limpa = linha.strip()
             lista_split = linha_limpa.split(';')
