@@ -27,9 +27,9 @@ def main():
             break
         if event == "Load Image":
             # filename = values["-FILE-"]
-            filename = "image/1111.jpeg"
+            filename = "images/1111.jpeg"
             if os.path.exists(filename):
-                # image = Image.open(values["-FILE-"])
+                # images = Image.open(values["-FILE-"])
                 image = Image.open(filename)
                 image.thumbnail((180, 180))
                 bio = io.BytesIO()
@@ -37,7 +37,7 @@ def main():
                 window["-IMAGE-"].update(data=bio.getvalue())
         elif event == 'Save':
             image = Image.open(filename)
-            image.save(fp='image/1112.jpeg', format='JPEG')
+            image.save(fp='images/1112.jpeg', format='JPEG')
 
     window.close()
 
