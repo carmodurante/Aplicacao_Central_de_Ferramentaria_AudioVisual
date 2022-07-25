@@ -1,6 +1,7 @@
 import PySimpleGUI as sg
-from layouts.Layouts import layout_principal
+
 from functions.Functions_Login import login
+from layouts.Layouts import layout_principal
 
 # Define o tema
 sg.theme('Black')
@@ -15,21 +16,22 @@ lista_cadastrado_tecnicos = [['46794179865', 'Carmo Durante Neto', '16992180889'
                              ['12345678910', 'Jose Carlos', '1699111111', 'Noite', 'Titans']]
 
 lista_cadastrado_reservas = [['1099', '1001', '46794179865', '25/07/22', '12:00', '27/07/22', '09:30', '', '', 'False'],
-                             ['1100', '1002', '1111119865', '20/07/22', '11:00', '25/07/22', '12:30', '23/07/22', '09:00', 'False']]
+                             ['1100', '1002', '1111119865', '20/07/22', '11:00', '25/07/22', '12:30', '23/07/22',
+                              '09:00', 'False']]
 
 if __name__ == '__main__':
     try:
         usuario_logado = login()
-        if usuario_logado['validado']: # Validado
+        if usuario_logado['validado']:  # Validado
             # progress_bar_login()
 
             # Define Window
             window = sg.Window('App Central de Ferramentaria AudioVisual',
-                               layout_principal( lista_cadastrado_ferramentas,
-                                                 lista_cadastrado_tecnicos,
-                                                 lista_cadastrado_reservas,
-                                                 usuario_logado),
-                               resizable=True, size=(1250,670))
+                               layout_principal(lista_cadastrado_ferramentas,
+                                                lista_cadastrado_tecnicos,
+                                                lista_cadastrado_reservas,
+                                                usuario_logado),
+                               resizable=True, size=(1250, 670))
 
             ## Eventos
             while True:
@@ -43,4 +45,3 @@ if __name__ == '__main__':
                     break
     except:
         exit()
-

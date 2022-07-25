@@ -4,24 +4,29 @@ Missão Certificação - Central de Ferramentas AudioVisual - Estácio
 ---
 
 ### Equipe
+
 * Carmo Durante Neto
 * Gustavo Pereira Arruda
+
 ### Tutotes
+
 * Professor: André Sobral
 * Mestre dos Magos: Roberto Maia
-
 
 ## Objetivo
 ---
 
 ### 📌 Objetivo da Aplicação
-Desenvolver uma aplicação para gerenciamento de ferramentas em um ambiente de produção de contúdo audiovisual de grande porte.
+
+Desenvolver uma aplicação para gerenciamento de ferramentas em um ambiente de produção de contúdo audiovisual de grande
+porte.
 
 
 ## Contexto Geral da Aplicação e Processo
 ---
 
 ### 🧾 Contexto
+
 * > Diferentes equipamentos com diversas necessidades de manutenção
 * > Equipes de manutenção trabalham em turnos
 * > Necessidades de diversas ferramentas específicas e com valores elevados
@@ -29,29 +34,30 @@ Desenvolver uma aplicação para gerenciamento de ferramentas em um ambiente de 
 * > Ferramentas com diversas características técnicas que indicam para qual uso específico elas se aplicam
 * > A correta reserva da ferramenta antes da execução do trabalho é fator crítico de sucesso
 
-
-
 ### 🧾 Descrição do Processo
+
 * > Local onde as ferramentas ficam armazenadas chama-se “Central de Ferramentaria”
 * > As ferramentas precisam ser reservadas com, no mínimo, 24 horas de antecedência
 * > Solicitação de reserva são enviadas por por e-mail para o responsável pela Central
 * > No momento da reserva deve-se informar: Data e Hora da Retirada e da Devolução
 * > Reservas precisam ficar associadas ao técnico responsável pela sua retirada
-* > Uma ferramenta só pode ser reservada se ela estiver disponível na data e hora da retirada, ou seja, não pode estar reservada por outro técnico no momento da retirada
-* > O responsável pela central controla as devoluções de forma a garantir que as ferramentas estarão sempre disponíveis no momento previsto para a próxima retirada
-
+* > Uma ferramenta só pode ser reservada se ela estiver disponível na data e hora da retirada, ou seja, não pode estar
+  reservada por outro técnico no momento da retirada
+* > O responsável pela central controla as devoluções de forma a garantir que as ferramentas estarão sempre disponíveis
+  no momento previsto para a próxima retirada
 
 ## Entregáveis
 ---
 
 ### ✔ Obrigatórios
+
 - [ ] Cadastro de ferramentas
 - [ ] Cadastro de técnicos
 - [ ] Consulta as ferramentas cadastradas
 - [ ] Consulta dos técnicos cadastrados
 
-
 ### 🎉🙌 Bônus
+
 - [ ] Cadastro de reserva de ferramenta
 - [ ] Consulta de reservas de ferramentas
 - [ ] Impressão das reservas de ferramentas
@@ -64,15 +70,19 @@ Desenvolver uma aplicação para gerenciamento de ferramentas em um ambiente de 
 ![](https://i.imgur.com/gN55fVT.png)
 
 ### 🔜 Descrição das Funcionalidades
+
 * > **Tela_Inicial_Menu_Cockpit**
 
     * > Tela inicial/Menu irá conter os botões de naveção para as funcionalidades da aplicação.
-    * > Tela inicial irá ter algumas informações úteis, como por exemplo as últimas 5 reservas feitas e 5 próximas reservas a vencer o prazo de devolução.
+    * > Tela inicial irá ter algumas informações úteis, como por exemplo as últimas 5 reservas feitas e 5 próximas
+      reservas a vencer o prazo de devolução.
 
 * > **Relatórios**
 
-    * > Dentro da sessão de relatórios irá conter botões para cada tipo de consulta possível, a tela de 'Consulta' será a mesma para todas as consultas, mudando apenas o conteudo a ser exibido(*Lista*).
-    * > O mesmo vale para a tela subsequente de 'Descrição' de cada consulta (*Descrição irá abrir como Pop-up ao clicar no item da lista*).
+    * > Dentro da sessão de relatórios irá conter botões para cada tipo de consulta possível, a tela de 'Consulta' será
+      a mesma para todas as consultas, mudando apenas o conteudo a ser exibido(*Lista*).
+    * > O mesmo vale para a tela subsequente de 'Descrição' de cada consulta (*Descrição irá abrir como Pop-up ao clicar
+      no item da lista*).
     * > Descrição deve dar detalhes, utilização e status do item.
 
 * > **Impressão**
@@ -89,6 +99,7 @@ Desenvolver uma aplicação para gerenciamento de ferramentas em um ambiente de 
 
 ## Tabela de Objetos e Relacionamentos
 ---
+
 #### **Tabela de Ferramentas**
 
 | Nome Campo | Descrição | Tipo | Chave? | Informações |
@@ -107,8 +118,8 @@ Desenvolver uma aplicação para gerenciamento de ferramentas em um ambiente de 
 
 ---
 
-
 #### **Tabela de Técnicos**
+
 | Nome Campo | Descrição | Tipo | Chave? | Informações |
 | -------- | -------- | -------- | -------- | -------- |
 | id_cpf | CPF   | int     | Sim     |  Mascara de CPF   |
@@ -118,7 +129,9 @@ Desenvolver uma aplicação para gerenciamento de ferramentas em um ambiente de 
 | nome_equipe | Nome da Equipe   | string     | Nao     |  Texto Livre  |
 
 ---
+
 #### **Tabela de Reservas**
+
 | Nome Campo | Descrição | Tipo | Chave? | Informações |
 | -------- | -------- | -------- | -------- | -------- |
 | id_reserva |ID Sequencial da reserva| int| Sim     |  Código gerado de forma automática pelo sistema|
@@ -137,6 +150,7 @@ Desenvolver uma aplicação para gerenciamento de ferramentas em um ambiente de 
 ---
 ## Linha do Tempo do Projeto
 ---
+
 ```mermaid
 gantt
     title Timeline

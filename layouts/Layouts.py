@@ -1,5 +1,6 @@
 import PySimpleGUI as sg
 
+
 def layout_reserva(lista_cadastrado_reservas):
     # Define Layout Cadastro Reservas
     header_reservas = ['ID Reserva', 'ID Ferramenta', 'CPF do Técnico', 'Data Reserva', 'Hora Reserva',
@@ -75,7 +76,7 @@ def layout_cadastro(lista_cadastrado_ferramentas, lista_cadastrado_tecnicos):
                               [sg.Text('Voltagem de Uso', size=(18, 1)),
                                sg.Combo(['220V', '110V', 'N/D'], default_value='110V', key='fVoltagem', size=10),
                                sg.Text('(Volts)', size=(7, 1)),
-                               sg.VerticalSeparator(pad=((180,15), (1,1)) ),
+                               sg.VerticalSeparator(pad=((180, 15), (1, 1))),
                                sg.Text('Código no Fabricante', size=(18, 1)), sg.Input('', key='fFabricante', size=25)],
                               [sg.Text('Tamanho', size=(18, 1)), sg.Input('', key='fTamanho', size=20),
                                sg.VerticalSeparator(pad=((193, 15), (1, 1))),
@@ -88,7 +89,8 @@ def layout_cadastro(lista_cadastrado_ferramentas, lista_cadastrado_tecnicos):
                                sg.Text('(Horas)', size=(7, 1)),
                                sg.VerticalSeparator(pad=((221, 15), (1, 1))),
                                sg.Text('Imagem da Ferramenta', size=(18, 1)), sg.Input('', key="fImagem"),
-                               sg.FileBrowse(file_types=file_types, button_text='Carregar Imagem', auto_size_button=True)],
+                               sg.FileBrowse(file_types=file_types, button_text='Carregar Imagem',
+                                             auto_size_button=True)],
                               [sg.Frame('Opções de Cadastro de Ferramentas', layout=buttons_cadastro_ferramentas,
                                         element_justification='left', expand_x=True, pad=(10, 10))],
                               [sg.Table(values=lista_cadastrado_ferramentas,
