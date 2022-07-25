@@ -27,7 +27,7 @@ def main():
             break
         if event == "Load Image":
             # filename = values["-FILE-"]
-            filename = "images/1111.jpeg"
+            filename = "functions/images/1111.jpeg"
             if os.path.exists(filename):
                 # images = Image.open(values["-FILE-"])
                 image = Image.open(filename)
@@ -36,6 +36,7 @@ def main():
                 image.save(bio, format='PNG')
                 window["-IMAGE-"].update(data=bio.getvalue())
         elif event == 'Save':
+            filename = "functions/images/1111.jpeg"
             image = Image.open(filename)
             image.save(fp='images/1112.jpeg', format='JPEG')
 

@@ -16,6 +16,7 @@ def progress_bar():
         window['progbar'].update_bar(i + 1)
     window.close()
 
+
 # Barra de Progresso para Login
 def progress_bar_login():
     sg.theme('Black')
@@ -31,9 +32,10 @@ def progress_bar_login():
         window['progbar'].update_bar(i + 1)
     window.close()
 
+
 # Salvar Usuário em arquivo
 def salvar_novo_usuario(username, password, email, admin):
-    with open("../data/usuarios.csv", "a") as arquivo_usuarios:
+    with open("data/usuarios.csv", "a") as arquivo_usuarios:
         usuario_arquivo = [f'\n{username}', f';{password}', f';{email}', f';{admin}']
         arquivo_usuarios.writelines(usuario_arquivo)
 
@@ -43,7 +45,7 @@ def carregar_usuarios(username, password):
     admin = False
     lista_usuarios = []
     validado = False
-    with open("../data/usuarios.csv", "r") as arquivo_usuarios:
+    with open("data/usuarios.csv", "r") as arquivo_usuarios:
         for linha in arquivo_usuarios:
             linha_limpa = linha.strip()
             lista_split = linha_limpa.split(';')
@@ -54,7 +56,7 @@ def carregar_usuarios(username, password):
             validado = True
             admin = linha[3]
 
-    usuario_validado = {'username':username, 'validado':validado, 'admin':admin}
+    usuario_validado = {'username': username, 'validado': validado, 'admin': admin}
     return usuario_validado
 
 
@@ -134,4 +136,3 @@ def login():
 
     window.close()
     return usuario_logado
-
