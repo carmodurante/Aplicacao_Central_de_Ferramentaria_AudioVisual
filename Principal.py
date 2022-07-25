@@ -1,8 +1,6 @@
 import PySimpleGUI as sg
 from layout.Layouts import layout_principal
-from Login import login
-from Login import progress_bar_login
-
+from functions.Functions_Login import login
 
 # Define o tema
 sg.theme('Black')
