@@ -1,8 +1,62 @@
 import PySimpleGUI as sg
 
+def layout_reserva(lista_cadastrado_reservas):
+    # Define Layout Cadastro Reservas
+    header_reservas = ['ID Reserva', 'ID Ferramenta', 'CPF do Técnico', 'Data Reserva', 'Hora Reserva',
+                       'Data Devolução', 'Hora Devolução', 'Data Devol. Efetiva', 'Hora Devol, Efetiva',
+                       'Reserva Emergencial?']
 
-def layout_cadastro(lista_cadastrado_ferramentas, lista_cadastrado_tecnicos, lista_cadastrado_reservas):
+    buttons_cadastro_reserva = [[sg.Button('Reservar', key='ReservarReserva', pad=(15, 7), expand_x=True),
+                                 sg.Button('Modificar', key='ModificarReserva', pad=(15, 7), expand_x=True),
+                                 sg.Button('Devolver', key='DevolverReserva', pad=(15, 7), expand_x=True)]]
 
+    lista_meses = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho',
+                   'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro']
+
+    layout_cad_reserva = [[sg.Text('ID Ferramenta', size=(18, 1)), sg.Input('', key='rFerramenta', size=8),
+                           sg.VerticalSeparator(pad=((277, 15), (1, 1))),
+                           sg.Text('CPF do Técnico', size=(18, 1)), sg.Input('', key='rCPF', size=13)],
+                          [sg.Text('Data da Retirada', size=(18, 1)), sg.Input('', key='rDTRetirada', size=8),
+                           sg.CalendarButton('Escolha a Data', close_when_date_chosen=True,
+                                             target='rDTRetirada', no_titlebar=False,
+                                             format='%d/%m/%y', default_date_m_d_y=(9, None, 2022),
+                                             month_names=lista_meses,
+                                             auto_size_button=True,
+                                             title='Escolha a Data'),
+                           sg.VerticalSeparator(pad=((168, 15), (1, 1))),
+                           sg.Text('Data da Devolução', size=(18, 1)), sg.Input('', key='rDTDevol', size=8),
+                           sg.CalendarButton('Escolha a Data', close_when_date_chosen=True,
+                                             target='rDTDevol', no_titlebar=False,
+                                             format='%d/%m/%y', default_date_m_d_y=(9, None, 2022),
+                                             month_names=lista_meses,
+                                             auto_size_button=True,
+                                             title='Escolha a Data')],
+                          [sg.Text('Horário da Retirada', size=(18, 1)), sg.Input('', key='rHRRetirada', size=5),
+                           sg.Text('(hh:mm)'),
+                           sg.VerticalSeparator(pad=((236, 15), (1, 1))),
+                           sg.Text('Horário da Devolução', size=(18, 1)), sg.Input('', key='rHRDevol', size=5),
+                           sg.Text('(hh:mm)')],
+                          [sg.Text('Reserva Emergencial?', size=(18, 1)),
+                           sg.Checkbox('', key='rEmergencial', default=False, font=16, size=(15, 1))],
+                          [sg.Frame('Opções de Cadastro de Reserva', layout=buttons_cadastro_reserva,
+                                    element_justification='left', expand_x=True, pad=(10, 10))],
+                          [sg.Table(values=lista_cadastrado_reservas,
+                                    headings=header_reservas,
+                                    max_col_width=35,
+                                    auto_size_columns=True,
+                                    display_row_numbers=True,
+                                    justification='left',
+                                    num_rows=7,
+                                    key='-TABLE_CAD_RESERVAS-',
+                                    row_height=35,
+                                    enable_click_events=True,
+                                    vertical_scroll_only=False,
+                                    expand_x=True)]]
+
+    return layout_cad_reserva
+
+
+def layout_cadastro(lista_cadastrado_ferramentas, lista_cadastrado_tecnicos):
     file_types = [("JPEG (*.jpeg)", "*.jpeg"),
                   ("JPG (*.jpg)", "*.jpg"),
                   ("PNG (*.png)", "*.png")]
@@ -43,10 +97,11 @@ def layout_cadastro(lista_cadastrado_ferramentas, lista_cadastrado_tecnicos, lis
                                         auto_size_columns=True,
                                         display_row_numbers=True,
                                         justification='left',
-                                        num_rows=6,
+                                        num_rows=5,
                                         key='-TABLE_CAD_FERRAMENTAS-',
                                         row_height=35,
                                         enable_click_events=True,
+                                        expand_x=True,
                                         vertical_scroll_only=False)]]
 
     # Define Layout Cadastro Tecnicos
@@ -73,24 +128,17 @@ def layout_cadastro(lista_cadastrado_ferramentas, lista_cadastrado_tecnicos, lis
                                     auto_size_columns=True,
                                     display_row_numbers=True,
                                     justification='left',
-                                    num_rows=6,
+                                    num_rows=5,
                                     key='-TABLE_CAD_TECNICOS-',
                                     row_height=35,
                                     enable_click_events=True,
-                                    expand_x=True)]]
-
-    # Define Layout Cadastro Reservas
-    layout_cad_reserva = [[sg.Text('Last Job', size=(10, 1)), sg.Input('', key='eLastJ')],
-                          [sg.Text('From Date', size=(10, 1)), sg.Input('', key='eJFdt')],
-                          [sg.Text('To Date', size=(10, 1)), sg.Input('', key='eJTdt')],
-                          [sg.Text('Company Name', size=(10, 1)), sg.Input('', key='eLJcmpy')],
-                          [sg.Button('Save Experience Details')]]
+                                    expand_x=True,
+                                    vertical_scroll_only=False)]]
 
     # Define o TabGroup Cadastro
     tabgrp_cadastro = [[sg.TabGroup([[
         sg.Tab('Cadastro de Ferramentas', layout_cad_ferramentas, border_width=5, element_justification='left'),
-        sg.Tab('Cadastro de Técnicos      ', layout_cad_tecnico, border_width=5, element_justification='left'),
-        sg.Tab('Cadastro de Reservas     ', layout_cad_reserva, border_width=5, element_justification='left')
+        sg.Tab('Cadastro de Técnicos      ', layout_cad_tecnico, border_width=5, element_justification='left')
     ]], tab_location=sg.TAB_LOCATION_TOP_LEFT, border_width=7, font='_ 12')]]
 
     return tabgrp_cadastro
@@ -131,7 +179,6 @@ def layout_consulta():
 def layout_principal(lista_cadastrado_ferramentas, lista_cadastrado_tecnicos, lista_cadastrado_reservas,
                      usuario_logado):
     # Definição Tela Principal
-    color = ''
     if usuario_logado['admin'] == 'True':
         color = 'green'
     else:
@@ -146,17 +193,20 @@ def layout_principal(lista_cadastrado_ferramentas, lista_cadastrado_tecnicos, li
                      sg.Push(), sg.Text('@DevTeam_05', size=(15, 1), text_color='purple')]
 
     layout_cadastros = [sg.Tab('Cadastros', layout_cadastro(lista_cadastrado_ferramentas,
-                                                            lista_cadastrado_tecnicos,
-                                                            lista_cadastrado_reservas),
+                                                            lista_cadastrado_tecnicos),
                                border_width=5, element_justification='left')]
 
     layout_consultas = [sg.Tab('Consultas', layout_consulta(), border_width=5, element_justification='left')]
+
+    layout_reservas = [sg.Tab('Reservas', layout_reserva(lista_cadastrado_reservas), border_width=5,
+                              element_justification='left')]
 
     if usuario_logado['admin'] == 'True':
         tabgroup_menu_admin = [layout_cabecalho,
                                [sg.TabGroup([
                                    layout_cadastros,
-                                   layout_consultas],
+                                   layout_consultas,
+                                   layout_reservas],
                                    tab_location=sg.TAB_LOCATION_TOP, border_width=12, font='_ 12')],
                                [layout_footer]]
 
