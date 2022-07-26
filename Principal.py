@@ -4,7 +4,7 @@ import PySimpleGUI as sg
 
 import functions.Functions_Cadastros as cadastros
 import functions.Functions_Reservas as reservas
-import functions.Funtions_Login as login
+import functions.Functions_Login as login
 from functions.Functions_Diversos import get_link_url_dev5
 from layouts.Layouts import layout_principal
 
