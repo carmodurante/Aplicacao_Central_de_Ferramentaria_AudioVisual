@@ -2,9 +2,9 @@ import webbrowser as web
 
 import PySimpleGUI as sg
 
-import functions.Functions_Cadastros as cadastros
+import functions.Functions_Cadastro as cadastros
 import functions.Functions_Login as login
-import functions.Functions_Reservas as reservas
+import functions.Functions_Reserva as reservas
 from functions.Functions_Diversos import get_link_url_dev5
 from layouts.Layout_Principal import layout_principal
 
