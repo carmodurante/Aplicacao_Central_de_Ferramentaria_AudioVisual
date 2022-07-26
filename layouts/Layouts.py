@@ -1,8 +1,20 @@
 import PySimpleGUI as sg
 
+def layout_calendario(target_input):
+    lista_meses = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho',
+                   'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro']
+
+    calendario = sg.CalendarButton('Escolha a Data', close_when_date_chosen=True,
+                                   target=target_input, no_titlebar=False,
+                                   format='%d/%m/%y', default_date_m_d_y=(9, None, 2022),
+                                   month_names=lista_meses,
+                                   auto_size_button=True,
+                                   title='Calendário')
+    return calendario
 
 def layout_reserva(lista_cadastrado_reservas):
     # Define Layout Cadastro Reservas
+
     header_reservas = ['ID Reserva', 'ID Ferramenta', 'CPF do Técnico', 'Data Reserva', 'Hora Reserva',
                        'Data Devolução', 'Hora Devolução', 'Data Devol. Efetiva', 'Hora Devol, Efetiva',
                        'Reserva Emergencial?']
@@ -11,27 +23,14 @@ def layout_reserva(lista_cadastrado_reservas):
                                  sg.Button('Modificar', key='ModificarReserva', pad=(15, 7), expand_x=True),
                                  sg.Button('Devolver', key='DevolverReserva', pad=(15, 7), expand_x=True)]]
 
-    lista_meses = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho',
-                   'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro']
-
     layout_cad_reserva = [[sg.Text('ID Ferramenta', size=(18, 1)), sg.Input('', key='rFerramenta', size=13),
                            sg.VerticalSeparator(pad=((242, 15), (1, 1))),
                            sg.Text('CPF do Técnico', size=(18, 1)), sg.Input('', key='rCPF', size=13)],
                           [sg.Text('Data da Retirada', size=(18, 1)), sg.Input('', key='rDTRetirada', size=8),
-                           sg.CalendarButton('Escolha a Data', close_when_date_chosen=True,
-                                             target='rDTRetirada', no_titlebar=False,
-                                             format='%d/%m/%y', default_date_m_d_y=(9, None, 2022),
-                                             month_names=lista_meses,
-                                             auto_size_button=True,
-                                             title='Escolha a Data'),
+                           layout_calendario('rDTRetirada'),
                            sg.VerticalSeparator(pad=((168, 15), (1, 1))),
                            sg.Text('Data da Devolução', size=(18, 1)), sg.Input('', key='rDTDevol', size=8),
-                           sg.CalendarButton('Escolha a Data', close_when_date_chosen=True,
-                                             target='rDTDevol', no_titlebar=False,
-                                             format='%d/%m/%y', default_date_m_d_y=(9, None, 2022),
-                                             month_names=lista_meses,
-                                             auto_size_button=True,
-                                             title='Escolha a Data')],
+                           layout_calendario('rDTDevol')],
                           [sg.Text('Horário da Retirada', size=(18, 1)), sg.Input('', key='rHRRetirada', size=5),
                            sg.Text('(hh:mm)'),
                            sg.VerticalSeparator(pad=((236, 15), (1, 1))),
@@ -204,6 +203,7 @@ def layout_principal(lista_cadastrado_ferramentas, lista_cadastrado_tecnicos, li
     layout_reservas = [sg.Tab('Reservas', layout_reserva(lista_cadastrado_reservas), border_width=5,
                               element_justification='left')]
 
+    # Somente Administradores tem permissão para cadastrar e reservar
     if usuario_logado['admin'] == 'True':
         tabgroup_menu_admin = [layout_cabecalho,
                                [sg.TabGroup([
