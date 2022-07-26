@@ -1,5 +1,9 @@
 import PySimpleGUI as sg
 
+from functions.Functions_Diversos import get_color_admin
+from functions.Functions_Diversos import get_file_types
+
+
 def layout_calendario(target_input):
     lista_meses = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho',
                    'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro']
@@ -12,17 +16,60 @@ def layout_calendario(target_input):
                                    title='Calendário')
     return calendario
 
+
+def get_table_header(table_name):
+    if table_name == 'Reserva':
+        header_reservas = ['ID Reserva', 'ID Ferramenta', 'CPF do Técnico', 'Data Reserva', 'Hora Reserva',
+                           'Data Devolução', 'Hora Devolução', 'Data Devol. Efetiva', 'Hora Devol, Efetiva',
+                           'Reserva Emergencial?']
+
+        return header_reservas
+
+    elif table_name == 'Ferramenta':
+        header_ferramentas = ['ID Ferramenta', 'Descrição', 'Fabricante', 'Voltagem', 'Cód. Fabricante',
+                              'Tamanho', 'Unidade Medida', 'Material', 'Tempo Max Reserva', 'Reservado?']
+
+        return header_ferramentas
+
+    elif table_name == 'Tecnico':
+        header_tecnicos = ['CPF', 'Nome Técnico', 'Telefone/Celular', 'Turno/Período', 'Nome da Equipe']
+
+        return header_tecnicos
+
+
+def get_buttons(layout_name):
+    if layout_name == 'CAD_RESERVA':
+        buttons_cadastro_reserva = [[sg.Button('Reservar', key='ReservarReserva', pad=(15, 7), expand_x=True),
+                                     sg.Button('Modificar', key='ModificarReserva', pad=(15, 7), expand_x=True),
+                                     sg.Button('Devolver', key='DevolverReserva', pad=(15, 7), expand_x=True)]]
+        return buttons_cadastro_reserva
+
+    elif layout_name == 'CAD_FERRAMENTA':
+        buttons_cadastro_ferramentas = [[sg.Button('Cadastrar', key='CadastrarFerramenta', pad=(15, 7), expand_x=True),
+                                         sg.Button('Modificar', key='ModificarFerramenta', pad=(15, 7), expand_x=True),
+                                         sg.Button('Eliminar', key='EliminarFerramenta', pad=(15, 7), expand_x=True)]]
+        return buttons_cadastro_ferramentas
+
+    elif layout_name == 'CAD_TECNICO':
+        buttons_cadastro_tecnico = [[sg.Button('Cadastrar', key='CadastrarTecnico', pad=(15, 7), expand_x=True),
+                                     sg.Button('Modificar', key='ModificarTecnico', pad=(15, 7), expand_x=True),
+                                     sg.Button('Eliminar', key='EliminarTecnico', pad=(15, 7), expand_x=True)]]
+        return buttons_cadastro_tecnico
+
+    elif layout_name == 'CON_RESERVA':
+        return True
+    elif layout_name == 'CON_FERRAMENTA':
+        buttons_consulta_ferramenta = [[sg.Button('Filtrar', key='FiltrarFerramenta', pad=(15, 7), expand_x=True),
+                                        sg.Button('Limpar Filtros', key='LimparFerramenta', pad=(15, 7), expand_x=True),
+                                        sg.Button('Imprimir', key='ImprimirFerramenta', pad=(15, 7), expand_x=True)]]
+        return buttons_consulta_ferramenta
+
+    elif layout_name == 'CON_TECNICO':
+        return True
+
+
 def layout_reserva(lista_cadastrado_reservas):
     # Define Layout Cadastro Reservas
-
-    header_reservas = ['ID Reserva', 'ID Ferramenta', 'CPF do Técnico', 'Data Reserva', 'Hora Reserva',
-                       'Data Devolução', 'Hora Devolução', 'Data Devol. Efetiva', 'Hora Devol, Efetiva',
-                       'Reserva Emergencial?']
-
-    buttons_cadastro_reserva = [[sg.Button('Reservar', key='ReservarReserva', pad=(15, 7), expand_x=True),
-                                 sg.Button('Modificar', key='ModificarReserva', pad=(15, 7), expand_x=True),
-                                 sg.Button('Devolver', key='DevolverReserva', pad=(15, 7), expand_x=True)]]
-
     layout_cad_reserva = [[sg.Text('ID Ferramenta', size=(18, 1)), sg.Input('', key='rFerramenta', size=13),
                            sg.VerticalSeparator(pad=((242, 15), (1, 1))),
                            sg.Text('CPF do Técnico', size=(18, 1)), sg.Input('', key='rCPF', size=13)],
@@ -38,10 +85,10 @@ def layout_reserva(lista_cadastrado_reservas):
                            sg.Text('(hh:mm)')],
                           [sg.Text('Reserva Emergencial?', size=(18, 1)),
                            sg.Checkbox('', key='rEmergencial', default=False, font=16, size=(15, 1))],
-                          [sg.Frame('Opções de Cadastro de Reserva', layout=buttons_cadastro_reserva,
+                          [sg.Frame('Opções de Cadastro de Reserva', layout=get_buttons('CAD_RESERVA'),
                                     element_justification='left', expand_x=True, pad=(10, 10))],
                           [sg.Table(values=lista_cadastrado_reservas,
-                                    headings=header_reservas,
+                                    headings=get_table_header('Reserva'),
                                     max_col_width=35,
                                     auto_size_columns=True,
                                     display_row_numbers=True,
@@ -57,18 +104,7 @@ def layout_reserva(lista_cadastrado_reservas):
 
 
 def layout_cadastro(lista_cadastrado_ferramentas, lista_cadastrado_tecnicos):
-    file_types = [("JPEG (*.jpeg)", "*.jpeg"),
-                  ("JPG (*.jpg)", "*.jpg"),
-                  ("PNG (*.png)", "*.png")]
-
     # Define Layout Cadastro Ferramentas
-    header_cadastro_ferramentas = ['ID Ferramenta', 'Descrição', 'Fabricante', 'Voltagem', 'Cód. Fabricante',
-                                   'Tamanho', 'Unidade Medida', 'Material', 'Tempo Max Reserva', 'Reservado?']
-
-    buttons_cadastro_ferramentas = [[sg.Button('Cadastrar', key='CadastrarFerramenta', pad=(15, 7), expand_x=True),
-                                     sg.Button('Modificar', key='ModificarFerramenta', pad=(15, 7), expand_x=True),
-                                     sg.Button('Eliminar', key='EliminarFerramenta', pad=(15, 7), expand_x=True)]]
-
     layout_cad_ferramentas = [[sg.Text('Descrição', size=(18, 1)), sg.Input('', key='fDescricao'),
                                sg.VerticalSeparator(pad=((18, 15), (1, 1))),
                                sg.Text('Nome do Fabricante', size=(18, 1)), sg.Input('', key='fFabricante')],
@@ -89,12 +125,12 @@ def layout_cadastro(lista_cadastrado_ferramentas, lista_cadastrado_tecnicos):
                                sg.Text('(hh:mm)', size=(7, 1)),
                                sg.VerticalSeparator(pad=((221, 15), (1, 1))),
                                sg.Text('Imagem da Ferramenta', size=(18, 1)), sg.Input('', key="fImagem"),
-                               sg.FileBrowse(file_types=file_types, button_text='Carregar Imagem',
+                               sg.FileBrowse(file_types=get_file_types(), button_text='Carregar Imagem',
                                              auto_size_button=True)],
-                              [sg.Frame('Opções de Cadastro de Ferramentas', layout=buttons_cadastro_ferramentas,
+                              [sg.Frame('Opções de Cadastro de Ferramentas', layout=get_buttons('CAD_FERRAMENTA'),
                                         element_justification='left', expand_x=True, pad=(10, 10))],
                               [sg.Table(values=lista_cadastrado_ferramentas,
-                                        headings=header_cadastro_ferramentas,
+                                        headings=get_table_header('Ferramenta'),
                                         max_col_width=35,
                                         auto_size_columns=True,
                                         display_row_numbers=True,
@@ -107,12 +143,6 @@ def layout_cadastro(lista_cadastrado_ferramentas, lista_cadastrado_tecnicos):
                                         vertical_scroll_only=False)]]
 
     # Define Layout Cadastro Tecnicos
-    header_cadastro_tecnicos = ['CPF', 'Nome Técnico', 'Telefone/Celular', 'Turno/Período', 'Nome da Equipe']
-
-    buttons_cadastro_tecnico = [[sg.Button('Cadastrar', key='CadastrarTecnico', pad=(15, 7), expand_x=True),
-                                 sg.Button('Modificar', key='ModificarTecnico', pad=(15, 7), expand_x=True),
-                                 sg.Button('Eliminar', key='EliminarTecnico', pad=(15, 7), expand_x=True)]]
-
     layout_cad_tecnico = [[sg.Text('CPF', size=(18, 1)), sg.Input('', key='tCPF', size=15)],
                           [sg.Text('Nome', size=(18, 1)), sg.Input('', key='tNome')],
                           [sg.Text('Celular/Rádio', size=(18, 1)), sg.Input('', key='tTelefone', size=11)],
@@ -121,11 +151,12 @@ def layout_cadastro(lista_cadastrado_ferramentas, lista_cadastrado_tecnicos):
                           [sg.Text('Nome da Equipe', size=(18, 1)), sg.Input('', key='tEquipe'),
                            sg.VerticalSeparator(pad=((18, 15), (1, 1))),
                            sg.Text('Imagem do Técnico', size=(18, 1)), sg.Input('', key="tImagem"),
-                           sg.FileBrowse(file_types=file_types, button_text='Carregar Imagem', auto_size_button=True)],
-                          [sg.Frame('Opções de Cadastro de Técnicos', layout=buttons_cadastro_tecnico,
+                           sg.FileBrowse(file_types=get_file_types(), button_text='Carregar Imagem',
+                                         auto_size_button=True)],
+                          [sg.Frame('Opções de Cadastro de Técnicos', layout=get_buttons('CAD_TECNICO'),
                                     element_justification='left', expand_x=True, pad=(10, 10))],
                           [sg.Table(values=lista_cadastrado_tecnicos,
-                                    headings=header_cadastro_tecnicos,
+                                    headings=get_table_header('Tecnico'),
                                     max_col_width=35,
                                     auto_size_columns=True,
                                     display_row_numbers=True,
@@ -148,13 +179,6 @@ def layout_cadastro(lista_cadastrado_ferramentas, lista_cadastrado_tecnicos):
 
 def layout_consulta(lista_consulta_ferramentas, lista_consulta_tecnicos, lista_consulta_reservas):
     # Define Layout Consulta Ferramentas
-    header_consulta_ferramentas = ['ID Ferramenta', 'Descrição', 'Fabricante', 'Voltagem', 'Cód. Fabricante',
-                                   'Tamanho', 'Unidade Medida', 'Material', 'Tempo Max Reserva', 'Reservado?']
-
-    buttons_consulta_ferramenta = [[sg.Button('Filtrar', key='FiltrarFerramenta', pad=(15, 7), expand_x=True),
-                                    sg.Button('Limpar Filtros', key='LimparFerramenta', pad=(15, 7), expand_x=True),
-                                    sg.Button('Imprimir', key='ImprimirFerramenta', pad=(15, 7), expand_x=True)]]
-
     layout_con_ferramentas = [[sg.Text('ID Ferramenta', size=(18, 1)), sg.Input('', key='cfFerramenta', size=10),
                                sg.VerticalSeparator(pad=((263, 15), (1, 1))),
                                sg.Text('Descrição', size=(18, 1)), sg.Input('', key='cfDescricao')],
@@ -166,10 +190,10 @@ def layout_consulta(lista_consulta_ferramentas, lista_consulta_tecnicos, lista_c
                                sg.VerticalSeparator(pad=((193, 15), (1, 1))),
                                sg.Text('Unidade de Medida', size=(18, 1)), sg.Input('', key='cfUnidade', size=25)],
                               [sg.Text('Reservado', size=(18, 1)), sg.Checkbox('', key='cfReservado', default=False)],
-                              [sg.Frame('Opções de Consulta de Ferramentas', layout=buttons_consulta_ferramenta,
+                              [sg.Frame('Opções de Consulta de Ferramentas', layout=get_buttons('CON_FERRAMENTA'),
                                         element_justification='center', expand_x=True, pad=(10, 10))],
                               [sg.Table(values=lista_consulta_ferramentas,
-                                        headings=header_consulta_ferramentas,
+                                        headings=get_table_header('Ferramenta'),
                                         max_col_width=35,
                                         auto_size_columns=True,
                                         display_row_numbers=True,
@@ -208,17 +232,13 @@ def layout_consulta(lista_consulta_ferramentas, lista_consulta_tecnicos, lista_c
 def layout_principal(lista_ferramentas, lista_tecnicos, lista_reservas,
                      usuario_logado):
     # Definição Tela Principal
-    if usuario_logado['admin'] == 'True':
-        color = 'green'
-    else:
-        color = 'red'
-
     layout_cabecalho = [sg.T('Central de Ferramentaria AudioVisual', font='_ 16', justification='c', expand_x=True,
                              border_width=10, background_color='white', text_color='black')]
 
     layout_footer = [sg.Text('Usuário Logado:', size=(12, 1)),
                      sg.Text(usuario_logado['username'], size=(18, 1), text_color='green'),
-                     sg.Text('Admin: ', size=(5, 1)), sg.Text(usuario_logado['admin'], size=(18, 1), text_color=color),
+                     sg.Text('Admin: ', size=(5, 1)),
+                     sg.Text(usuario_logado['admin'], size=(18, 1), text_color=get_color_admin(usuario_logado['admin'])),
                      sg.Push(),
                      sg.Text('@DevTeam_05', size=(15, 1), text_color='purple', enable_events=True, key='URL_DEV5',
                              tooltip='Abrir Documentação no Github')]
