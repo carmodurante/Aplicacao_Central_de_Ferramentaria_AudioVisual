@@ -1,7 +1,10 @@
 import PySimpleGUI as sg
+import webbrowser as web
+
 
 from functions.Funtions_Login import login
 from layouts.Layouts import layout_principal
+from functions.Functions_Diversos import get_link_url_dev5
 
 # Define o tema
 sg.theme('Black')
@@ -41,7 +44,11 @@ if __name__ == '__main__':
                 except:
                     break
                 print(event)
-                if event == sg.WIN_CLOSED:  # always, always give a way out!
+                if event == sg.WIN_CLOSED:
                     break
+                elif event == 'URL_DEV5':
+                    web.open(get_link_url_dev5())
+
+            window.close()
     except:
         exit()

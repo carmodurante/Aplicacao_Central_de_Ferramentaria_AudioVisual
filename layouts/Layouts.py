@@ -14,8 +14,8 @@ def layout_reserva(lista_cadastrado_reservas):
     lista_meses = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho',
                    'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro']
 
-    layout_cad_reserva = [[sg.Text('ID Ferramenta', size=(18, 1)), sg.Input('', key='rFerramenta', size=8),
-                           sg.VerticalSeparator(pad=((277, 15), (1, 1))),
+    layout_cad_reserva = [[sg.Text('ID Ferramenta', size=(18, 1)), sg.Input('', key='rFerramenta', size=13),
+                           sg.VerticalSeparator(pad=((242, 15), (1, 1))),
                            sg.Text('CPF do Técnico', size=(18, 1)), sg.Input('', key='rCPF', size=13)],
                           [sg.Text('Data da Retirada', size=(18, 1)), sg.Input('', key='rDTRetirada', size=8),
                            sg.CalendarButton('Escolha a Data', close_when_date_chosen=True,
@@ -192,7 +192,8 @@ def layout_principal(lista_cadastrado_ferramentas, lista_cadastrado_tecnicos, li
     layout_footer = [sg.Text('Usuário Logado:', size=(12, 1)),
                      sg.Text(usuario_logado['username'], size=(18, 1), text_color='green'),
                      sg.Text('Admin: ', size=(5, 1)), sg.Text(usuario_logado['admin'], size=(18, 1), text_color=color),
-                     sg.Push(), sg.Text('@DevTeam_05', size=(15, 1), text_color='purple')]
+                     sg.Push(), sg.Text('@DevTeam_05', size=(15, 1), text_color='purple', enable_events=True, key='URL_DEV5',
+                                        tooltip='Abrir Documentação no Github')]
 
     layout_cadastros = [sg.Tab('Cadastros', layout_cadastro(lista_cadastrado_ferramentas,
                                                             lista_cadastrado_tecnicos),
