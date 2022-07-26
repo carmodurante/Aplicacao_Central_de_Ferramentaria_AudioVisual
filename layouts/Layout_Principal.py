@@ -3,7 +3,7 @@ import PySimpleGUI as sg
 from layouts.Layout_Cadastro import layout_cadastro
 from layouts.Layout_Consulta import layout_consulta
 from layouts.Layout_Reserva import layout_reserva
-from functions.Functions_Diversos import get_color_admin
+from functions.Functions_Diversos import get_color
 
 def layout_principal(lista_ferramentas, lista_tecnicos, lista_reservas,
                      usuario_logado):
@@ -14,7 +14,7 @@ def layout_principal(lista_ferramentas, lista_tecnicos, lista_reservas,
     layout_footer = [sg.Text('Usuário Logado:', size=(12, 1)),
                      sg.Text(usuario_logado['username'], size=(18, 1), text_color='green'),
                      sg.Text('Admin: ', size=(5, 1)),
-                     sg.Text(usuario_logado['admin'], size=(18, 1), text_color=get_color_admin(usuario_logado['admin'])),
+                     sg.Text(usuario_logado['admin'], size=(18, 1), text_color=get_color(usuario_logado['admin'])),
                      sg.Push(),
                      sg.Text('@DevTeam_05', size=(15, 1), text_color='purple', enable_events=True, key='URL_DEV5',
                              tooltip='Abrir Documentação no Github')]

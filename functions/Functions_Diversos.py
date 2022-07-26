@@ -8,7 +8,7 @@ def get_file_types():
                   ("PNG (*.png)", "*.png")]
     return file_types
 
-def get_color_admin(string_boleana):
+def get_color(string_boleana):
     if string_boleana == 'True':
         return 'green'
     else:
