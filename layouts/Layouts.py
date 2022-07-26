@@ -269,8 +269,9 @@ def layout_principal(lista_ferramentas, lista_tecnicos, lista_reservas,
 
     else:
         tabgroup_menu = [layout_cabecalho,
-                         [sg.TabGroup([layout_consultas],
-                                      tab_location=sg.TAB_LOCATION_TOP, border_width=12, font='_ 12')],
+                         [sg.TabGroup([
+                             layout_consultas],
+                             tab_location=sg.TAB_LOCATION_TOP, border_width=12, font='_ 12')],
                          [layout_footer]]
 
         return tabgroup_menu
