@@ -65,10 +65,10 @@ def create_account():
     sg.theme('Black')
     layout = [[sg.T("Cadastrar Usuário", size=(18, 1), font=40, justification='c', expand_x=True, border_width=10,
                     background_color='White', text_color='Black')],
-              [sg.Text("E-mail", size=(19, 1), font=16), sg.InputText(key='EmailCadastro', font=16)],
-              [sg.Text("Criar Usuário", size=(19, 1), font=16), sg.InputText(key='UsernameCadastro', font=16)],
+              [sg.Text("E-mail", size=(19, 1), font=16), sg.InputText(key='EmailCadastro', font=16, size=25)],
+              [sg.Text("Criar Usuário", size=(19, 1), font=16), sg.InputText(key='UsernameCadastro', font=16, size=25)],
               [sg.Text("Criar Senha", size=(19, 1), font=16),
-               sg.InputText(key='PasswordCadastro', font=16, password_char='*')],
+               sg.InputText(key='PasswordCadastro', font=16, password_char='*', size=25)],
               [sg.Text('Usuário Administrador?', size=(19, 1), font=16),
                sg.Checkbox('', key='AdminCadastro', default=True, font=16, size=(15, 1))],
               [sg.Button("Cadastrar", pad=(35, 20), key='SubmitCadastro', expand_x=True),
@@ -107,8 +107,9 @@ def login():
 
     layout = [[sg.T("Log In", size=(18, 1), font=40, justification='c', expand_x=True, border_width=5,
                     background_color='White', text_color='Black')],
-              [sg.Text("Usuário:", size=(8, 1), font=16), sg.InputText(key='UsernameLogin', font=16)],
-              [sg.Text("Senha:", size=(8, 1), font=16), sg.InputText(key='PasswordLogin', password_char='*', font=16)],
+              [sg.Text("Usuário:", size=(8, 1), font=16), sg.InputText(key='UsernameLogin', font=16, size=25)],
+              [sg.Text("Senha:", size=(8, 1), font=16),
+               sg.InputText(key='PasswordLogin', password_char='*', font=16, size=25)],
               [sg.Button("Log In", pad=(10, 20), key='SubmitLogin', auto_size_button=True, expand_x=True),
                sg.Button("Cancelar", pad=(10, 20), key='CancelLogin', auto_size_button=True, expand_x=True),
                sg.Button("Cadastrar", pad=(10, 20), key='CadastrarUsuario', auto_size_button=True, expand_x=True)]]
@@ -132,7 +133,8 @@ def login():
                 elif event == 'CadastrarUsuario':
                     create_account()
         except:
-            sg.popup("Preencha todos os campos!", title='Error', font=8)
+            sg.popup("Finalizando Aplicação", title='Information', font=8)
+            break
 
     window.close()
     return usuario_logado
