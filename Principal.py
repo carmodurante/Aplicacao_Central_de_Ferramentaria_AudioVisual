@@ -15,7 +15,7 @@ if __name__ == '__main__':
     try:
         usuario_logado = login.login()
         if usuario_logado['validado']:  # Validado
-            login.progress_bar('Entrando na aplicação...')
+            # login.progress_bar('Entrando na aplicação...')
 
             # Define Window
             window = sg.Window('App Central de Ferramentaria AudioVisual',

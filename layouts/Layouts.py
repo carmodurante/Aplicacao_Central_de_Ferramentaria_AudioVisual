@@ -76,7 +76,8 @@ def layout_cadastro(lista_cadastrado_ferramentas, lista_cadastrado_tecnicos):
                                sg.Combo(['220V', '110V', 'N/D'], default_value='110V', key='fVoltagem', size=10),
                                sg.Text('(Volts)', size=(7, 1)),
                                sg.VerticalSeparator(pad=((180, 15), (1, 1))),
-                               sg.Text('Código no Fabricante', size=(18, 1)), sg.Input('', key='fFabricante', size=25)],
+                               sg.Text('Código no Fabricante', size=(18, 1)),
+                               sg.Input('', key='fCodFabricante', size=25)],
                               [sg.Text('Tamanho', size=(18, 1)), sg.Input('', key='fTamanho', size=20),
                                sg.VerticalSeparator(pad=((193, 15), (1, 1))),
                                sg.Text('Unidade de Medida', size=(18, 1)), sg.Input('', key='fUnidade', size=25)],
@@ -145,13 +146,40 @@ def layout_cadastro(lista_cadastrado_ferramentas, lista_cadastrado_tecnicos):
     return tabgrp_cadastro
 
 
-def layout_consulta():
+def layout_consulta(lista_consulta_ferramentas):
     # Define Layout Consulta Ferramentas
-    layout_con_ferramentas = [[sg.Text('Name', size=(10, 1)), sg.Input('', key='eName')],
-                              [sg.Text('Date of Birth', size=(10, 1)), sg.Input('', key='eDob')],
-                              [sg.Text('Phone No', size=(10, 1)), sg.Input('', key='ePhone')],
-                              [sg.Text('Email ID', size=(10, 1)), sg.Input('', key='eEmail')],
-                              [sg.Button('Save Personal Details')]]
+    header_consulta_ferramentas = ['ID Ferramenta', 'Descrição', 'Fabricante', 'Voltagem', 'Cód. Fabricante',
+                                   'Tamanho', 'Unidade Medida', 'Material', 'Tempo Max Reserva', 'Reservado?']
+
+    buttons_consulta_ferramenta = [[sg.Button('Filtrar', key='FiltrarFerramenta', pad=(15, 7), expand_x=True),
+                                    sg.Button('Limpar Filtros', key='LimparFerramenta', pad=(15, 7), expand_x=True),
+                                    sg.Button('Imprimir', key='ImprimirFerramenta', pad=(15, 7), expand_x=True)]]
+
+    layout_con_ferramentas = [[sg.Text('ID Ferramenta', size=(18, 1)), sg.Input('', key='cfFerramenta', size=10),
+                               sg.VerticalSeparator(pad=((263, 15), (1, 1))),
+                               sg.Text('Descrição', size=(18, 1)), sg.Input('', key='cfDescricao')],
+                              [sg.Text('Código do Fabricante', size=(18, 1)),
+                               sg.Input('', key='cfCodFabricante', size=25),
+                               sg.VerticalSeparator(pad=((158, 15), (1, 1))),
+                               sg.Text('Nome do Fabricante', size=(18, 1)), sg.Input('', key='cfFabricante')],
+                              [sg.Text('Tamanho', size=(18, 1)), sg.Input('', key='cfTamanho', size=20),
+                               sg.VerticalSeparator(pad=((193, 15), (1, 1))),
+                               sg.Text('Unidade de Medida', size=(18, 1)), sg.Input('', key='cfUnidade', size=25)],
+                              [sg.Text('Reservado', size=(18, 1)), sg.Checkbox('', key='cfReservado', default=False)],
+                              [sg.Frame('Opções de Consulta de Ferramentas', layout=buttons_consulta_ferramenta,
+                                        element_justification='center', expand_x=True, pad=(10, 10))],
+                              [sg.Table(values=lista_consulta_ferramentas,
+                                        headings=header_consulta_ferramentas,
+                                        max_col_width=35,
+                                        auto_size_columns=True,
+                                        display_row_numbers=True,
+                                        justification='left',
+                                        num_rows=6,
+                                        key='-TABLE_CON_FERRAMENTAS-',
+                                        row_height=35,
+                                        enable_click_events=True,
+                                        expand_x=True,
+                                        vertical_scroll_only=False)]]
 
     # Define Layout Consulta Tecnicos
     layout_con_tecnico = [[sg.Text('Highest Qualfication', size=(15, 1)), sg.Input('', key='eQual')],
@@ -198,7 +226,8 @@ def layout_principal(lista_cadastrado_ferramentas, lista_cadastrado_tecnicos, li
                                                             lista_cadastrado_tecnicos),
                                border_width=5, element_justification='left')]
 
-    layout_consultas = [sg.Tab('Consultas', layout_consulta(), border_width=5, element_justification='left')]
+    layout_consultas = [sg.Tab('Consultas', layout_consulta(lista_cadastrado_ferramentas), border_width=5,
+                               element_justification='left')]
 
     layout_reservas = [sg.Tab('Reservas', layout_reserva(lista_cadastrado_reservas), border_width=5,
                               element_justification='left')]
