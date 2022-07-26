@@ -3,10 +3,10 @@ import webbrowser as web
 import PySimpleGUI as sg
 
 import functions.Functions_Cadastros as cadastros
-import functions.Functions_Reservas as reservas
 import functions.Functions_Login as login
+import functions.Functions_Reservas as reservas
 from functions.Functions_Diversos import get_link_url_dev5
-from layouts.Layouts import layout_principal
+from layouts.Layout_Principal import layout_principal
 
 # Define o tema
 sg.theme('Black')
