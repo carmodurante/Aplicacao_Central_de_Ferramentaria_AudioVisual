@@ -1,26 +1,15 @@
-import PySimpleGUI as sg
 import webbrowser as web
 
+import PySimpleGUI as sg
 
+import functions.Functions_Cadastros as cadastros
+import functions.Functions_Reservas as reservas
+from functions.Functions_Diversos import get_link_url_dev5
 from functions.Funtions_Login import login
 from layouts.Layouts import layout_principal
-from functions.Functions_Diversos import get_link_url_dev5
 
 # Define o tema
 sg.theme('Black')
-
-## Dados Tabelas
-lista_cadastrado_ferramentas = [['1001', 'Chave Inglesa', 'John Deere', '110V', '1015-U521', '10', 'Polegadas',
-                                 'Metal', '36', 'True'],
-                                ['1002', 'Chave de Fenda', 'John Deere', 'N/D', '1015-U522', '40', 'Metros',
-                                 'Aluminio', '24', 'False']]
-
-lista_cadastrado_tecnicos = [['46794179865', 'Carmo Durante Neto', '16992180889', 'Manhã', 'Hell Fire'],
-                             ['12345678910', 'Jose Carlos', '1699111111', 'Noite', 'Titans']]
-
-lista_cadastrado_reservas = [['1099', '1001', '46794179865', '25/07/22', '12:00', '27/07/22', '09:30', '', '', 'False'],
-                             ['1100', '1002', '1111119865', '20/07/22', '11:00', '25/07/22', '12:30', '23/07/22',
-                              '09:00', 'False']]
 
 if __name__ == '__main__':
     try:
@@ -30,25 +19,25 @@ if __name__ == '__main__':
 
             # Define Window
             window = sg.Window('App Central de Ferramentaria AudioVisual',
-                               layout_principal(lista_cadastrado_ferramentas,
-                                                lista_cadastrado_tecnicos,
-                                                lista_cadastrado_reservas,
+                               layout_principal(cadastros.get_cadastro_ferramentas(),
+                                                cadastros.get_cadastro_tecnicos(),
+                                                reservas.get_cadastro_reservas(),
                                                 usuario_logado),
                                resizable=True, size=(1250, 670))
 
             ## Eventos
             while True:
-                # Read values entered by user
                 try:
                     event, values = window.read()
+                    print(event)  # Somente para visualização
+                    if event == sg.WIN_CLOSED:
+                        break
+                    elif event == 'URL_DEV5':
+                        web.open(get_link_url_dev5())
                 except:
                     break
-                print(event)
-                if event == sg.WIN_CLOSED:
-                    break
-                elif event == 'URL_DEV5':
-                    web.open(get_link_url_dev5())
-
             window.close()
+        else:
+            exit()
     except:
         exit()
