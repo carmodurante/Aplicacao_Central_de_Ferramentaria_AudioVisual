@@ -85,7 +85,7 @@ def layout_cadastro(lista_cadastrado_ferramentas, lista_cadastrado_tecnicos):
                                sg.Text('Material da Ferramenta', size=(18, 1)), sg.Input('', key='fMaterial')],
                               [sg.Text('Tempo Max. de Reserva', size=(18, 1)),
                                sg.Input('', key='fTempoReserva', size=6, ),
-                               sg.Text('(Horas)', size=(7, 1)),
+                               sg.Text('(hh:mm)', size=(7, 1)),
                                sg.VerticalSeparator(pad=((221, 15), (1, 1))),
                                sg.Text('Imagem da Ferramenta', size=(18, 1)), sg.Input('', key="fImagem"),
                                sg.FileBrowse(file_types=file_types, button_text='Carregar Imagem',
