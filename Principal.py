@@ -4,8 +4,8 @@ import PySimpleGUI as sg
 
 import functions.Functions_Cadastros as cadastros
 import functions.Functions_Reservas as reservas
+import functions.Funtions_Login as login
 from functions.Functions_Diversos import get_link_url_dev5
-from functions.Funtions_Login import login
 from layouts.Layouts import layout_principal
 
 # Define o tema
@@ -13,9 +13,9 @@ sg.theme('Black')
 
 if __name__ == '__main__':
     try:
-        usuario_logado = login()
+        usuario_logado = login.login()
         if usuario_logado['validado']:  # Validado
-            # progress_bar_login()
+            login.progress_bar('Entrando na aplicação...')
 
             # Define Window
             window = sg.Window('App Central de Ferramentaria AudioVisual',

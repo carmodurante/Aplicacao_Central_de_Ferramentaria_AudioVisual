@@ -2,9 +2,9 @@ import PySimpleGUI as sg
 
 
 # Barra de Progresso
-def progress_bar():
+def progress_bar(texto_popup):
     sg.theme('Black')
-    layout = [[sg.Text('Criando sua conta...')],
+    layout = [[sg.Text(texto_popup)],
               [sg.ProgressBar(1800, orientation='h', size=(30, 30), key='progbar')],
               [sg.Cancel()]]
 
@@ -15,23 +15,6 @@ def progress_bar():
             break
         window['progbar'].update_bar(i + 1)
     window.close()
-
-
-# Barra de Progresso para Login
-def progress_bar_login():
-    sg.theme('Black')
-    layout = [[sg.Text('Entrando na aplicação...')],
-              [sg.ProgressBar(1800, orientation='h', size=(30, 30), key='progbar')],
-              [sg.Cancel()]]
-
-    window = sg.Window('Executando...', layout)
-    for i in range(1800):
-        event, values = window.read(timeout=1)
-        if event == 'Cancel' or event == sg.WIN_CLOSED:
-            break
-        window['progbar'].update_bar(i + 1)
-    window.close()
-
 
 # Salvar Usuário em arquivo
 def salvar_novo_usuario(username, password, email, admin):
@@ -90,7 +73,7 @@ def create_account():
                     email = values['EmailCadastro']
                     if password.strip() != "" and username.strip() != "":
                         salvar_novo_usuario(username, password, email, admin)
-                        progress_bar()
+                        progress_bar('Criando seu usuário...')
                         break
                     else:
                         sg.popup("Usuario e Senha são Obrigatórios", title='Error', font=8)
