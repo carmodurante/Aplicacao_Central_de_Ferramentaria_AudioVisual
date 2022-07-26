@@ -146,7 +146,7 @@ def layout_cadastro(lista_cadastrado_ferramentas, lista_cadastrado_tecnicos):
     return tabgrp_cadastro
 
 
-def layout_consulta(lista_consulta_ferramentas):
+def layout_consulta(lista_consulta_ferramentas, lista_consulta_tecnicos, lista_consulta_reservas):
     # Define Layout Consulta Ferramentas
     header_consulta_ferramentas = ['ID Ferramenta', 'Descrição', 'Fabricante', 'Voltagem', 'Cód. Fabricante',
                                    'Tamanho', 'Unidade Medida', 'Material', 'Tempo Max Reserva', 'Reservado?']
@@ -205,7 +205,7 @@ def layout_consulta(lista_consulta_ferramentas):
     return tabgrp_consulta
 
 
-def layout_principal(lista_cadastrado_ferramentas, lista_cadastrado_tecnicos, lista_cadastrado_reservas,
+def layout_principal(lista_ferramentas, lista_tecnicos, lista_reservas,
                      usuario_logado):
     # Definição Tela Principal
     if usuario_logado['admin'] == 'True':
@@ -219,17 +219,20 @@ def layout_principal(lista_cadastrado_ferramentas, lista_cadastrado_tecnicos, li
     layout_footer = [sg.Text('Usuário Logado:', size=(12, 1)),
                      sg.Text(usuario_logado['username'], size=(18, 1), text_color='green'),
                      sg.Text('Admin: ', size=(5, 1)), sg.Text(usuario_logado['admin'], size=(18, 1), text_color=color),
-                     sg.Push(), sg.Text('@DevTeam_05', size=(15, 1), text_color='purple', enable_events=True, key='URL_DEV5',
-                                        tooltip='Abrir Documentação no Github')]
+                     sg.Push(),
+                     sg.Text('@DevTeam_05', size=(15, 1), text_color='purple', enable_events=True, key='URL_DEV5',
+                             tooltip='Abrir Documentação no Github')]
 
-    layout_cadastros = [sg.Tab('Cadastros', layout_cadastro(lista_cadastrado_ferramentas,
-                                                            lista_cadastrado_tecnicos),
+    layout_cadastros = [sg.Tab('Cadastros', layout_cadastro(lista_ferramentas,
+                                                            lista_tecnicos),
                                border_width=5, element_justification='left')]
 
-    layout_consultas = [sg.Tab('Consultas', layout_consulta(lista_cadastrado_ferramentas), border_width=5,
+    layout_consultas = [sg.Tab('Consultas', layout_consulta(lista_ferramentas,
+                                                            lista_tecnicos,
+                                                            lista_reservas), border_width=5,
                                element_justification='left')]
 
-    layout_reservas = [sg.Tab('Reservas', layout_reserva(lista_cadastrado_reservas), border_width=5,
+    layout_reservas = [sg.Tab('Reservas', layout_reserva(lista_reservas), border_width=5,
                               element_justification='left')]
 
     # Somente Administradores tem permissão para cadastrar e reservar
