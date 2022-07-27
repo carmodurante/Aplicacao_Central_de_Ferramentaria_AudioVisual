@@ -19,12 +19,13 @@ def layout_consulta(lista_consulta_ferramentas, lista_consulta_tecnicos, lista_c
          sg.Text('Unidade de Medida', size=(18, 1)), sg.Input('', key='cfUnidade', size=25)],
         [sg.Text('Reservado', size=(18, 1)), sg.Checkbox('', key='cfReservado', default=False)]]
 
-    imagem = [[sg.Image(key="IMGFerramenta")]]
-    right_column = [[sg.Frame('Imagem Ferramenta', layout=imagem,
-                  element_justification='center', expand_x=True, expand_y=True, pad=(10, 10))]]
+    imagem_ferramenta = [[sg.Image(key="IMGFerramenta", expand_y=True, expand_x=True, pad=((1,1),(5,5)))]]
+
+    right_column = [[sg.Frame('Imagem Ferramenta', layout=imagem_ferramenta,
+                  element_justification='right', expand_x=True, expand_y=True)]]
     layout_con_ferramentas = [
         [sg.Column(left_column, vertical_alignment='top'), sg.VSeparator(),
-         sg.Column(right_column, vertical_alignment='center', expand_x=True, expand_y=True)],
+         sg.Column(right_column, vertical_alignment='top', expand_x=True, expand_y=True)],
         [sg.Frame('Opções de Consulta de Ferramentas', layout=get_buttons('CON_FERRAMENTA'),
                   element_justification='center', expand_x=True, pad=(10, 10))],
         [sg.Table(values=lista_consulta_ferramentas,
