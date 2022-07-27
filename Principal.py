@@ -3,9 +3,9 @@ import webbrowser as web
 import PySimpleGUI as sg
 
 import functions.Functions_Cadastro as cadastros
+import functions.Functions_Consulta as consulta
 import functions.Functions_Login as login
 import functions.Functions_Reserva as reservas
-from functions.Functions_Consulta import get_imagem_ferramenta
 from functions.Functions_Diversos import get_link_url_dev5
 from layouts.Layout_Principal import layout_principal
 
@@ -33,13 +33,15 @@ if __name__ == '__main__':
                     print(event)  # Somente para visualização
                     if event == sg.WIN_CLOSED:
                         break
+
                     elif event == 'URL_DEV5':
                         web.open(get_link_url_dev5())
+
                     elif event == "FiltrarFerramenta":
-                        bio = get_imagem_ferramenta('1001')
-                        window["IMGFerramenta"].update(data=bio.getvalue())
+                        consulta.filtrar_ferramentas(window, values)
+
                     elif event == "LimparFerramenta":
-                        window["IMGFerramenta"].update(data='')
+                        consulta.limpar_filtro_ferramentas(window)
                 except:
                     break
             window.close()

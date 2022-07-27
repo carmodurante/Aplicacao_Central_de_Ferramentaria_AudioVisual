@@ -16,6 +16,7 @@ def progress_bar(texto_popup):
         window['progbar'].update_bar(i + 1)
     window.close()
 
+
 # Salvar Usuário em arquivo
 def salvar_novo_usuario(username, password, email, admin):
     with open("content/data/usuarios.csv", "a") as arquivo_usuarios:

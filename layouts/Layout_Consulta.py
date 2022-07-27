@@ -6,23 +6,23 @@ from layouts.Layout_Components import get_table_header
 
 def layout_consulta(lista_consulta_ferramentas, lista_consulta_tecnicos, lista_consulta_reservas):
     # Define Layout Consulta Ferramentas
-
+    ['cfFerramenta', 'cfDescricao', 'cfCodFabricante', 'cfFabricante', 'cfTamanho', 'cfUnidade', 'cfReservado', 'IMGFerramenta']
     left_column = [[sg.Text('ID Ferramenta', size=(18, 1)), sg.Input('', key='cfFerramenta', size=10),
-         sg.VerticalSeparator(pad=((143, 15), (1, 1))),
-         sg.Text('Descrição', size=(18, 1)), sg.Input('', key='cfDescricao')],
-        [sg.Text('Código do Fabricante', size=(18, 1)),
-         sg.Input('', key='cfCodFabricante', size=25),
-         sg.VerticalSeparator(pad=((38, 15), (1, 1))),
-         sg.Text('Nome do Fabricante', size=(18, 1)), sg.Input('', key='cfFabricante')],
-        [sg.Text('Tamanho', size=(18, 1)), sg.Input('', key='cfTamanho', size=20),
-         sg.VerticalSeparator(pad=((73, 15), (1, 1))),
-         sg.Text('Unidade de Medida', size=(18, 1)), sg.Input('', key='cfUnidade', size=25)],
-        [sg.Text('Reservado', size=(18, 1)), sg.Checkbox('', key='cfReservado', default=False)]]
+                    sg.VerticalSeparator(pad=((143, 15), (1, 1))),
+                    sg.Text('Descrição', size=(18, 1)), sg.Input('', key='cfDescricao')],
+                   [sg.Text('Código do Fabricante', size=(18, 1)),
+                    sg.Input('', key='cfCodFabricante', size=25),
+                    sg.VerticalSeparator(pad=((38, 15), (1, 1))),
+                    sg.Text('Nome do Fabricante', size=(18, 1)), sg.Input('', key='cfFabricante')],
+                   [sg.Text('Tamanho', size=(18, 1)), sg.Input('', key='cfTamanho', size=20),
+                    sg.VerticalSeparator(pad=((73, 15), (1, 1))),
+                    sg.Text('Unidade de Medida', size=(18, 1)), sg.Input('', key='cfUnidade', size=25)],
+                   [sg.Text('Reservado', size=(18, 1)), sg.Checkbox('', key='cfReservado', default=False)]]
 
-    imagem_ferramenta = [[sg.Image(key="IMGFerramenta", expand_y=True, expand_x=True, pad=((1,1),(5,5)))]]
+    imagem_ferramenta = [[sg.Image(key="IMGFerramenta", expand_y=True, expand_x=True, pad=((1, 1), (5, 5)))]]
 
     right_column = [[sg.Frame('Imagem Ferramenta', layout=imagem_ferramenta,
-                  element_justification='right', expand_x=True, expand_y=True)]]
+                              element_justification='right', expand_x=True, expand_y=True)]]
     layout_con_ferramentas = [
         [sg.Column(left_column, vertical_alignment='top'), sg.VSeparator(),
          sg.Column(right_column, vertical_alignment='top', expand_x=True, expand_y=True)],

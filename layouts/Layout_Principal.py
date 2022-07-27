@@ -1,9 +1,10 @@
 import PySimpleGUI as sg
 
+from functions.Functions_Diversos import get_color
 from layouts.Layout_Cadastro import layout_cadastro
 from layouts.Layout_Consulta import layout_consulta
 from layouts.Layout_Reserva import layout_reserva
-from functions.Functions_Diversos import get_color
+
 
 def layout_principal(lista_ferramentas, lista_tecnicos, lista_reservas,
                      usuario_logado):
