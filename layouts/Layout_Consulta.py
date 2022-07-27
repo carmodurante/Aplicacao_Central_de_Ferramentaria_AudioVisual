@@ -6,7 +6,8 @@ from layouts.Layout_Components import get_table_header
 
 def layout_consulta(lista_consulta_ferramentas, lista_consulta_tecnicos, lista_consulta_reservas):
     # Define Layout Consulta Ferramentas
-    ['cfFerramenta', 'cfDescricao', 'cfCodFabricante', 'cfFabricante', 'cfTamanho', 'cfUnidade', 'cfReservado', 'IMGFerramenta']
+    ['cfFerramenta', 'cfDescricao', 'cfCodFabricante', 'cfFabricante', 'cfTamanho', 'cfUnidade', 'cfReservado',
+     'IMGFerramenta']
     left_column = [[sg.Text('ID Ferramenta', size=(18, 1)), sg.Input('', key='cfFerramenta', size=10),
                     sg.VerticalSeparator(pad=((143, 15), (1, 1))),
                     sg.Text('Descrição', size=(18, 1)), sg.Input('', key='cfDescricao')],
