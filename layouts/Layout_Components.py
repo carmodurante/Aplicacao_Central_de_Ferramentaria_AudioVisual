@@ -62,4 +62,7 @@ def get_buttons(layout_name):
         return buttons_consulta_ferramenta
 
     elif layout_name == 'CON_TECNICO':
-        return True
+        buttons_consulta_tecnico = [[sg.Button('Filtrar', key='FiltrarTecnico', pad=(15, 7), expand_x=True),
+                                     sg.Button('Limpar Filtros', key='LimparTecnico', pad=(15, 7), expand_x=True),
+                                     sg.Button('Imprimir', key='ImprimirTecnico', pad=(15, 7), expand_x=True)]]
+        return buttons_consulta_tecnico

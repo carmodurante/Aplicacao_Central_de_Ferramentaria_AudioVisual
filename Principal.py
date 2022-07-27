@@ -37,11 +37,18 @@ if __name__ == '__main__':
                     elif event == 'URL_DEV5':
                         web.open(get_link_url_dev5())
 
-                    elif event == "FiltrarFerramenta":
+                    elif event == 'FiltrarFerramenta':
                         consulta.filtrar_ferramentas(window, values)
 
-                    elif event == "LimparFerramenta":
-                        consulta.limpar_filtro_ferramentas(window)
+                    elif event == 'LimparFerramenta':
+                        consulta.limpar_filtros(window, 'ferramenta')
+
+                    elif event == 'FiltrarTecnico':
+                        consulta.filtrar_tecnicos(window, values)
+
+                    elif event == 'LimparTecnico':
+                        consulta.limpar_filtros(window, 'tecnico')
+
                 except:
                     break
             window.close()
