@@ -9,7 +9,7 @@ def get_keys_to_clean(tipo_consulta):
                               'cfUnidade', 'cfReservado', 'IMGFerramenta']
 
     elif tipo_consulta == 'tecnico':
-        chaves_para_limpar = []
+        chaves_para_limpar = ['ctCPF', 'ctNome', 'cfTurno', 'ctEquipe']
 
     return chaves_para_limpar
 

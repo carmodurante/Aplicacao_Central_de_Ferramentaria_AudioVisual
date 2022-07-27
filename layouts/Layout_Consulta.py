@@ -14,7 +14,7 @@ def layout_consulta(lista_consulta_ferramentas, lista_consulta_tecnicos, lista_c
                                sg.VerticalSeparator(pad=((38, 15), (1, 1))),
                                sg.Text('Nome do Fabricante', size=(18, 1)), sg.Input('', key='cfFabricante', size=27)],
                               [sg.Text('Tamanho', size=(18, 1)), sg.Input('', key='cfTamanho', size=15),
-                               sg.VerticalSeparator(pad=((73, 15), (1, 1))),
+                               sg.VerticalSeparator(pad=((108, 15), (1, 1))),
                                sg.Text('Unidade de Medida', size=(18, 1)), sg.Input('', key='cfUnidade', size=20)],
                               [sg.Text('Reservado', size=(18, 1)), sg.Checkbox('', key='cfReservado', default=False)]]
 
