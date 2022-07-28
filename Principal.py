@@ -37,17 +37,29 @@ if __name__ == '__main__':
                     elif event == 'URL_DEV5':
                         web.open(get_link_url_dev5())
 
+                    # Filtrar
                     elif event == 'FiltrarFerramenta':
                         consulta.filtrar_ferramentas(window, values)
-
-                    elif event == 'LimparFerramenta':
-                        consulta.limpar_filtros(window, 'ferramenta')
 
                     elif event == 'FiltrarTecnico':
                         consulta.filtrar_tecnicos(window, values)
 
-                    elif event == 'LimparTecnico':
-                        consulta.limpar_filtros(window, 'tecnico')
+                    # Limpar Tela
+                    elif event == 'LimparFerramentaCON':
+                        consulta.limpar_filtros(window, 'ferramenta_CON')
+
+                    elif event == 'LimparFerramentaCAD':
+                        consulta.limpar_filtros(window, 'ferramenta_CAD')
+
+                    elif event == 'LimparTecnicoCON':
+                        consulta.limpar_filtros(window, 'tecnico_CON')
+
+                    elif event == 'LimparTecnicoCAD':
+                        consulta.limpar_filtros(window, 'tecnico_CAD')
+
+                    elif event == 'LimparReservaCAD':
+                        consulta.limpar_filtros(window, 'reserva_CAD')
+
 
                 except:
                     break
