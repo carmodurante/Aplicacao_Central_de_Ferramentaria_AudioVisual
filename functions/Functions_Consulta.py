@@ -4,12 +4,13 @@ from PIL import Image
 
 
 def get_keys_to_clean(tipo_consulta):
+    chaves_para_limpar = []
     if tipo_consulta == 'ferramenta':
         chaves_para_limpar = ['cfFerramenta', 'cfDescricao', 'cfCodFabricante', 'cfFabricante', 'cfTamanho',
                               'cfUnidade', 'cfReservado', 'IMGFerramenta']
 
     elif tipo_consulta == 'tecnico':
-        chaves_para_limpar = ['ctCPF', 'ctNome', 'cfTurno', 'ctEquipe']
+        chaves_para_limpar = ['ctCPF', 'ctNome', 'cfTurno', 'ctEquipe', 'IMGTecnico', 'ctTelefone']
 
     return chaves_para_limpar
 

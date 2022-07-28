@@ -38,19 +38,22 @@ def get_buttons(layout_name):
     if layout_name == 'CAD_RESERVA':
         buttons_cadastro_reserva = [[sg.Button('Reservar', key='ReservarReserva', pad=(15, 7), expand_x=True),
                                      sg.Button('Modificar', key='ModificarReserva', pad=(15, 7), expand_x=True),
-                                     sg.Button('Devolver', key='DevolverReserva', pad=(15, 7), expand_x=True)]]
+                                     sg.Button('Devolver', key='DevolverReserva', pad=(15, 7), expand_x=True),
+                                     sg.Button('Limpar', key='LimparReserva', pad=(15, 7), expand_x=True)]]
         return buttons_cadastro_reserva
 
     elif layout_name == 'CAD_FERRAMENTA':
         buttons_cadastro_ferramentas = [[sg.Button('Cadastrar', key='CadastrarFerramenta', pad=(15, 7), expand_x=True),
                                          sg.Button('Modificar', key='ModificarFerramenta', pad=(15, 7), expand_x=True),
-                                         sg.Button('Eliminar', key='EliminarFerramenta', pad=(15, 7), expand_x=True)]]
+                                         sg.Button('Eliminar', key='EliminarFerramenta', pad=(15, 7), expand_x=True,),
+                                         sg.Button('Limpar', key='LimparFerramenta', pad=(15, 7), expand_x=True)]]
         return buttons_cadastro_ferramentas
 
     elif layout_name == 'CAD_TECNICO':
         buttons_cadastro_tecnico = [[sg.Button('Cadastrar', key='CadastrarTecnico', pad=(15, 7), expand_x=True),
                                      sg.Button('Modificar', key='ModificarTecnico', pad=(15, 7), expand_x=True),
-                                     sg.Button('Eliminar', key='EliminarTecnico', pad=(15, 7), expand_x=True)]]
+                                     sg.Button('Eliminar', key='EliminarTecnico', pad=(15, 7), expand_x=True),
+                                     sg.Button('Limpar', key='LimparTecnico', pad=(15, 7), expand_x=True)]]
         return buttons_cadastro_tecnico
 
     elif layout_name == 'CON_RESERVA':
@@ -66,3 +69,12 @@ def get_buttons(layout_name):
                                      sg.Button('Limpar Filtros', key='LimparTecnico', pad=(15, 7), expand_x=True),
                                      sg.Button('Imprimir', key='ImprimirTecnico', pad=(15, 7), expand_x=True)]]
         return buttons_consulta_tecnico
+
+
+def get_tooltip_layout(key_field):
+    text_tooltip = ''
+    if key_field == 'rEmergencial':
+        text_tooltip = 'Reserva Emergencial ignora as validações de tempo de reserva com 24h de ' \
+                       'antecedência, podendo retirar a ferramenta no momento da reserva para ' \
+                       'casos de emergência.'
+    return text_tooltip
