@@ -1,7 +1,6 @@
 import PySimpleGUI as sg
 
-from layouts.Layout_Components import get_buttons
-from layouts.Layout_Components import get_table_header
+import layouts.Layout_Components as components
 
 
 def layout_consulta_ferramentas(lista_consulta_ferramentas):
@@ -26,10 +25,11 @@ def layout_consulta_ferramentas(lista_consulta_ferramentas):
                                sg.Column(center_column_ferramenta, vertical_alignment='top'), sg.VSeparator(),
                                sg.Column(right_column_ferramenta, vertical_alignment='top', expand_x=True,
                                          expand_y=True)],
-                              [sg.Frame('Opções de Consulta de Ferramentas', layout=get_buttons('CON_FERRAMENTA'),
+                              [sg.Frame('Opções de Consulta de Ferramentas',
+                                        layout=components.get_buttons('CON_FERRAMENTA'),
                                         element_justification='center', expand_x=True, pad=(10, 10))],
                               [sg.Table(values=lista_consulta_ferramentas,
-                                        headings=get_table_header('Ferramenta'),
+                                        headings=components.get_table_header('Ferramenta'),
                                         max_col_width=35,
                                         auto_size_columns=True,
                                         display_row_numbers=True,
@@ -60,10 +60,10 @@ def layout_consulta_tecnicos(lista_consulta_tecnicos):
 
     layout_con_tecnico = [[sg.Column(left_column_tecnico, vertical_alignment='top'), sg.Push(), sg.VSeparator(),
                            sg.Column(right_column_tecnico, vertical_alignment='top', expand_x=True, expand_y=True)],
-                          [sg.Frame('Opções de Consulta de Técnicos', layout=get_buttons('CON_TECNICO'),
+                          [sg.Frame('Opções de Consulta de Técnicos', layout=components.get_buttons('CON_TECNICO'),
                                     element_justification='center', expand_x=True, pad=(10, 10))],
                           [sg.Table(values=lista_consulta_tecnicos,
-                                    headings=get_table_header('Tecnico'),
+                                    headings=components.get_table_header('Tecnico'),
                                     max_col_width=35,
                                     auto_size_columns=True,
                                     display_row_numbers=True,
@@ -78,13 +78,45 @@ def layout_consulta_tecnicos(lista_consulta_tecnicos):
     return layout_con_tecnico
 
 
-def layout_consulta_reservas(lista_consulta_tecnicos):
+def layout_consulta_reservas(lista_consulta_reservas):
     # Define Layout Consulta Reservas
-    layout_con_reserva = [[sg.Text('Last Job', size=(10, 1)), sg.Input('', key='eLastJ')],
-                          [sg.Text('From Date', size=(10, 1)), sg.Input('', key='eJFdt')],
-                          [sg.Text('To Date', size=(10, 1)), sg.Input('', key='eJTdt')],
-                          [sg.Text('Company Name', size=(10, 1)), sg.Input('', key='eLJcmpy')],
-                          [sg.Button('Save Experience Details')]]
+    left_column_reserva = [[sg.Text('ID Ferramenta', size=(18, 1)), sg.Input('', key='crFerramenta', size=13)],
+                           [sg.Text('CPF do Técnico', size=(18, 1)), sg.Input('', key='crCPF', size=13)],
+                           [sg.Text('Nome do Técnico', size=(18, 1)), sg.Input('', key='crNomeTecnico', size=35)],
+                           [sg.Text('Descrição da Solicitação', size=(18, 1)),
+                            sg.Input('', key='crDescricao', size=35)],
+                           [sg.Text('Reserva Emergencial?', size=(18, 1),
+                                    tooltip=components.get_tooltip_layout('rEmergencial')),
+                            sg.Checkbox('', key='crEmergencial', default=False)]]
+
+    right_column_reserva = [[sg.Text('Data da Retirada', size=(18, 1)), sg.Input('', key='crDTRetirada', size=8),
+                             components.get_calendario('crDTRetirada')],
+                            [sg.Text('Horário da Retirada', size=(18, 1)), sg.Input('', key='crHRRetirada', size=5),
+                             sg.Text('(hh:mm)')],
+                            [sg.Text('Data da Devolução', size=(18, 1)), sg.Input('', key='crDTDevol', size=8),
+                             components.get_calendario('crDTDevol')],
+                            [sg.Text('Horário da Devolução', size=(18, 1)), sg.Input('', key='crHRDevol', size=5),
+                             sg.Text('(hh:mm)')],
+                            [sg.Text('Reservas em Atraso?', size=(18, 1)),
+                             sg.Checkbox('', key='crAtraso', default=False)]]
+
+    layout_con_reserva = [[sg.Column(left_column_reserva, vertical_alignment='top', element_justification='left'),
+                           sg.VSeparator(),
+                           sg.Column(right_column_reserva, vertical_alignment='top', element_justification='left')],
+                          [sg.Frame('Opções de Cadastro de Reserva', layout=components.get_buttons('CON_RESERVA'),
+                                    element_justification='left', expand_x=True, pad=(10, 10))],
+                          [sg.Table(values=lista_consulta_reservas,
+                                    headings=components.get_table_header('Reserva'),
+                                    max_col_width=35,
+                                    auto_size_columns=True,
+                                    display_row_numbers=True,
+                                    justification='left',
+                                    num_rows=5,
+                                    key='-TABLE_CAD_RESERVAS-',
+                                    row_height=35,
+                                    enable_click_events=True,
+                                    vertical_scroll_only=False,
+                                    expand_x=True)]]
 
     return layout_con_reserva
 

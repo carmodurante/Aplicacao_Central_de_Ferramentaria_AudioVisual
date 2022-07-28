@@ -57,17 +57,23 @@ def get_buttons(layout_name):
         return buttons_cadastro_tecnico
 
     elif layout_name == 'CON_RESERVA':
-        return True
+        buttons_consulta_reserva = [[sg.Button('Filtrar', key='FiltrarReserva', pad=(15, 7), expand_x=True),
+                                     sg.Button('Limpar Filtros', key='LimparReservaCON', pad=(15, 7),
+                                               expand_x=True),
+                                     sg.Button('Baixar CSV', key='BaixarReserva', pad=(15, 7), expand_x=True)]]
+        return buttons_consulta_reserva
+
     elif layout_name == 'CON_FERRAMENTA':
         buttons_consulta_ferramenta = [[sg.Button('Filtrar', key='FiltrarFerramenta', pad=(15, 7), expand_x=True),
-                                        sg.Button('Limpar Filtros', key='LimparFerramentaCON', pad=(15, 7), expand_x=True),
-                                        sg.Button('Imprimir', key='ImprimirFerramenta', pad=(15, 7), expand_x=True)]]
+                                        sg.Button('Limpar Filtros', key='LimparFerramentaCON', pad=(15, 7),
+                                                  expand_x=True),
+                                        sg.Button('Baixar CSV', key='BaixarFerramenta', pad=(15, 7), expand_x=True)]]
         return buttons_consulta_ferramenta
 
     elif layout_name == 'CON_TECNICO':
         buttons_consulta_tecnico = [[sg.Button('Filtrar', key='FiltrarTecnico', pad=(15, 7), expand_x=True),
                                      sg.Button('Limpar Filtros', key='LimparTecnicoCON', pad=(15, 7), expand_x=True),
-                                     sg.Button('Imprimir', key='ImprimirTecnico', pad=(15, 7), expand_x=True)]]
+                                     sg.Button('Baixar CSV', key='BaixarTecnico', pad=(15, 7), expand_x=True)]]
         return buttons_consulta_tecnico
 
 

@@ -12,6 +12,11 @@ def get_keys_to_clean(tipo_consulta):
     elif tipo_consulta == 'tecnico_CON':
         chaves_para_limpar = ['ctCPF', 'ctNome', 'cfTurno', 'ctEquipe', 'IMGTecnico', 'ctTelefone']
 
+    elif tipo_consulta == 'reserva_CON':
+        chaves_para_limpar = ['crFerramenta', 'crCPF', 'crNomeTecnico', 'crDescricao', 'crEmergencial', 'crDTRetirada',
+                              'crHRRetirada', 'crDTDevol', 'crAtraso', 'crHRDevol', 'IMGTecnico_Reserva',
+                              'IMGFerramenta_Reserva']
+
     elif tipo_consulta == 'ferramenta_CAD':
         chaves_para_limpar = ['fDescricao', 'fCodFabricante', 'fFabricante', 'fTamanho',
                               'fUnidade', 'fVoltagem', 'fTipo', 'fMaterial', 'fTempoReserva', 'fImagem']
@@ -39,7 +44,6 @@ def filtrar_ferramentas(window, values):
     lista_ferramentas = []
     bio = get_imagem('1001', 'ferramenta')
     window["IMGFerramenta"].update(data=bio.getvalue())
-
     return lista_ferramentas
 
 
@@ -47,7 +51,6 @@ def filtrar_tecnicos(window, values):
     lista_tecnicos = []
     bio = get_imagem('46794179865', 'tecnico')
     window["IMGTecnico"].update(data=bio.getvalue())
-
     return lista_tecnicos
 
 
