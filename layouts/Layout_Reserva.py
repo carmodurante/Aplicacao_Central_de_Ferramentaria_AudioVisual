@@ -9,11 +9,10 @@ def layout_reserva(lista_cadastrado_reservas):
                            [sg.Text('CPF do Técnico', size=(18, 1)), sg.Input('', key='rCPF', size=13)],
                            [sg.Text('Nome do Técnico', size=(18, 1)), sg.Input('', key='rNomeTecnico', size=35)],
                            [sg.Text('Descrição da Solicitação', size=(18, 1)),
-                            sg.Input('', key='rNomeTecnico', size=35)],
+                            sg.Input('', key='rDescricao', size=35)],
                            [sg.Text('Reserva Emergencial?', size=(18, 1),
                                     tooltip=components.get_tooltip_layout('rEmergencial')),
-                            sg.Checkbox('', key='rEmergencial', default=False, font=16, size=(15, 1))],
-                           ]
+                            sg.Checkbox('', key='rEmergencial', default=False, font=16, size=(15, 1))]]
 
     right_column_reserva = [[sg.Text('Data da Retirada', size=(18, 1)), sg.Input('', key='rDTRetirada', size=8),
                              components.get_calendario('rDTRetirada')],

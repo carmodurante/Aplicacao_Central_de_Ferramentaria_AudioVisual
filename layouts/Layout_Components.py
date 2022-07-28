@@ -16,9 +16,9 @@ def get_calendario(target_input):
 
 def get_table_header(table_name):
     if table_name == 'Reserva':
-        header_reservas = ['ID Reserva', 'ID Ferramenta', 'CPF do Técnico', 'Data Reserva', 'Hora Reserva',
-                           'Data Devolução', 'Hora Devolução', 'Data Devol. Efetiva', 'Hora Devol, Efetiva',
-                           'Reserva Emergencial?']
+        header_reservas = ['ID Reserva', 'ID Ferramenta', 'CPF do Técnico', 'Nome do Técnico', 'Descrição',
+                           'Data Reserva', 'Hora Reserva', 'Data Devolução', 'Hora Devolução', 'Data Devol. Efetiva',
+                           'Hora Devol, Efetiva', 'Reserva Emergencial?']
 
         return header_reservas
 
