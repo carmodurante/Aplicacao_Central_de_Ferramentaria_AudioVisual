@@ -2,7 +2,7 @@ import PySimpleGUI as sg
 
 from functions.Functions_Diversos import get_color
 from layouts.Layout_Cadastro import layout_cadastro
-from layouts.Layout_Consulta import layout_consulta
+from layouts.Layout_Consulta import layout_consulta_principal
 from layouts.Layout_Reserva import layout_reserva
 
 
@@ -24,13 +24,13 @@ def layout_principal(lista_ferramentas, lista_tecnicos, lista_reservas,
                                                             lista_tecnicos),
                                border_width=5, element_justification='left')]
 
-    layout_consultas = [sg.Tab('Consultas', layout_consulta(lista_ferramentas,
-                                                            lista_tecnicos,
-                                                            lista_reservas), border_width=5,
-                               element_justification='left')]
+    layout_consultas = [sg.Tab('Consultas', layout_consulta_principal(lista_ferramentas,
+                                                                      lista_tecnicos,
+                                                                      lista_reservas),
+                               border_width=5, element_justification='left')]
 
-    layout_reservas = [sg.Tab('Reservas', layout_reserva(lista_reservas), border_width=5,
-                              element_justification='left')]
+    layout_reservas = [sg.Tab('Reservas', layout_reserva(lista_reservas),
+                              border_width=5, element_justification='left')]
 
     # Somente Administradores tem permissão para cadastrar e reservar
     if usuario_logado['admin'] == 'True':
