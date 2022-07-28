@@ -5,9 +5,8 @@ from layouts.Layout_Components import get_buttons
 from layouts.Layout_Components import get_table_header
 
 
-def layout_cadastro(lista_cadastrado_ferramentas, lista_cadastrado_tecnicos):
+def layout_cadastro_ferramenta(lista_cadastrado_ferramentas):
     # Define Layout Cadastro Ferramentas
-
     left_column_ferramentas = [[sg.Text('Descrição', size=(18, 1)), sg.Input('', key='fDescricao')],
                                [sg.Text('Nome do Fabricante', size=(18, 1)), sg.Input('', key='fFabricante', size=35)],
                                [sg.Text('Voltagem de Uso', size=(18, 1)),
@@ -45,6 +44,10 @@ def layout_cadastro(lista_cadastrado_ferramentas, lista_cadastrado_tecnicos):
                                         expand_x=True,
                                         vertical_scroll_only=False)]]
 
+    return layout_cad_ferramentas
+
+
+def layout_cadastro_tecnicos(lista_cadastrado_tecnicos):
     # Define Layout Cadastro Tecnicos
     left_column_tecnicos = [[sg.Text('CPF', size=(18, 1)), sg.Input('', key='tCPF', size=15)],
                             [sg.Text('Nome', size=(18, 1)), sg.Input('', key='tNome')],
@@ -73,10 +76,16 @@ def layout_cadastro(lista_cadastrado_ferramentas, lista_cadastrado_tecnicos):
                                     expand_x=True,
                                     vertical_scroll_only=False)]]
 
+    return layout_cad_tecnico
+
+
+def layout_cadastro_principal(lista_cadastrado_ferramentas, lista_cadastrado_tecnicos):
     # Define o TabGroup Cadastro
     tabgrp_cadastro = [[sg.TabGroup([[
-        sg.Tab('Cadastro de Ferramentas', layout_cad_ferramentas, border_width=5, element_justification='left'),
-        sg.Tab('Cadastro de Técnicos      ', layout_cad_tecnico, border_width=5, element_justification='left')
+        sg.Tab('Cadastro de Ferramentas', layout_cadastro_ferramenta(lista_cadastrado_ferramentas), border_width=5,
+               element_justification='left'),
+        sg.Tab('Cadastro de Técnicos      ', layout_cadastro_tecnicos(lista_cadastrado_tecnicos), border_width=5,
+               element_justification='left')
     ]], tab_location=sg.TAB_LOCATION_TOP_LEFT, border_width=7, font='_ 12')]]
 
     return tabgrp_cadastro

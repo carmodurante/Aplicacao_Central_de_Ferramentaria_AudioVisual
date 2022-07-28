@@ -1,7 +1,7 @@
 import PySimpleGUI as sg
 
 from functions.Functions_Diversos import get_color
-from layouts.Layout_Cadastro import layout_cadastro
+from layouts.Layout_Cadastro import layout_cadastro_principal
 from layouts.Layout_Consulta import layout_consulta_principal
 from layouts.Layout_Reserva import layout_reserva
 
@@ -20,8 +20,8 @@ def layout_principal(lista_ferramentas, lista_tecnicos, lista_reservas,
                      sg.Text('@DevTeam_05', size=(15, 1), text_color='purple', enable_events=True, key='URL_DEV5',
                              tooltip='Abrir Documentação no Github')]
 
-    layout_cadastros = [sg.Tab('Cadastros', layout_cadastro(lista_ferramentas,
-                                                            lista_tecnicos),
+    layout_cadastros = [sg.Tab('Cadastros', layout_cadastro_principal(lista_ferramentas,
+                                                                      lista_tecnicos),
                                border_width=5, element_justification='left')]
 
     layout_consultas = [sg.Tab('Consultas', layout_consulta_principal(lista_ferramentas,
