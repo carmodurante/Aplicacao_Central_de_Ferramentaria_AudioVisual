@@ -35,7 +35,7 @@ def layout_reserva(lista_cadastrado_reservas):
                                     auto_size_columns=True,
                                     display_row_numbers=True,
                                     justification='left',
-                                    num_rows=7,
+                                    num_rows=6,
                                     key='-TABLE_CAD_RESERVAS-',
                                     row_height=35,
                                     enable_click_events=True,
