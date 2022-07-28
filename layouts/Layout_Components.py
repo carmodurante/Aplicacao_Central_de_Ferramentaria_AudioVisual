@@ -45,7 +45,7 @@ def get_buttons(layout_name):
     elif layout_name == 'CAD_FERRAMENTA':
         buttons_cadastro_ferramentas = [[sg.Button('Cadastrar', key='CadastrarFerramenta', pad=(15, 7), expand_x=True),
                                          sg.Button('Modificar', key='ModificarFerramenta', pad=(15, 7), expand_x=True),
-                                         sg.Button('Eliminar', key='EliminarFerramenta', pad=(15, 7), expand_x=True,),
+                                         sg.Button('Eliminar', key='EliminarFerramenta', pad=(15, 7), expand_x=True, ),
                                          sg.Button('Limpar', key='LimparFerramentaCad', pad=(15, 7), expand_x=True)]]
         return buttons_cadastro_ferramentas
 
