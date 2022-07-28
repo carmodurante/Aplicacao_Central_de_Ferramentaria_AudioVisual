@@ -50,7 +50,7 @@ def layout_cadastro_ferramenta(lista_cadastrado_ferramentas):
 def layout_cadastro_tecnicos(lista_cadastrado_tecnicos):
     # Define Layout Cadastro Tecnicos
     left_column_tecnicos = [[sg.Text('CPF', size=(18, 1)), sg.Input('', key='tCPF', size=15)],
-                            [sg.Text('Nome', size=(18, 1)), sg.Input('', key='tNome')],
+                            [sg.Text('Nome Completo', size=(18, 1)), sg.Input('', key='tNome')],
                             [sg.Text('Celular/Rádio', size=(18, 1)), sg.Input('', key='tTelefone', size=11)],
                             [sg.Text('Turno', size=(18, 1)), sg.Combo(['Manhã', 'Tarde', 'Noite'],
                                                                       default_value='Manhã', key='fTurno', size=9)],
