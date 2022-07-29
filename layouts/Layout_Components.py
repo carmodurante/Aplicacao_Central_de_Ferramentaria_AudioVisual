@@ -5,11 +5,14 @@ def get_calendario(target_input):
     lista_meses = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho',
                    'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro']
 
-    calendario = sg.CalendarButton('Escolha a Data', close_when_date_chosen=True,
+    calendario = sg.CalendarButton('📅', close_when_date_chosen=True,
                                    target=target_input, no_titlebar=False,
                                    format='%d/%m/%y', default_date_m_d_y=(9, None, 2022),
                                    month_names=lista_meses,
-                                   auto_size_button=True,
+                                   auto_size_button=False,
+                                   button_color=('white', 'black'),
+                                   font='_ 12',
+                                   size=3,
                                    title='Calendário')
     return calendario
 
