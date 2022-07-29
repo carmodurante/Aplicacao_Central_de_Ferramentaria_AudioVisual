@@ -34,37 +34,49 @@ if __name__ == '__main__':
                     if event == sg.WIN_CLOSED:
                         break
 
-                    elif event == 'URL_DEV5':
-                        web.open(get_link_url_dev5())
+                    # Cadastrar
+                    elif event == 'CadastrarFerramenta':
+                        cadastros.cadastrar_ferramenta(values)
+
+                    # Modificar
+
+                    # Reservar
+
 
                     # Filtrar
-                    elif event == 'FiltrarFerramenta':
+                    elif event == 'FiltrarFerramenta':  # Filtrar Ferramenta Consulta
                         consulta.filtrar_ferramentas(window, values)
 
-                    elif event == 'FiltrarTecnico':
+                    elif event == 'FiltrarTecnico':  # Filtrar Tecnico Consulta
                         consulta.filtrar_tecnicos(window, values)
 
-                    elif event == 'FiltrarReserva':
+                    elif event == 'FiltrarReserva':  # Filtrar Reserva Consulta
                         consulta.filtrar_reservas(window, values)
 
                     # Limpar Tela
-                    elif event == 'LimparFerramentaCON':
+                    elif event == 'LimparFerramentaCON':  # Limpar Ferramenta Consulta
                         consulta.limpar_filtros(window, 'ferramenta_CON')
 
-                    elif event == 'LimparFerramentaCAD':
+                    elif event == 'LimparFerramentaCAD':  # Limpar Ferramenta Cadastro
                         consulta.limpar_filtros(window, 'ferramenta_CAD')
 
-                    elif event == 'LimparTecnicoCON':
+                    elif event == 'LimparTecnicoCON':  # Limpar Tecnico Consulta
                         consulta.limpar_filtros(window, 'tecnico_CON')
 
-                    elif event == 'LimparTecnicoCAD':
+                    elif event == 'LimparTecnicoCAD':  # Limpar Tecnico Cadastro
                         consulta.limpar_filtros(window, 'tecnico_CAD')
 
-                    elif event == 'LimparReservaCAD':
+                    elif event == 'LimparReservaCON':  # Limpar Reserva Consulta
+                        consulta.limpar_filtros(window, 'reserva_CON')
+
+                    elif event == 'LimparReservaCAD':  # Limpar Reserva Cadastro
                         consulta.limpar_filtros(window, 'reserva_CAD')
 
-                    elif event == 'LimparReservaCON':
-                        consulta.limpar_filtros(window, 'reserva_CON')
+                    # Baixar CSV
+
+                    # Links
+                    elif event == 'URL_DEV5':
+                        web.open(get_link_url_dev5())
 
 
                 except:

@@ -12,3 +12,11 @@ def get_cadastro_tecnicos():
                                  ['12345678910', 'Jose Carlos', '1699111111', 'Noite', 'Titans']]
 
     return lista_cadastrado_tecnicos
+
+
+def cadastrar_ferramenta(values):
+    lista_ferramenta = [values['fDescricao'].strip()]
+
+    return lista_ferramenta
+
+
