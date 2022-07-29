@@ -44,6 +44,9 @@ if __name__ == '__main__':
                     elif event == 'FiltrarTecnico':
                         consulta.filtrar_tecnicos(window, values)
 
+                    elif event == 'FiltrarReserva':
+                        consulta.filtrar_reservas(window, values)
+
                     # Limpar Tela
                     elif event == 'LimparFerramentaCON':
                         consulta.limpar_filtros(window, 'ferramenta_CON')
@@ -59,6 +62,9 @@ if __name__ == '__main__':
 
                     elif event == 'LimparReservaCAD':
                         consulta.limpar_filtros(window, 'reserva_CAD')
+
+                    elif event == 'LimparReservaCON':
+                        consulta.limpar_filtros(window, 'reserva_CON')
 
 
                 except:

@@ -6,14 +6,14 @@ import layouts.Layout_Components as components
 def layout_consulta_ferramentas(lista_consulta_ferramentas):
     # Define Layout Consulta Ferramentas
     left_column_ferramenta = [[sg.Text('ID Ferramenta', size=(18, 1)), sg.Input('', key='cfFerramenta', size=10)],
+                              [sg.Text('Descrição', size=(18, 1)), sg.Input('', key='cfDescricao', size=27)],
                               [sg.Text('Código do Fabricante', size=(18, 1)),
                                sg.Input('', key='cfCodFabricante', size=25)],
-                              [sg.Text('Tamanho', size=(18, 1)), sg.Input('', key='cfTamanho', size=15)],
+                              [sg.Text('Nome do Fabricante', size=(18, 1)),
+                               sg.Input('', key='cfFabricante', size=27)],
                               [sg.Text('Reservado', size=(18, 1)), sg.Checkbox('', key='cfReservado', default=False)]]
 
-    center_column_ferramenta = [[sg.Text('Descrição', size=(18, 1)), sg.Input('', key='cfDescricao', size=27)],
-                                [sg.Text('Nome do Fabricante', size=(18, 1)),
-                                 sg.Input('', key='cfFabricante', size=27)],
+    center_column_ferramenta = [[sg.Text('Tamanho', size=(18, 1)), sg.Input('', key='cfTamanho', size=15)],
                                 [sg.Text('Unidade de Medida', size=(18, 1)), sg.Input('', key='cfUnidade', size=20)]]
 
     imagem_ferramenta = [[sg.Image(key="IMGFerramenta", expand_y=True, expand_x=True, pad=((1, 1), (5, 5)))]]
@@ -21,8 +21,11 @@ def layout_consulta_ferramentas(lista_consulta_ferramentas):
     right_column_ferramenta = [[sg.Frame('Imagem Ferramenta', layout=imagem_ferramenta,
                                          element_justification='center', expand_x=True, expand_y=True)]]
 
-    layout_con_ferramentas = [[sg.Column(left_column_ferramenta, vertical_alignment='top'), sg.VSeparator(),
-                               sg.Column(center_column_ferramenta, vertical_alignment='top'), sg.VSeparator(),
+    layout_con_ferramentas = [[sg.Column(left_column_ferramenta, vertical_alignment='top'),
+                               sg.VSeparator(),
+                               sg.Column(center_column_ferramenta, vertical_alignment='top'),
+                               sg.Push(),
+                               sg.VSeparator(),
                                sg.Column(right_column_ferramenta, vertical_alignment='top', expand_x=True,
                                          expand_y=True)],
                               [sg.Frame('Opções de Consulta de Ferramentas',
@@ -53,12 +56,17 @@ def layout_consulta_tecnicos(lista_consulta_tecnicos):
                                                                      default_value='Manhã', key='cfTurno', size=9)],
                            [sg.Text('Nome da Equipe', size=(18, 1)), sg.Input('', key='ctEquipe')]]
 
+    center_column_ferramenta = [[sg.Text('', size=20)]]
+
     imagem_tecnico = [[sg.Image(key="IMGTecnico", expand_y=True, expand_x=True, pad=((1, 1), (5, 5)))]]
 
     right_column_tecnico = [[sg.Frame('Imagem Técnico', layout=imagem_tecnico,
                                       element_justification='center', expand_x=True, expand_y=True)]]
 
-    layout_con_tecnico = [[sg.Column(left_column_tecnico, vertical_alignment='top'), sg.Push(), sg.VSeparator(),
+    layout_con_tecnico = [[sg.Column(left_column_tecnico, vertical_alignment='top'),
+                           sg.Column(center_column_ferramenta, vertical_alignment='rigth'),
+                           sg.Push(),
+                           sg.VSeparator(),
                            sg.Column(right_column_tecnico, vertical_alignment='top', expand_x=True, expand_y=True)],
                           [sg.Frame('Opções de Consulta de Técnicos', layout=components.get_buttons('CON_TECNICO'),
                                     element_justification='center', expand_x=True, pad=(10, 10))],
@@ -89,20 +97,34 @@ def layout_consulta_reservas(lista_consulta_reservas):
                                     tooltip=components.get_tooltip_layout('rEmergencial')),
                             sg.Checkbox('', key='crEmergencial', default=False)]]
 
-    right_column_reserva = [[sg.Text('Data da Retirada', size=(18, 1)), sg.Input('', key='crDTRetirada', size=8),
-                             components.get_calendario('crDTRetirada')],
-                            [sg.Text('Horário da Retirada', size=(18, 1)), sg.Input('', key='crHRRetirada', size=5),
-                             sg.Text('(hh:mm)')],
-                            [sg.Text('Data da Devolução', size=(18, 1)), sg.Input('', key='crDTDevol', size=8),
-                             components.get_calendario('crDTDevol')],
-                            [sg.Text('Horário da Devolução', size=(18, 1)), sg.Input('', key='crHRDevol', size=5),
-                             sg.Text('(hh:mm)')],
-                            [sg.Text('Reservas em Atraso?', size=(18, 1)),
-                             sg.Checkbox('', key='crAtraso', default=False)]]
+    center_column_reserva = [[sg.Text('Data da Retirada', size=(18, 1)), sg.Input('', key='crDTRetirada', size=8),
+                              components.get_calendario('crDTRetirada')],
+                             [sg.Text('Horário da Retirada', size=(18, 1)), sg.Input('', key='crHRRetirada', size=5),
+                              sg.Text('(hh:mm)')],
+                             [sg.Text('Data da Devolução', size=(18, 1)), sg.Input('', key='crDTDevol', size=8),
+                              components.get_calendario('crDTDevol')],
+                             [sg.Text('Horário da Devolução', size=(18, 1)), sg.Input('', key='crHRDevol', size=5),
+                              sg.Text('(hh:mm)')],
+                             [sg.Text('Reservas em Atraso?', size=(18, 1)),
+                              sg.Checkbox('', key='crAtraso', default=False)]]
+
+    imagem_tecnico = [[sg.Image(key="IMGTecnico_Reserva", expand_y=True, expand_x=True, pad=((1, 1), (5, 5)))]]
+
+    imagem_ferramenta = [[sg.Image(key="IMGFerramenta_Reserva", expand_y=True, expand_x=True, pad=((1, 1), (5, 5)))]]
+
+    right_column_reserva = [[sg.Frame('Imagem Técnico', layout=imagem_tecnico,
+                                      element_justification='left', expand_x=True, expand_y=True),
+                             sg.VSeparator(),
+                             sg.Frame('Imagem Ferramenta', layout=imagem_ferramenta,
+                                      element_justification='right', expand_x=True, expand_y=True)]]
 
     layout_con_reserva = [[sg.Column(left_column_reserva, vertical_alignment='top', element_justification='left'),
                            sg.VSeparator(),
-                           sg.Column(right_column_reserva, vertical_alignment='top', element_justification='left')],
+                           sg.Column(center_column_reserva, vertical_alignment='top', element_justification='left'),
+
+                           sg.VSeparator(),
+                           sg.Column(right_column_reserva, vertical_alignment='top', element_justification='center',
+                                     expand_y=True, expand_x=True)],
                           [sg.Frame('Opções de Cadastro de Reserva', layout=components.get_buttons('CON_RESERVA'),
                                     element_justification='left', expand_x=True, pad=(10, 10))],
                           [sg.Table(values=lista_consulta_reservas,

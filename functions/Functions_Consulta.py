@@ -53,6 +53,17 @@ def filtrar_tecnicos(window, values):
     window["IMGTecnico"].update(data=bio.getvalue())
     return lista_tecnicos
 
+def filtrar_reservas(window, values):
+    lista_ferramentas = []
+    # Imagem Tecnico
+    bio = get_imagem('46794179865', 'tecnico')
+    window["IMGTecnico_Reserva"].update(data=bio.getvalue())
+
+    # Imagem Ferramenta
+    bio = get_imagem('1001', 'ferramenta')
+    window["IMGFerramenta_Reserva"].update(data=bio.getvalue())
+
+    return lista_ferramentas
 
 def limpar_filtros(window, tipo_consulta):
     for chave in get_keys_to_clean(tipo_consulta):
