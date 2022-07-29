@@ -50,7 +50,7 @@ def layout_consulta_ferramentas(lista_consulta_ferramentas):
 def layout_consulta_tecnicos(lista_consulta_tecnicos):
     # Define Layout Consulta Tecnicos
     left_column_tecnico = [[sg.Text('CPF', size=(18, 1)), sg.Input('', key='ctCPF', size=15)],
-                           [sg.Text('Nome', size=(18, 1)), sg.Input('', key='ctNome')],
+                           [sg.Text('Nome Completo', size=(18, 1)), sg.Input('', key='ctNome')],
                            [sg.Text('Celular/Rádio', size=(18, 1)), sg.Input('', key='ctTelefone', size=11)],
                            [sg.Text('Turno', size=(18, 1)), sg.Combo(['Manhã', 'Tarde', 'Noite'],
                                                                      default_value='Manhã', key='cfTurno', size=9)],
@@ -99,12 +99,16 @@ def layout_consulta_reservas(lista_consulta_reservas):
 
     center_column_reserva = [[sg.Text('Data da Retirada', size=(18, 1)), sg.Input('', key='crDTRetirada', size=8),
                               components.get_calendario('crDTRetirada')],
-                             [sg.Text('Horário da Retirada', size=(18, 1)), sg.Input('', key='crHRRetirada', size=5),
-                              sg.Text('(hh:mm)')],
+                             [sg.Text('Horário da Retirada', size=(18, 1)),
+                              sg.Spin(values=components.get_horas_minutos(24), key='rHRRetirada', initial_value='12'),
+                              sg.Text(':', auto_size_text=True),
+                              sg.Spin(values=components.get_horas_minutos(60), key='rMinRetirada', initial_value='30')],
                              [sg.Text('Data da Devolução', size=(18, 1)), sg.Input('', key='crDTDevol', size=8),
                               components.get_calendario('crDTDevol')],
-                             [sg.Text('Horário da Devolução', size=(18, 1)), sg.Input('', key='crHRDevol', size=5),
-                              sg.Text('(hh:mm)')],
+                             [sg.Text('Horário da Devolução', size=(18, 1)),
+                              sg.Spin(values=components.get_horas_minutos(24), key='crHRDevol', initial_value='12'),
+                              sg.Text(':', auto_size_text=True),
+                              sg.Spin(values=components.get_horas_minutos(60), key='crMinDevol', initial_value='30')],
                              [sg.Text('Reservas em Atraso?', size=(18, 1)),
                               sg.Checkbox('', key='crAtraso', default=False)]]
 

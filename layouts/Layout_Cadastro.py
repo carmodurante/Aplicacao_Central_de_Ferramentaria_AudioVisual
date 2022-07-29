@@ -3,20 +3,23 @@ import PySimpleGUI as sg
 from functions.Functions_Diversos import get_file_types
 from layouts.Layout_Components import get_buttons
 from layouts.Layout_Components import get_table_header
+from layouts.Layout_Components import get_horas_minutos
 
 
 def layout_cadastro_ferramenta(lista_cadastrado_ferramentas):
     # Define Layout Cadastro Ferramentas
     left_column_ferramentas = [[sg.Text('Descrição', size=(18, 1)), sg.Input('', key='fDescricao')],
-                               [sg.Text('Nome do Fabricante', size=(18, 1)), sg.Input('', key='fFabricante', size=35)],
-                               [sg.Text('Voltagem de Uso', size=(18, 1)),
-                                sg.Combo(['220V', '110V', 'N/D'], default_value='110V', key='fVoltagem', size=10),
-                                sg.Text('(Volts)', size=(7, 1))],
                                [sg.Text('Código no Fabricante', size=(18, 1)),
                                 sg.Input('', key='fCodFabricante', size=20)],
+                               [sg.Text('Nome do Fabricante', size=(18, 1)), sg.Input('', key='fFabricante', size=35)],
+                               [sg.Text('Voltagem de Uso', size=(18, 1)),
+                                sg.Combo(['220V', '110V', 'N/D'], default_value='110V', key='fVoltagem', size=6),
+                                sg.Text('(Volts)', size=(7, 1))],
                                [sg.Text('Tempo Max. de Reserva', size=(18, 1)),
-                                sg.Input('', key='fTempoReserva', size=6, ),
-                                sg.Text('(hh:mm)', size=(7, 1))]]
+                                sg.Spin(values=get_horas_minutos(24), key='fHRMaxReserva', initial_value='12'),
+                                sg.Text(':', auto_size_text=True),
+                                sg.Spin(values=get_horas_minutos(60), key='fMinMaxReserva', initial_value='30')
+                                ]]
 
     right_column_ferramentas = [[sg.Text('Tamanho', size=(18, 1)), sg.Input('', key='fTamanho', size=20)],
                                 [sg.Text('Unidade de Medida', size=(18, 1)), sg.Input('', key='fUnidade', size=15)],
