@@ -16,12 +16,16 @@ def layout_reserva(lista_cadastrado_reservas):
 
     right_column_reserva = [[sg.Text('Data da Retirada', size=(18, 1)), sg.Input('', key='rDTRetirada', size=8),
                              components.get_calendario('rDTRetirada')],
-                            [sg.Text('Horário da Retirada', size=(18, 1)), sg.Input('', key='rHRRetirada', size=5),
-                             sg.Text('(hh:mm)')],
+                            [sg.Text('Horário da Retirada', size=(18, 1)),
+                             sg.Spin(values=components.get_horas_minutos(24), key='rHRRetirada', initial_value='12'),
+                             sg.Text(':', auto_size_text=True),
+                             sg.Spin(values=components.get_horas_minutos(60), key='rMinRetirada', initial_value='30')],
                             [sg.Text('Data da Devolução', size=(18, 1)), sg.Input('', key='rDTDevol', size=8),
                              components.get_calendario('rDTDevol')],
-                            [sg.Text('Horário da Devolução', size=(18, 1)), sg.Input('', key='rHRDevol', size=5),
-                             sg.Text('(hh:mm)')]]
+                            [sg.Text('Horário da Devolução', size=(18, 1)),
+                             sg.Spin(values=components.get_horas_minutos(24), key='rHRDevol', initial_value='12'),
+                             sg.Text(':', auto_size_text=True),
+                             sg.Spin(values=components.get_horas_minutos(60), key='rMinDevol', initial_value='30')]]
 
     layout_cad_reserva = [[sg.Column(left_column_reserva, vertical_alignment='top', element_justification='left'),
                            sg.VSeparator(),

@@ -87,3 +87,15 @@ def get_tooltip_layout(key_field):
                        'antecedência, podendo retirar a ferramenta no momento da reserva para ' \
                        'casos de emergência.'
     return text_tooltip
+
+
+def get_horas_minutos(horas_minutos):
+    lista_horario = []
+    horas_minutos += 1
+    for index, value in enumerate(range(horas_minutos)):
+        if index < 10:
+            lista_horario.append(f'0{value}')
+        else:
+            lista_horario.append(f'{value}')
+
+    return lista_horario

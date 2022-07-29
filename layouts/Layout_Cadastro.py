@@ -24,8 +24,11 @@ def layout_cadastro_ferramenta(lista_cadastrado_ferramentas):
                                 [sg.Text('Material da Ferramenta', size=(18, 1)),
                                  sg.Input('', key='fMaterial', size=25)],
                                 [sg.Text('Imagem da Ferramenta', size=(18, 1)), sg.Input('', key="fImagem"),
-                                 sg.FileBrowse(file_types=get_file_types(), button_text='Carregar Imagem',
-                                               auto_size_button=True)]]
+                                 sg.FileBrowse(file_types=get_file_types(), button_text='📂',
+                                               auto_size_button=False,
+                                               size=3,
+                                               font='_ 12',
+                                               button_color=('white', 'black'))]]
 
     layout_cad_ferramentas = [[sg.Column(left_column_ferramentas, vertical_alignment='left'), sg.VSeparator(),
                                sg.Column(right_column_ferramentas, vertical_alignment='left')],
@@ -55,9 +58,14 @@ def layout_cadastro_tecnicos(lista_cadastrado_tecnicos):
                             [sg.Text('Turno', size=(18, 1)), sg.Combo(['Manhã', 'Tarde', 'Noite'],
                                                                       default_value='Manhã', key='fTurno', size=9)],
                             [sg.Text('Nome da Equipe', size=(18, 1)), sg.Input('', key='tEquipe')]]
+
     right_column_tecnicos = [[sg.Text('Imagem do Técnico', size=(18, 1)), sg.Input('', key="tImagem"),
-                              sg.FileBrowse(file_types=get_file_types(), button_text='Carregar Imagem',
-                                            auto_size_button=True)]]
+                              sg.FileBrowse(file_types=get_file_types(), button_text='📂',
+                                            auto_size_button=False,
+                                            size=3,
+                                            font='_ 12',
+                                            button_color=('white', 'black'))]]
+
     layout_cad_tecnico = [[sg.Column(left_column_tecnicos, vertical_alignment='left'), sg.VSeparator(),
                            sg.Column(right_column_tecnicos, vertical_alignment='top')],
                           [sg.Frame('Opções de Cadastro de Técnicos', layout=get_buttons('CAD_TECNICO'),
