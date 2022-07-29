@@ -14,19 +14,18 @@ def get_keys_to_clean(tipo_consulta):
 
     elif tipo_consulta == 'reserva_CON':
         chaves_para_limpar = ['crFerramenta', 'crCPF', 'crNomeTecnico', 'crDescricao', 'crEmergencial', 'crDTRetirada',
-                              'crHRRetirada', 'crDTDevol', 'crAtraso', 'crHRDevol', 'IMGTecnico_Reserva',
-                              'IMGFerramenta_Reserva']
+                              'crDTDevol', 'crAtraso', 'crHRDevol', 'IMGTecnico_Reserva', 'IMGFerramenta_Reserva']
 
     elif tipo_consulta == 'ferramenta_CAD':
         chaves_para_limpar = ['fDescricao', 'fCodFabricante', 'fFabricante', 'fTamanho',
-                              'fUnidade', 'fVoltagem', 'fTipo', 'fMaterial', 'fTempoReserva', 'fImagem']
+                              'fUnidade', 'fVoltagem', 'fTipo', 'fMaterial', 'fImagem']
 
     elif tipo_consulta == 'tecnico_CAD':
         chaves_para_limpar = ['tCPF', 'tNome', 'fTurno', 'tEquipe', 'tTelefone', 'tImagem']
 
     elif tipo_consulta == 'reserva_CAD':
         chaves_para_limpar = ['rFerramenta', 'rCPF', 'rNomeTecnico', 'rDescricao', 'rEmergencial', 'rDTRetirada',
-                              'rHRRetirada', 'rDTDevol', 'rHRDevol']
+                              'rDTDevol']
 
     return chaves_para_limpar
 

@@ -16,9 +16,9 @@ def layout_cadastro_ferramenta(lista_cadastrado_ferramentas):
                                 sg.Combo(['220V', '110V', 'N/D'], default_value='110V', key='fVoltagem', size=6),
                                 sg.Text('(Volts)', size=(7, 1))],
                                [sg.Text('Tempo Max. de Reserva', size=(18, 1)),
-                                sg.Spin(values=get_horas_minutos(24), key='fHRMaxReserva', initial_value='12'),
+                                sg.Spin(values=get_horas_minutos(72), key='fHRMaxReserva', initial_value='12'),
                                 sg.Text(':', auto_size_text=True),
-                                sg.Spin(values=get_horas_minutos(60), key='fMinMaxReserva', initial_value='30')
+                                sg.Spin(values=get_horas_minutos(59), key='fMinMaxReserva', initial_value='30')
                                 ]]
 
     right_column_ferramentas = [[sg.Text('Tamanho', size=(18, 1)), sg.Input('', key='fTamanho', size=20)],
