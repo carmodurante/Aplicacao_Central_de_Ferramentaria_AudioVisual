@@ -2,8 +2,8 @@ import PySimpleGUI as sg
 
 from functions.Functions_Diversos import get_file_types
 from layouts.Layout_Components import get_buttons
-from layouts.Layout_Components import get_table_header
 from layouts.Layout_Components import get_horas_minutos
+from layouts.Layout_Components import get_table_header
 
 
 def layout_cadastro_ferramenta(lista_cadastrado_ferramentas):
