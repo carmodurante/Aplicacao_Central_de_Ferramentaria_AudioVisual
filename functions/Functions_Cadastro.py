@@ -1,37 +1,27 @@
+import io
 import os
 
 from PIL import Image
 
 
-def get_cadastro_ferramenta():
-    lista_cadastrado_ferramentas = []
-    with open("content/data/ferramentas.csv", "r") as ferramentas:
-        for linha in ferramentas:
-            linha_separada = linha.split(";")
-            lista_cadastrado_ferramentas.append(linha_separada)
+def get_cadastrados(tipo):
+    lista_cadastrados = []
+    try:
+        with open(f'content/data/{tipo}.csv', "r") as cadastrados_arquivo:
+            for linha in cadastrados_arquivo:
+                linha_separada = linha.split(";")
+                lista_cadastrados.append(linha_separada)
 
-    return lista_cadastrado_ferramentas
+        return lista_cadastrados
 
-
-def get_cadastro_tecnico():
-    lista_cadastrado_tecnicos = [['46794179865', 'Carmo Durante Neto', '16992180889', 'Manhã', 'Hell Fire'],
-                                 ['12345678910', 'Jose Carlos', '1699111111', 'Noite', 'Titans']]
-
-    return lista_cadastrado_tecnicos
-
+    except:
+        return lista_cadastrados
 
 def cadastrar_ferramenta(values, sg):
-    # Pega sequencial de id_ferramenta
-    id_ferramenta = 1000
-
-    for ferramenta in get_cadastro_ferramenta():
-        if int(ferramenta[0]) > id_ferramenta:
-            id_ferramenta = int(ferramenta[0])
-
-    id_ferramenta += 1
-
+    id_ferramenta = ''
     try:
-        with open("content/data/ferramentas.csv", "a") as ferramentas_arquivo:
+        id_ferramenta = get_new_sequencial_id('ferramenta')
+        with open("content/data/ferramenta.csv", "a") as ferramentas_arquivo:
             lista_ferramenta = [f'\n{id_ferramenta}',
                                 f';{values["fDescricao"].strip()}',
                                 f';{values["fCodFabricante"].strip()}',
@@ -58,12 +48,29 @@ def cadastrar_ferramenta(values, sg):
 
 
 def salvar_imagem(tipo, id_number, filename, sg):
-    try:
-        if os.path.exists(filename):
-            image = Image.open(filename)
-            image.save(fp=f'content/data/{tipo}_{id_number}.jpg', format='JPEG')
-        else:
-            sg.popup("Erro ao salvar caminho da imagem", title='Error', font=8)
+    # try:
+    if os.path.exists(filename):
+        image = Image.open(filename)
+        caminho = f'content/images/{tipo}_{id_number}.jpg'
+        image.thumbnail((180, 180))
+        bio = io.BytesIO()
+        image.save(bio, format='PNG')
+        image.save(fp=caminho, format='JPG')
+    else:
+        sg.popup("Erro ao salvar caminho da imagem", title='Error', font=8)
 
-    except:
-        sg.popup("Erro ao salvar imagem", title='Error', font=8)
+
+# except:
+#     sg.popup("Erro ao salvar imagem", title='Error', font=8)
+
+
+def get_new_sequencial_id(tipo):
+    id_number = 1000
+
+    for linha in get_cadastrados(tipo):
+        if int(linha[0]) > id_number:
+            id_ferramenta = int(linha[0])
+
+    id_number += 1
+
+    return str(id_number)

@@ -20,8 +20,8 @@ if __name__ == '__main__':
 
             # Define Window
             window = sg.Window('App Central de Ferramentaria AudioVisual',
-                               layout_principal(cadastros.get_cadastro_ferramenta(),
-                                                cadastros.get_cadastro_tecnico(),
+                               layout_principal(cadastros.get_cadastrados('ferramenta'),
+                                                cadastros.get_cadastrados('tecnico'),
                                                 reservas.get_cadastro_reservas(),
                                                 usuario_logado),
                                resizable=True, size=(1250, 670))

@@ -31,7 +31,7 @@ def get_keys_to_clean(tipo_consulta):
 
 
 def get_imagem(identificador, tipo_consulta):
-    filename = f'content/images/{tipo_consulta}_{identificador}.jpg'
+    filename = f'content/images/{tipo_consulta}_{identificador}.jpeg'
     image = Image.open(filename)
     image.thumbnail((100, 100))
     bio = io.BytesIO()
