@@ -1,4 +1,3 @@
-import os
 import webbrowser as web
 
 import PySimpleGUI as sg
@@ -38,6 +37,7 @@ if __name__ == '__main__':
                     # Cadastrar
                     elif event == 'CadastrarFerramenta':  # Cadastrar Ferramenta
                         cadastros.cadastrar_ferramenta(values, sg)
+                        window['-TABLE_CAD_FERRAMENTAS-'].update(cadastros.get_cadastrados('ferramenta'))
 
                     # Modificar
                     elif event == 'ModificarFerramenta':  # Modificar Ferramenta
