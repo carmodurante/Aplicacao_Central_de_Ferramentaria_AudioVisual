@@ -1,8 +1,6 @@
-import io
 import os
 
-from PIL import Image
-
+import shutil
 
 def get_cadastrados(tipo):
     lista_cadastrados = []
@@ -48,28 +46,19 @@ def cadastrar_ferramenta(values, sg):
 
 
 def salvar_imagem(tipo, id_number, filename, sg):
-    # try:
-    if os.path.exists(filename):
-        image = Image.open(filename)
-        caminho = f'content/images/{tipo}_{id_number}.jpg'
-        image.thumbnail((180, 180))
-        bio = io.BytesIO()
-        image.save(bio, format='PNG')
-        image.save(fp=caminho, format='JPG')
-    else:
-        sg.popup("Erro ao salvar caminho da imagem", title='Error', font=8)
-
-
-# except:
-#     sg.popup("Erro ao salvar imagem", title='Error', font=8)
-
+    try:
+        if os.path.exists(filename):
+            shutil.copyfile(filename, f'content/images/{tipo}_{id_number}.jpg')
+        else:
+            sg.popup("Erro ao salvar caminho da imagem", title='Error', font=8)
+    except:
+        sg.popup("Erro ao salvar imagem", title='Error', font=8)
 
 def get_new_sequencial_id(tipo):
     id_number = 1000
-
     for linha in get_cadastrados(tipo):
         if int(linha[0]) > id_number:
-            id_ferramenta = int(linha[0])
+            id_number = int(linha[0])
 
     id_number += 1
 

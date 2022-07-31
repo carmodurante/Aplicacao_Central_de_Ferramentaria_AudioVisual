@@ -4,9 +4,7 @@ def get_link_url_dev5():
 
 
 def get_file_types():
-    file_types = [("JPEG (*.jpeg)", "*.jpeg"),
-                  ("JPG (*.jpg)", "*.jpg"),
-                  ("PNG (*.png)", "*.png")]
+    file_types = [("JPG (*.jpg)", "*.jpg")]
     return file_types
 
 
