@@ -16,13 +16,11 @@ def get_cadastrados(tipo):
         return lista_cadastrados
 
 def cadastrar_ferramenta(values, sg):
-    id_ferramenta = ''
     try:
         id_ferramenta = get_new_sequencial_id('ferramenta')
         with open("content/data/ferramenta.csv", "a") as ferramentas_arquivo:
             lista_ferramenta = [f'\n{id_ferramenta}',
                                 f';{values["fDescricao"].strip()}',
-                                f';{values["fCodFabricante"].strip()}',
                                 f';{values["fCodFabricante"].strip()}',
                                 f';{values["fFabricante"].strip()}',
                                 f';{values["fVoltagem"].strip()}',
@@ -31,19 +29,19 @@ def cadastrar_ferramenta(values, sg):
                                 f';{values["fTamanho"].strip()}',
                                 f';{values["fUnidade"].strip()}',
                                 f';{values["fTipo"].strip()}',
-                                f';{values["fMaterial"].strip()}']
+                                f';{values["fMaterial"].strip()}',
+                                ';False']  # Reservado? nasce como False.
 
             ferramentas_arquivo.writelines(lista_ferramenta)
 
+        # Salvar Imagem da Ferramenta se existir
+        if values['fImagem'].strip() != '':
+            salvar_imagem('ferramenta', id_ferramenta, values['fImagem'], sg)
+
+        return lista_ferramenta
+
     except:
         sg.popup("Erro ao salvar ferramenta", title='Error', font=8)
-
-    # Salvar Imagem da Ferramenta se existir
-    if values['fImagem'].strip() != '':
-        salvar_imagem('ferramenta', id_ferramenta, values['fImagem'], sg)
-
-    return lista_ferramenta
-
 
 def salvar_imagem(tipo, id_number, filename, sg):
     try:
