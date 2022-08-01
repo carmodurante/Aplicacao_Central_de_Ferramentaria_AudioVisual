@@ -92,10 +92,9 @@ def get_screen_keys(tipo):
 
 
 def deletar_registro(index, tipo):
-    if tipo == 'ferramenta':
-        new_list = []
-        with open(f'content/data/', "w") as lista_arquivo:
-            for linhas in lista_arquivo:
-                new_list.append(linhas)
-            new_list.pop(index)
-            lista_arquivo.writelines(linhas)
+    new_list = []
+    with open(f'content/data/{tipo}.csv', "w") as lista_arquivo:
+        for linhas in lista_arquivo:
+            new_list.append(linhas)
+        new_list.pop(index)
+        lista_arquivo.writelines(linhas)
