@@ -12,6 +12,9 @@ from layouts.Layout_Principal import layout_principal
 # Define o tema
 sg.theme('Black')
 
+# Variaveis Globais
+linha_selecionada = -1
+
 if __name__ == '__main__':
     try:
         usuario_logado = login.login()
@@ -44,23 +47,40 @@ if __name__ == '__main__':
                     elif event == 'ModificarFerramenta':  # Modificar Ferramenta
                         a = 1
 
+                    elif event == 'ModificarTecnico':  # Modificar Tecnico
+                        a = 1
+
                     # Seleção tabela
                     elif type(event) is tuple and event[0] == '-TABLE_CAD_FERRAMENTAS-':
-                        print(event[2][0])
-                        if event[2][0] >= 0:  # linha selecionada
-                            lista_filtrada = cadastros.get_cadastrados('ferramenta')[event[2][0]]
-                            print(lista_filtrada)
+                        if event[2][0] >= 0:  # Linha selecionada Tabela de Cadastro de Ferramentas
+                            linha_selecionada = event[2][0]
+                            cadastros.carregar_dados_tela(cadastros.get_cadastrados('ferramenta')[event[2][0]],
+                                                          'cadastro_ferramenta', window)
 
-                        # TELAS DE CONSULTA
-                        # Filtrar
-                        elif event == 'FiltrarFerramenta':  # Filtrar Ferramenta Consulta
-                            consultas.filtrar_ferramentas(window, values)
+                    elif type(event) is tuple and event[0] == '-TABLE_CAD_TECNICOS-':
+                        if event[2][0] >= 0:  # Linha selecionada Tabela de Cadastro de Tecnicos
+                            linha_selecionada = int(event[2][0])
+                            cadastros.carregar_dados_tela(cadastros.get_cadastrados('tecnico')[event[2][0]],
+                                                          'cadastro_tecnico', window)
 
-                        elif event == 'FiltrarTecnico':  # Filtrar Tecnico Consulta
-                            consultas.filtrar_tecnicos(window, values)
+                    # Eliminar
+                    elif event == 'EliminarFerramenta':  # Modificar Ferramenta
+                        if linha_selecionada >= 0:
+                            cadastros.deletar_registro(linha_selecionada, 'ferramenta')
 
-                        elif event == 'FiltrarReserva':  # Filtrar Reserva Consulta
-                            consultas.filtrar_reservas(window, values)
+                    elif event == 'EliminarFerramenta':  # Modificar Ferramenta
+                        a = 2
+
+                    # TELAS DE CONSULTA
+                    # Filtrar
+                    elif event == 'FiltrarFerramenta':  # Filtrar Ferramenta Consulta
+                        consultas.filtrar_ferramentas(window, values)
+
+                    elif event == 'FiltrarTecnico':  # Filtrar Tecnico Consulta
+                        consultas.filtrar_tecnicos(window, values)
+
+                    elif event == 'FiltrarReserva':  # Filtrar Reserva Consulta
+                        consultas.filtrar_reservas(window, values)
 
                     # Limpar Tela
                     elif event == 'LimparFerramentaCON':  # Limpar Ferramenta Consulta

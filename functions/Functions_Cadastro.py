@@ -52,6 +52,7 @@ def salvar_imagem(tipo, id_number, filename, sg):
     except:
         sg.popup("Erro ao salvar imagem", title='Error', font=8)
 
+
 def get_new_sequencial_id(tipo):
     id_number = 1000
     for linha in get_cadastrados(tipo):
@@ -61,3 +62,40 @@ def get_new_sequencial_id(tipo):
     id_number += 1
 
     return str(id_number)
+
+
+def carregar_dados_tela(lista, tipo, window):
+    if tipo == 'cadastro_ferramenta':
+        list_keys = get_screen_keys(tipo)
+        for index, campo in enumerate(lista):
+            if index != 0 and index <= 10:
+                window[list_keys[index - 1]].update(campo)
+
+    elif tipo == 'cadastro_tecnico':
+        list_keys = get_screen_keys(tipo)
+        for index, campo in enumerate(lista):
+            window[list_keys[index]].update(campo)
+
+
+def get_screen_keys(tipo):
+    lista_keys = []
+
+    if tipo == 'cadastro_ferramenta':
+        lista_keys = ['fDescricao', 'fCodFabricante', 'fFabricante', 'fVoltagem',
+                      'fHRMaxReserva', 'fMinMaxReserva', 'fTamanho', 'fUnidade', 'fTipo',
+                      'fMaterial']
+
+    elif tipo == 'cadastro_tecnico':
+        lista_keys = ['tCPF', 'tNome', 'tTelefone', 'tTurno', 'tEquipe']
+
+    return lista_keys
+
+
+def deletar_registro(index, tipo):
+    if tipo == 'ferramenta':
+        new_list = []
+        with open(f'content/data/', "w") as lista_arquivo:
+            for linhas in lista_arquivo:
+                new_list.append(linhas)
+            new_list.pop(index)
+            lista_arquivo.writelines(linhas)

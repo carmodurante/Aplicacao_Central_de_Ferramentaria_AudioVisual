@@ -21,7 +21,7 @@ def get_keys_to_clean(tipo_consulta):
                               'fUnidade', 'fVoltagem', 'fTipo', 'fMaterial', 'fImagem']
 
     elif tipo_consulta == 'tecnico_CAD':
-        chaves_para_limpar = ['tCPF', 'tNome', 'fTurno', 'tEquipe', 'tTelefone', 'tImagem']
+        chaves_para_limpar = ['tCPF', 'tNome', 'tTurno', 'tEquipe', 'tTelefone', 'tImagem']
 
     elif tipo_consulta == 'reserva_CAD':
         chaves_para_limpar = ['rFerramenta', 'rCPF', 'rNomeTecnico', 'rDescricao', 'rEmergencial', 'rDTRetirada',
