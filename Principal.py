@@ -34,6 +34,7 @@ if __name__ == '__main__':
                     if event == sg.WIN_CLOSED:
                         break
 
+                    # TELAS DE CADASTRO
                     # Cadastrar
                     elif event == 'CadastrarFerramenta':  # Cadastrar Ferramenta
                         cadastros.cadastrar_ferramenta(values, sg)
@@ -42,17 +43,24 @@ if __name__ == '__main__':
                     # Modificar
                     elif event == 'ModificarFerramenta':  # Modificar Ferramenta
                         a = 1
-                    # Reservar
 
-                    # Filtrar
-                    elif event == 'FiltrarFerramenta':  # Filtrar Ferramenta Consulta
-                        consultas.filtrar_ferramentas(window, values)
+                    # Seleção tabela
+                    elif type(event) is tuple and event[0] == '-TABLE_CAD_FERRAMENTAS-':
+                        print(event[2][0])
+                        if event[2][0] >= 0:  # linha selecionada
+                            lista_filtrada = cadastros.get_cadastrados('ferramenta')[event[2][0]]
+                            print(lista_filtrada)
 
-                    elif event == 'FiltrarTecnico':  # Filtrar Tecnico Consulta
-                        consultas.filtrar_tecnicos(window, values)
+                        # TELAS DE CONSULTA
+                        # Filtrar
+                        elif event == 'FiltrarFerramenta':  # Filtrar Ferramenta Consulta
+                            consultas.filtrar_ferramentas(window, values)
 
-                    elif event == 'FiltrarReserva':  # Filtrar Reserva Consulta
-                        consultas.filtrar_reservas(window, values)
+                        elif event == 'FiltrarTecnico':  # Filtrar Tecnico Consulta
+                            consultas.filtrar_tecnicos(window, values)
+
+                        elif event == 'FiltrarReserva':  # Filtrar Reserva Consulta
+                            consultas.filtrar_reservas(window, values)
 
                     # Limpar Tela
                     elif event == 'LimparFerramentaCON':  # Limpar Ferramenta Consulta
@@ -70,6 +78,7 @@ if __name__ == '__main__':
                     elif event == 'LimparReservaCON':  # Limpar Reserva Consulta
                         consultas.limpar_filtros(window, 'reserva_CON')
 
+                        # TELA DE RESERVA
                     elif event == 'LimparReservaCAD':  # Limpar Reserva Cadastro
                         consultas.limpar_filtros(window, 'reserva_CAD')
 
