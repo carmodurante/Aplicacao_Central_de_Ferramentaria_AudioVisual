@@ -93,8 +93,10 @@ def get_screen_keys(tipo):
 
 def deletar_registro(index, tipo):
     new_list = []
-    with open(f'content/data/{tipo}.csv', "w") as lista_arquivo:
-        for linhas in lista_arquivo:
+    with open(file=f'content/data/{tipo}.csv', mode='r') as lista_leitura:
+        for linhas in lista_leitura:
             new_list.append(linhas)
         new_list.pop(index)
-        lista_arquivo.writelines(new_list)
+
+    with open(file=f'content/data/{tipo}.csv', mode='w') as lista_gravacao:
+        lista_gravacao.writelines(new_list)
