@@ -67,6 +67,8 @@ if __name__ == '__main__':
                     elif event == 'EliminarFerramenta':  # Modificar Ferramenta
                         if linha_selecionada >= 0:
                             cadastros.deletar_registro(linha_selecionada, 'ferramenta')
+                            window['-TABLE_CAD_FERRAMENTAS-'].update(cadastros.get_cadastrados('ferramenta'))
+                            consultas.limpar_filtros(window, 'ferramenta_CAD')
 
                     elif event == 'EliminarFerramenta':  # Modificar Ferramenta
                         a = 2

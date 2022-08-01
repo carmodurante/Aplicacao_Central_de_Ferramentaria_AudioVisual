@@ -97,4 +97,4 @@ def deletar_registro(index, tipo):
         for linhas in lista_arquivo:
             new_list.append(linhas)
         new_list.pop(index)
-        lista_arquivo.writelines(linhas)
+        lista_arquivo.writelines(new_list)
