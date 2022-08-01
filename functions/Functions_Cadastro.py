@@ -1,6 +1,7 @@
 import os
 
 import shutil
+import traceback
 
 def get_cadastrados(tipo):
     lista_cadastrados = []
@@ -19,18 +20,17 @@ def cadastrar_ferramenta(values, sg):
     try:
         id_ferramenta = get_new_sequencial_id('ferramenta')
         with open("content/data/ferramenta.csv", "a") as ferramentas_arquivo:
-            lista_ferramenta = [f'\n{id_ferramenta}',
-                                f';{values["fDescricao"].strip()}',
-                                f';{values["fCodFabricante"].strip()}',
-                                f';{values["fFabricante"].strip()}',
-                                f';{values["fVoltagem"].strip()}',
-                                f';{values["fHRMaxReserva"].strip()}',
-                                f';{values["fMinMaxReserva"].strip()}',
-                                f';{values["fTamanho"].strip()}',
-                                f';{values["fUnidade"].strip()}',
-                                f';{values["fTipo"].strip()}',
-                                f';{values["fMaterial"].strip()}',
-                                ';False']  # Reservado? nasce como False.
+            lista_ferramenta = f'{id_ferramenta}' \
+                               f';{values["fDescricao"].strip()}' \
+                               f';{values["fCodFabricante"].strip()}' \
+                               f';{values["fFabricante"].strip()}' \
+                               f';{values["fVoltagem"].strip()}' \
+                               f';{values["fHRMaxReserva"].strip()}' \
+                               f';{values["fMinMaxReserva"].strip()}' \
+                               f';{values["fTamanho"].strip()}' \
+                               f';{values["fUnidade"].strip()}' \
+                               f';{values["fTipo"].strip()}' \
+                               f';{values["fMaterial"].strip()}\n'
 
             ferramentas_arquivo.writelines(lista_ferramenta)
 
@@ -100,3 +100,45 @@ def deletar_registro(index, tipo):
 
     with open(file=f'content/data/{tipo}.csv', mode='w') as lista_gravacao:
         lista_gravacao.writelines(new_list)
+
+
+def modificar_ferramenta(index, values, sg):
+    try:
+        with open("content/data/ferramenta.csv", "r") as ferramentas_leitura:
+            new_list = []
+            for linhas in ferramentas_leitura:
+                new_list.append(linhas)
+            id_ferramenta = new_list[index][0:4].strip()  # get id_ferramenta selecionado
+            new_list.pop(index)  # Remove valor antigo
+            ferramentas_leitura.close()
+
+            lista_ferramenta = f'{id_ferramenta}' \
+                               f';{values["fDescricao"].strip()}' \
+                               f';{values["fCodFabricante"].strip()}' \
+                               f';{values["fFabricante"].strip()}' \
+                               f';{values["fVoltagem"].strip()}' \
+                               f';{values["fHRMaxReserva"].strip()}' \
+                               f';{values["fMinMaxReserva"].strip()}' \
+                               f';{values["fTamanho"].strip()}' \
+                               f';{values["fUnidade"].strip()}' \
+                               f';{values["fTipo"].strip()}' \
+                               f';{values["fMaterial"].strip()}\n'
+
+        with open("content/data/ferramenta.csv", "w") as ferramentas_gravacao:
+            new_list.insert(index, lista_ferramenta)  # Insere valor novo da tela
+            ferramentas_gravacao.writelines(new_list)
+
+        # Deleta Imagem
+        filename = f'content/images/ferramenta_{id_ferramenta}.jpg'
+        if os.path.exists(filename):
+            os.remove(filename)
+
+        # Salvar Imagem da Ferramenta se existir
+        if values['fImagem'].strip() != '':
+            salvar_imagem('ferramenta', id_ferramenta, values['fImagem'], sg)
+
+        return lista_ferramenta
+
+    except Exception:
+        traceback.print_exc()
+    #    sg.popup("Erro ao salvar ferramenta", title='Error', font=8)

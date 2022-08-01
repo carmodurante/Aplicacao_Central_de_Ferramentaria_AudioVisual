@@ -27,8 +27,7 @@ def get_table_header(table_name):
 
     elif table_name == 'Ferramenta':
         header_ferramentas = ['ID Ferramenta', 'Descrição', 'Cód. Fabricante', 'Fabricante', 'Voltagem',
-                              'Hora Max Reserva', 'Min. Max Reserva', 'Tamanho', 'Unidade Medida', 'Tipo', 'Material',
-                              'Reservado?']
+                              'Hora Max Reserva', 'Min. Max Reserva', 'Tamanho', 'Unidade Medida', 'Tipo', 'Material']
 
         return header_ferramentas
 

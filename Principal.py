@@ -50,7 +50,11 @@ if __name__ == '__main__':
 
                     # Modificar
                     elif event == 'ModificarFerramenta':  # Modificar Ferramenta
-                        a = 1
+                        if linha_selecionada >= 0:
+                            cadastros.modificar_ferramenta(linha_selecionada, values, sg)
+                            window['-TABLE_CAD_FERRAMENTAS-'].update(cadastros.get_cadastrados('ferramenta'))
+                            consultas.limpar_filtros(window, 'ferramenta_CAD')
+                            linha_selecionada = -1
 
                     elif event == 'ModificarTecnico':  # Modificar Tecnico
                         a = 1
