@@ -29,7 +29,7 @@ if __name__ == '__main__':
                                                 usuario_logado),
                                resizable=True, size=(1250, 670))
 
-            ## Eventos
+            # TODO: EVENTOS
             while True:
                 try:
                     event, values = window.read()
@@ -37,11 +37,16 @@ if __name__ == '__main__':
                     if event == sg.WIN_CLOSED:
                         break
 
-                    # TELAS DE CADASTRO
+                    # TODO: TELAS DE CADASTRO
                     # Cadastrar
                     elif event == 'CadastrarFerramenta':  # Cadastrar Ferramenta
                         cadastros.cadastrar_ferramenta(values, sg)
                         window['-TABLE_CAD_FERRAMENTAS-'].update(cadastros.get_cadastrados('ferramenta'))
+
+                    elif event == 'CadastrarTecnico':  # Cadastrar Tecnico
+                        pass
+                        # cadastros.cadastrar_tecnico(values, sg)
+                        # window['-TABLE_CAD_TECNICOS-'].update(cadastros.get_cadastrados('tecnico'))
 
                     # Modificar
                     elif event == 'ModificarFerramenta':  # Modificar Ferramenta
@@ -50,7 +55,7 @@ if __name__ == '__main__':
                     elif event == 'ModificarTecnico':  # Modificar Tecnico
                         a = 1
 
-                    # Seleção tabela
+                    # Seleção Tabela
                     elif type(event) is tuple and event[0] == '-TABLE_CAD_FERRAMENTAS-':
                         if event[2][0] >= 0:  # Linha selecionada Tabela de Cadastro de Ferramentas
                             linha_selecionada = event[2][0]
@@ -64,16 +69,22 @@ if __name__ == '__main__':
                                                           'cadastro_tecnico', window)
 
                     # Eliminar
-                    elif event == 'EliminarFerramenta':  # Modificar Ferramenta
+                    elif event == 'EliminarFerramenta':  # Eliminar Ferramenta
                         if linha_selecionada >= 0:
                             cadastros.deletar_registro(linha_selecionada, 'ferramenta')
                             window['-TABLE_CAD_FERRAMENTAS-'].update(cadastros.get_cadastrados('ferramenta'))
                             consultas.limpar_filtros(window, 'ferramenta_CAD')
+                            linha_selecionada = -1
 
-                    elif event == 'EliminarFerramenta':  # Modificar Ferramenta
-                        a = 2
+                    elif event == 'EliminarTecnico':  # Eliminar Tecnico
+                        if linha_selecionada >= 0:
+                            cadastros.deletar_registro(linha_selecionada, 'tecnico')
+                            window['-TABLE_CAD_TECNICOS-'].update(cadastros.get_cadastrados('tecnico'))
+                            consultas.limpar_filtros(window, 'tecnico_CAD')
+                            linha_selecionada = -1
 
-                    # TELAS DE CONSULTA
+
+                    # TODO: TELAS DE CONSULTA
                     # Filtrar
                     elif event == 'FiltrarFerramenta':  # Filtrar Ferramenta Consulta
                         consultas.filtrar_ferramentas(window, values)
@@ -100,7 +111,7 @@ if __name__ == '__main__':
                     elif event == 'LimparReservaCON':  # Limpar Reserva Consulta
                         consultas.limpar_filtros(window, 'reserva_CON')
 
-                        # TELA DE RESERVA
+                    # TODO: TELA DE RESERVA
                     elif event == 'LimparReservaCAD':  # Limpar Reserva Cadastro
                         consultas.limpar_filtros(window, 'reserva_CAD')
 
