@@ -42,11 +42,10 @@ if __name__ == '__main__':
                     elif event == 'CadastrarFerramenta':  # Cadastrar Ferramenta
                         cadastros.cadastrar_ferramenta(values, sg)
                         window['-TABLE_CAD_FERRAMENTAS-'].update(cadastros.get_cadastrados('ferramenta'))
-
+                    #TODO Fazer cadastro tecnico
                     elif event == 'CadastrarTecnico':  # Cadastrar Tecnico
-                        pass
                         # cadastros.cadastrar_tecnico(values, sg)
-                        # window['-TABLE_CAD_TECNICOS-'].update(cadastros.get_cadastrados('tecnico'))
+                        window['-TABLE_CAD_TECNICOS-'].update(cadastros.get_cadastrados('tecnico'))
 
                     # Modificar
                     elif event == 'ModificarFerramenta':  # Modificar Ferramenta
@@ -55,9 +54,13 @@ if __name__ == '__main__':
                             window['-TABLE_CAD_FERRAMENTAS-'].update(cadastros.get_cadastrados('ferramenta'))
                             consultas.limpar_filtros(window, 'ferramenta_CAD')
                             linha_selecionada = -1
-
+                    # TODO Fazer modificar tecnico
                     elif event == 'ModificarTecnico':  # Modificar Tecnico
-                        a = 1
+                        if linha_selecionada >= 0:
+                            # cadastros.modificar_ferramenta(linha_selecionada, values, sg)
+                            window['-TABLE_CAD_TECNICOS-'].update(cadastros.get_cadastrados('tecnico'))
+                            consultas.limpar_filtros(window, 'tecnico_CAD')
+                            linha_selecionada = -1
 
                     # Seleção Tabela
                     elif type(event) is tuple and event[0] == '-TABLE_CAD_FERRAMENTAS-':
@@ -65,7 +68,7 @@ if __name__ == '__main__':
                             linha_selecionada = event[2][0]
                             cadastros.carregar_dados_tela(cadastros.get_cadastrados('ferramenta')[event[2][0]],
                                                           'cadastro_ferramenta', window)
-
+                    # TODO Validar
                     elif type(event) is tuple and event[0] == '-TABLE_CAD_TECNICOS-':
                         if event[2][0] >= 0:  # Linha selecionada Tabela de Cadastro de Tecnicos
                             linha_selecionada = int(event[2][0])
@@ -79,7 +82,7 @@ if __name__ == '__main__':
                             window['-TABLE_CAD_FERRAMENTAS-'].update(cadastros.get_cadastrados('ferramenta'))
                             consultas.limpar_filtros(window, 'ferramenta_CAD')
                             linha_selecionada = -1
-
+                    # TODO Validar
                     elif event == 'EliminarTecnico':  # Eliminar Tecnico
                         if linha_selecionada >= 0:
                             cadastros.deletar_registro(linha_selecionada, 'tecnico')
