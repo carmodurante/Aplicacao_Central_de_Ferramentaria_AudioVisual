@@ -42,9 +42,9 @@ if __name__ == '__main__':
                     elif event == 'CadastrarFerramenta':  # Cadastrar Ferramenta
                         cadastros.cadastrar_ferramenta(values, sg)
                         window['-TABLE_CAD_FERRAMENTAS-'].update(cadastros.get_cadastrados('ferramenta'))
-                    #TODO Fazer cadastro tecnico
+
                     elif event == 'CadastrarTecnico':  # Cadastrar Tecnico
-                        # cadastros.cadastrar_tecnico(values, sg)
+                        cadastros.cadastrar_tecnico(values, sg)
                         window['-TABLE_CAD_TECNICOS-'].update(cadastros.get_cadastrados('tecnico'))
 
                     # Modificar
@@ -68,7 +68,7 @@ if __name__ == '__main__':
                             linha_selecionada = event[2][0]
                             cadastros.carregar_dados_tela(cadastros.get_cadastrados('ferramenta')[event[2][0]],
                                                           'cadastro_ferramenta', window)
-                    # TODO Validar
+
                     elif type(event) is tuple and event[0] == '-TABLE_CAD_TECNICOS-':
                         if event[2][0] >= 0:  # Linha selecionada Tabela de Cadastro de Tecnicos
                             linha_selecionada = int(event[2][0])
