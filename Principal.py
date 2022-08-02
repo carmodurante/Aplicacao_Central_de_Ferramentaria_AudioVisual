@@ -54,10 +54,10 @@ if __name__ == '__main__':
                             window['-TABLE_CAD_FERRAMENTAS-'].update(cadastros.get_cadastrados('ferramenta'))
                             consultas.limpar_filtros(window, 'ferramenta_CAD')
                             linha_selecionada = -1
-                    # TODO Fazer modificar tecnico
+
                     elif event == 'ModificarTecnico':  # Modificar Tecnico
                         if linha_selecionada >= 0:
-                            # cadastros.modificar_ferramenta(linha_selecionada, values, sg)
+                            cadastros.modificar_tecnico(linha_selecionada, values, sg)
                             window['-TABLE_CAD_TECNICOS-'].update(cadastros.get_cadastrados('tecnico'))
                             consultas.limpar_filtros(window, 'tecnico_CAD')
                             linha_selecionada = -1
@@ -82,7 +82,7 @@ if __name__ == '__main__':
                             window['-TABLE_CAD_FERRAMENTAS-'].update(cadastros.get_cadastrados('ferramenta'))
                             consultas.limpar_filtros(window, 'ferramenta_CAD')
                             linha_selecionada = -1
-                    # TODO Validar
+
                     elif event == 'EliminarTecnico':  # Eliminar Tecnico
                         if linha_selecionada >= 0:
                             cadastros.deletar_registro(linha_selecionada, 'tecnico')
@@ -90,6 +90,11 @@ if __name__ == '__main__':
                             consultas.limpar_filtros(window, 'tecnico_CAD')
                             linha_selecionada = -1
 
+                    elif event == 'LimparFerramentaCAD':  # Limpar Ferramenta Cadastro
+                        consultas.limpar_filtros(window, 'ferramenta_CAD')
+
+                    elif event == 'LimparTecnicoCAD':  # Limpar Tecnico Cadastro
+                        consultas.limpar_filtros(window, 'tecnico_CAD')
 
                     # TODO: TELAS DE CONSULTA
                     # Filtrar
@@ -106,14 +111,8 @@ if __name__ == '__main__':
                     elif event == 'LimparFerramentaCON':  # Limpar Ferramenta Consulta
                         consultas.limpar_filtros(window, 'ferramenta_CON')
 
-                    elif event == 'LimparFerramentaCAD':  # Limpar Ferramenta Cadastro
-                        consultas.limpar_filtros(window, 'ferramenta_CAD')
-
                     elif event == 'LimparTecnicoCON':  # Limpar Tecnico Consulta
                         consultas.limpar_filtros(window, 'tecnico_CON')
-
-                    elif event == 'LimparTecnicoCAD':  # Limpar Tecnico Cadastro
-                        consultas.limpar_filtros(window, 'tecnico_CAD')
 
                     elif event == 'LimparReservaCON':  # Limpar Reserva Consulta
                         consultas.limpar_filtros(window, 'reserva_CON')

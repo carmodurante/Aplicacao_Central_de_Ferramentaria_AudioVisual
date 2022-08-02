@@ -1,7 +1,9 @@
 import os
-
 import shutil
 import traceback
+
+import functions.Functions_Diversos as util
+
 
 def get_cadastrados(tipo):
     lista_cadastrados = []
@@ -46,6 +48,14 @@ def cadastrar_ferramenta(values, sg):
 
 def cadastrar_tecnico(values, sg):
     try:
+        # Validacoes de CPF e Celular/Telefone
+        if not util.validar_cpf(values["tCPF"].strip()):
+            sg.popup("CPF Inválido", title='Error', font=8)
+            return
+        if not util.validar_celular(values["tTelefone"].strip()):
+            sg.popup("Celular/Telefone Inválido", title='Error', font=8)
+            return
+
         with open("content/data/tecnico.csv", "a") as tecnico_arquivo:
             lista_tecnico = f'{values["tCPF"].strip()}' \
                             f';{values["tNome"].strip()}' \
@@ -55,7 +65,7 @@ def cadastrar_tecnico(values, sg):
 
             tecnico_arquivo.writelines(lista_tecnico)
 
-        # Salvar Imagem da Ferramenta se existir
+            # Salvar Imagem da Ferramenta se existir
         if values['tImagem'].strip() != '':
             salvar_imagem('tecnico', values["tCPF"].strip(), values['tImagem'], sg)
 
@@ -167,11 +177,19 @@ def modificar_ferramenta(index, values, sg):
 
 def modificar_tecnico(index, values, sg):
     try:
+        # Validacoes de CPF e Celular/Telefone
+        if not util.validar_cpf(values["tCPF"].strip()):
+            sg.popup("CPF Inválido", title='Error', font=8)
+            return
+        if not util.validar_celular(values["tTelefone"].strip()):
+            sg.popup("Celular/Telefone Inválido", title='Error', font=8)
+            return
+
         with open("content/data/tecnico.csv", "r") as tecnicos_leitura:
             new_list = []
             for linhas in tecnicos_leitura:
                 new_list.append(linhas)
-            tecnico_cpf = new_list[index][0:12].strip()  # get id_ferramenta selecionado
+            tecnico_cpf = values["tCPF"].strip()
             new_list.pop(index)  # Remove valor antigo
             tecnicos_leitura.close()
 
