@@ -78,7 +78,17 @@ def deletar_registro(index, tipo):
     with open(file=f'content/data/{tipo}.csv', mode='r') as lista_leitura:
         for linhas in lista_leitura:
             new_list.append(linhas)
-        new_list.pop(index)
+        linha_deletada = new_list.pop(index)
+
+        # Deleta as imagens
+        if tipo == 'ferramenta':
+            filename = f'content/images/ferramenta_{linha_deletada[:4]}.jpg'
+            if os.path.exists(filename):  # Deleta imagem se ja existir
+                os.remove(filename)
+        elif tipo == 'tecnico':
+            filename = f'content/images/ferramenta_{linha_deletada[:12]}.jpg'
+            if os.path.exists(filename):  # Deleta imagem se ja existir
+                os.remove(filename)
 
     with open(file=f'content/data/{tipo}.csv', mode='w') as lista_gravacao:
         lista_gravacao.writelines(new_list)
@@ -155,7 +165,7 @@ def modificar_ferramenta(index, values, sg):
             new_list = []
             for linhas in ferramentas_leitura:
                 new_list.append(linhas)
-            id_ferramenta = new_list[index][0:4].strip()  # get id_ferramenta selecionado
+            id_ferramenta = new_list[index][:4].strip()  # get id_ferramenta selecionado
             new_list.pop(index)  # Remove valor antigo
             ferramentas_leitura.close()
 
