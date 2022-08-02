@@ -18,62 +18,6 @@ def get_cadastrados(tipo):
     except:
         return lista_cadastrados
 
-def cadastrar_ferramenta(values, sg):
-    try:
-        id_ferramenta = get_new_sequencial_id('ferramenta')
-        with open("content/data/ferramenta.csv", "a") as ferramentas_arquivo:
-            lista_ferramenta = f'{id_ferramenta}' \
-                               f';{values["fDescricao"].strip()}' \
-                               f';{values["fCodFabricante"].strip()}' \
-                               f';{values["fFabricante"].strip()}' \
-                               f';{values["fVoltagem"].strip()}' \
-                               f';{values["fHRMaxReserva"].strip()}' \
-                               f';{values["fMinMaxReserva"].strip()}' \
-                               f';{values["fTamanho"].strip()}' \
-                               f';{values["fUnidade"].strip()}' \
-                               f';{values["fTipo"].strip()}' \
-                               f';{values["fMaterial"].strip()}\n'
-
-            ferramentas_arquivo.writelines(lista_ferramenta)
-
-        # Salvar Imagem da Ferramenta se existir
-        if values['fImagem'].strip() != '':
-            salvar_imagem('ferramenta', id_ferramenta, values['fImagem'], sg)
-
-        return lista_ferramenta
-
-    except:
-        sg.popup("Erro ao salvar ferramenta", title='Error', font=8)
-
-
-def cadastrar_tecnico(values, sg):
-    try:
-        # Validacoes de CPF e Celular/Telefone
-        if not util.validar_cpf(values["tCPF"].strip()):
-            sg.popup("CPF Inválido", title='Error', font=8)
-            return
-        if not util.validar_celular(values["tTelefone"].strip()):
-            sg.popup("Celular/Telefone Inválido", title='Error', font=8)
-            return
-
-        with open("content/data/tecnico.csv", "a") as tecnico_arquivo:
-            lista_tecnico = f'{values["tCPF"].strip()}' \
-                            f';{values["tNome"].strip()}' \
-                            f';{values["tTelefone"].strip()}' \
-                            f';{values["tTurno"].strip()}' \
-                            f';{values["tEquipe"].strip()}\n'
-
-            tecnico_arquivo.writelines(lista_tecnico)
-
-            # Salvar Imagem da Ferramenta se existir
-        if values['tImagem'].strip() != '':
-            salvar_imagem('tecnico', values["tCPF"].strip(), values['tImagem'], sg)
-
-        return lista_tecnico
-
-    except:
-        sg.popup("Erro ao salvar tecnico", title='Error', font=8)
-
 
 def salvar_imagem(tipo, id_number, filename, sg):
     try:
@@ -140,6 +84,71 @@ def deletar_registro(index, tipo):
         lista_gravacao.writelines(new_list)
 
 
+def cadastrar_ferramenta(values, sg):
+    try:
+        id_ferramenta = get_new_sequencial_id('ferramenta')
+        with open("content/data/ferramenta.csv", "a") as ferramentas_arquivo:
+            lista_ferramenta = f'{id_ferramenta}' \
+                               f';{values["fDescricao"].strip()}' \
+                               f';{values["fCodFabricante"].strip()}' \
+                               f';{values["fFabricante"].strip()}' \
+                               f';{values["fVoltagem"].strip()}' \
+                               f';{values["fHRMaxReserva"].strip()}' \
+                               f';{values["fMinMaxReserva"].strip()}' \
+                               f';{values["fTamanho"].strip()}' \
+                               f';{values["fUnidade"].strip()}' \
+                               f';{values["fTipo"].strip()}' \
+                               f';{values["fMaterial"].strip()}\n'
+
+            ferramentas_arquivo.writelines(lista_ferramenta)
+
+        # Salvar Imagem da Ferramenta se existir
+        if values['fImagem'].strip() != '':
+            salvar_imagem('ferramenta', id_ferramenta, values['fImagem'], sg)
+        else:
+            filename = f'content/images/ferramenta_{id_ferramenta}.jpg'
+            if os.path.exists(filename):  # Deleta imagem se ja existir
+                os.remove(filename)
+
+        return lista_ferramenta
+
+    except:
+        sg.popup("Erro ao salvar ferramenta", title='Error', font=8)
+
+
+def cadastrar_tecnico(values, sg):
+    try:
+        # Validacoes de CPF e Celular/Telefone
+        if not util.validar_cpf(values["tCPF"].strip()):
+            sg.popup("CPF Inválido", title='Error', font=8)
+            return
+        if not util.validar_celular(values["tTelefone"].strip()):
+            sg.popup("Celular/Telefone Inválido", title='Error', font=8)
+            return
+
+        with open("content/data/tecnico.csv", "a") as tecnico_arquivo:
+            lista_tecnico = f'{values["tCPF"].strip()}' \
+                            f';{values["tNome"].strip()}' \
+                            f';{values["tTelefone"].strip()}' \
+                            f';{values["tTurno"].strip()}' \
+                            f';{values["tEquipe"].strip()}\n'
+
+            tecnico_arquivo.writelines(lista_tecnico)
+
+            # Salvar Imagem da Ferramenta se existir
+        if values['tImagem'].strip() != '':
+            salvar_imagem('tecnico', values["tCPF"].strip(), values['tImagem'], sg)
+        else:
+            filename = f'content/images/tecnico_{values["tCPF"].strip()}.jpg'
+            if os.path.exists(filename):  # Deleta imagem se ja existir
+                os.remove(filename)
+
+        return lista_tecnico
+
+    except:
+        sg.popup("Erro ao salvar tecnico", title='Error', font=8)
+
+
 def modificar_ferramenta(index, values, sg):
     try:
         with open("content/data/ferramenta.csv", "r") as ferramentas_leitura:
@@ -169,6 +178,10 @@ def modificar_ferramenta(index, values, sg):
         # Salvar Imagem da Ferramenta se existir
         if values['fImagem'].strip() != '':
             salvar_imagem('ferramenta', id_ferramenta, values['fImagem'], sg)
+        else:
+            filename = f'content/images/ferramenta_{id_ferramenta}.jpg'
+            if os.path.exists(filename):  # Deleta imagem se ja existir
+                os.remove(filename)
 
     except Exception:
         traceback.print_exc()
@@ -206,6 +219,10 @@ def modificar_tecnico(index, values, sg):
         # Salvar Imagem do Tecnico se existir
         if values['tImagem'].strip() != '':
             salvar_imagem('tecnico', tecnico_cpf, values['tImagem'], sg)
+        else:
+            filename = f'content/images/tecnico_{tecnico_cpf}.jpg'
+            if os.path.exists(filename):  # Deleta imagem se ja existir
+                os.remove(filename)
 
     except Exception:
         traceback.print_exc()

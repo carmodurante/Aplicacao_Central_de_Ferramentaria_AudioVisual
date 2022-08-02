@@ -19,7 +19,8 @@ def get_color(string_boleana):
 
 
 def validar_cpf(cpf_id):
-    return CPF(cpf_id)
+    cpf = CPF()
+    return cpf.validate(cpf_id)
 
 
 def validar_celular(celular):
