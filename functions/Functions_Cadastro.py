@@ -129,8 +129,8 @@ def cadastrar_ferramenta(values, sg):
 def cadastrar_tecnico(values, sg):
     try:
         # Validacoes de CPF e Celular/Telefone
-        if not util.validar_cpf(values["tCPF"].strip()):
-            sg.popup("CPF Inválido", title='Error', font=8)
+        if not util.validar_cpf(values["tCPF"].strip(), True):
+            sg.popup("CPF Inválido ou já Cadastrado", title='Error', font=8)
             return
         if not util.validar_celular(values["tTelefone"].strip()):
             sg.popup("Celular/Telefone Inválido", title='Error', font=8)
@@ -201,7 +201,7 @@ def modificar_ferramenta(index, values, sg):
 def modificar_tecnico(index, values, sg):
     try:
         # Validacoes de CPF e Celular/Telefone
-        if not util.validar_cpf(values["tCPF"].strip()):
+        if not util.validar_cpf(values["tCPF"].strip(), False):
             sg.popup("CPF Inválido", title='Error', font=8)
             return
         if not util.validar_celular(values["tTelefone"].strip()):
