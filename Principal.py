@@ -20,7 +20,7 @@ if __name__ == '__main__':
     try:
         usuario_logado = login.login()
         if usuario_logado['validado']:  # Validado
-            # login.progress_bar('Entrando na aplicação...')
+            login.progress_bar('Entrando na aplicação...')
 
             # Define Window
             window = sg.Window('App Central de Ferramentaria AudioVisual',
@@ -102,7 +102,7 @@ if __name__ == '__main__':
                     # Filtrar
                     elif event == 'FiltrarFerramenta':  # Filtrar Ferramenta Consulta
                         consultas.filtrar_ferramentas(window, values)
-
+                    # TODO: FAZER
                     elif event == 'FiltrarTecnico':  # Filtrar Tecnico Consulta
                         consultas.filtrar_tecnicos(window, values)
 
