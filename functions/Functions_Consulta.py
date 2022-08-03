@@ -60,15 +60,13 @@ def filtrar_ferramentas(window, values):
     if values['cfUnidade'].strip() != '':
         lista_ferramentas = list(filter(lambda linha: linha[8] == values['cfUnidade'].strip(), lista_ferramentas))
 
-    print(lista_ferramentas)
     window['-TABLE_CON_FERRAMENTAS-'].update(lista_ferramentas)
     return lista_ferramentas
 
 
 def filtrar_tecnicos(window, values):
-    lista_tecnicos = []
-    bio = get_imagem('46794179865', 'tecnico')
-    window["IMGTecnico"].update(data=bio.getvalue())
+    lista_tecnicos = cadastro.get_cadastrados('tecnico')
+
     return lista_tecnicos
 
 
