@@ -2,7 +2,7 @@ import os
 import shutil
 import traceback
 
-import functions.Functions_Diversos as util
+import functions.Functions_Utils as utils
 
 
 def get_cadastrados(tipo):
@@ -129,10 +129,10 @@ def cadastrar_ferramenta(values, sg):
 def cadastrar_tecnico(values, sg):
     try:
         # Validacoes de CPF e Celular/Telefone
-        if not util.validar_cpf(values["tCPF"].strip(), True):
+        if not utils.validar_cpf(values["tCPF"].strip(), True):
             sg.popup("CPF Inválido ou já Cadastrado", title='Error', font=8)
             return
-        if not util.validar_celular(values["tTelefone"].strip()):
+        if not utils.validar_celular(values["tTelefone"].strip()):
             sg.popup("Celular/Telefone Inválido", title='Error', font=8)
             return
 
@@ -201,10 +201,10 @@ def modificar_ferramenta(index, values, sg):
 def modificar_tecnico(index, values, sg):
     try:
         # Validacoes de CPF e Celular/Telefone
-        if not util.validar_cpf(values["tCPF"].strip(), False):
+        if not utils.validar_cpf(values["tCPF"].strip(), False):
             sg.popup("CPF Inválido", title='Error', font=8)
             return
-        if not util.validar_celular(values["tTelefone"].strip()):
+        if not utils.validar_celular(values["tTelefone"].strip()):
             sg.popup("Celular/Telefone Inválido", title='Error', font=8)
             return
 
