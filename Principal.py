@@ -1,3 +1,4 @@
+import traceback
 import webbrowser as web
 
 import PySimpleGUI as sg
@@ -62,7 +63,7 @@ if __name__ == '__main__':
                             consultas.limpar_filtros(window, 'tecnico_CAD')
                             linha_selecionada = -1
 
-                    # Seleção Tabela
+                    # Seleção Tabela Cadastro
                     elif type(event) is tuple and event[0] == '-TABLE_CAD_FERRAMENTAS-':
                         if event[2][0] >= 0:  # Linha selecionada Tabela de Cadastro de Ferramentas
                             linha_selecionada = event[2][0]
@@ -108,6 +109,23 @@ if __name__ == '__main__':
                     elif event == 'FiltrarReserva':  # Filtrar Reserva Consulta
                         consultas.filtrar_reservas(window, values)
 
+                    # Seleção Tabela Consulta
+                    elif type(event) is tuple and event[0] == '-TABLE_CON_FERRAMENTAS-':
+                        if event[2][0] >= 0:  # Linha selecionada Tabela de Consulta de Ferramentas
+                            consultas.atualiza_imagem_selecao(
+                                window['-TABLE_CON_FERRAMENTAS-'].get(), 'ferramenta', event[2][0], window)
+
+                    elif type(event) is tuple and event[0] == '-TABLE_CON_TECNICOS-':
+                        if event[2][0] >= 0:  # Linha selecionada Tabela de Consulta de Tecnicos
+                            consultas.atualiza_imagem_selecao(
+                                window['-TABLE_CON_TECNICOS-'].get(), 'tecnico', event[2][0], window)
+
+                    elif type(event) is tuple and event[0] == '-TABLE_CON_RESERVAS-':
+                        pass
+                        # if event[2][0] >= 0:  # Linha selecionada Tabela de Consulta de Reservas
+                        #     consultas.atualiza_imagem_selecao(
+                        #         window['-TABLE_CON_RESERVAS-'].get(), 'reserva', event[2][0], window)
+
                     # Limpar Tela
                     elif event == 'LimparFerramentaCON':  # Limpar Ferramenta Consulta
                         consultas.limpar_filtros(window, 'ferramenta_CON')
@@ -129,10 +147,14 @@ if __name__ == '__main__':
                         web.open(get_link_url_dev5())
 
 
-                except:
-                    break
+                except Exception:
+                    traceback.print_exc()
+                    sg.popup("Erro na Aplicacao", title='Error', font=8)
+
             window.close()
+
         else:
             exit()
-    except:
-        exit()
+    except Exception:
+        traceback.print_exc()
+        sg.popup("Erro na Aplicacao", title='Error', font=8)

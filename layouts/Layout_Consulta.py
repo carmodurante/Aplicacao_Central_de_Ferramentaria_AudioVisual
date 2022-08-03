@@ -2,7 +2,6 @@ import PySimpleGUI as sg
 
 import layouts.Layout_Components as components
 
-
 def layout_consulta_ferramentas(lista_consulta_ferramentas):
     # Define Layout Consulta Ferramentas
     left_column_ferramenta = [[sg.Text('ID Ferramenta', size=(18, 1)), sg.Input('', key='cfFerramenta', size=10)],
@@ -11,10 +10,9 @@ def layout_consulta_ferramentas(lista_consulta_ferramentas):
                                sg.Input('', key='cfCodFabricante', size=25)],
                               [sg.Text('Nome do Fabricante', size=(18, 1)),
                                sg.Input('', key='cfFabricante', size=27)],
-                              [sg.Text('Reservado', size=(18, 1)), sg.Checkbox('', key='cfReservado', default=False)]]
+                              [sg.Text('Tamanho', size=(18, 1)), sg.Input('', key='cfTamanho', size=15)], ]
 
-    center_column_ferramenta = [[sg.Text('Tamanho', size=(18, 1)), sg.Input('', key='cfTamanho', size=15)],
-                                [sg.Text('Unidade de Medida', size=(18, 1)), sg.Input('', key='cfUnidade', size=20)]]
+    center_column_ferramenta = [[sg.Text('Unidade de Medida', size=(18, 1)), sg.Input('', key='cfUnidade', size=20)]]
 
     imagem_ferramenta = [[sg.Image(key="IMGFerramenta", expand_y=True, expand_x=True, pad=((1, 1), (5, 5)))]]
 

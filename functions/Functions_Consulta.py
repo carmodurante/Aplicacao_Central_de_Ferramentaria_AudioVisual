@@ -1,13 +1,16 @@
 import io
+import os
 
 from PIL import Image
+
+import functions.Functions_Cadastro as cadastro
 
 
 def get_keys_to_clean(tipo_consulta):
     chaves_para_limpar = []
     if tipo_consulta == 'ferramenta_CON':
         chaves_para_limpar = ['cfFerramenta', 'cfDescricao', 'cfCodFabricante', 'cfFabricante', 'cfTamanho',
-                              'cfUnidade', 'cfReservado', 'IMGFerramenta']
+                              'cfUnidade', 'IMGFerramenta']
 
     elif tipo_consulta == 'tecnico_CON':
         chaves_para_limpar = ['ctCPF', 'ctNome', 'cfTurno', 'ctEquipe', 'IMGTecnico', 'ctTelefone']
@@ -30,19 +33,35 @@ def get_keys_to_clean(tipo_consulta):
     return chaves_para_limpar
 
 
-def get_imagem(identificador, tipo_consulta):
-    filename = f'content/images/{tipo_consulta}_{identificador}.jpeg'
+def get_imagem(tipo_consulta, identificador):
+    filename = f'content/images/{tipo_consulta}_{identificador}.jpg'
+    if not os.path.exists(filename):  # Se imagem nao existir, exibe uma generica
+        filename = f'content/images/sem_imagem.jpg'
+
     image = Image.open(filename)
     image.thumbnail((100, 100))
-    bio = io.BytesIO()
-    image.save(bio, format='PNG')
-    return bio
+    with io.BytesIO() as output:
+        image.save(output, format="PNG")
+        data = output.getvalue()
+        return data
 
 
 def filtrar_ferramentas(window, values):
-    lista_ferramentas = []
-    bio = get_imagem('1001', 'ferramenta')
-    window["IMGFerramenta"].update(data=bio.getvalue())
+    lista_ferramentas = cadastro.get_cadastrados('ferramenta')
+
+    if values['cfFerramenta'].strip() != '':
+        lista_ferramentas = list(filter(lambda linha: linha[0] == values['cfFerramenta'].strip(), lista_ferramentas))
+    if values['cfDescricao'].strip() != '':
+        lista_ferramentas = list(filter(lambda linha: linha[1] == values['cfDescricao'].strip(), lista_ferramentas))
+    if values['cfCodFabricante'].strip() != '':
+        lista_ferramentas = list(filter(lambda linha: linha[2] == values['cfCodFabricante'].strip(), lista_ferramentas))
+    if values['cfTamanho'].strip() != '':
+        lista_ferramentas = list(filter(lambda linha: linha[7] == values['cfTamanho'].strip(), lista_ferramentas))
+    if values['cfUnidade'].strip() != '':
+        lista_ferramentas = list(filter(lambda linha: linha[8] == values['cfUnidade'].strip(), lista_ferramentas))
+
+    print(lista_ferramentas)
+    window['-TABLE_CON_FERRAMENTAS-'].update(lista_ferramentas)
     return lista_ferramentas
 
 
@@ -69,3 +88,14 @@ def filtrar_reservas(window, values):
 def limpar_filtros(window, tipo_consulta):
     for chave in get_keys_to_clean(tipo_consulta):
         window[chave].update('')
+
+
+def atualiza_imagem_selecao(lista, tipo, linha_selecionada, window):
+    identificador = lista[linha_selecionada][0]
+    data = get_imagem(tipo, identificador)
+
+    if tipo == 'ferramenta':
+        window["IMGFerramenta"].update(data=data)
+
+    elif tipo == 'tecnico':
+        window['IMGTecnico'].update(data=data)
