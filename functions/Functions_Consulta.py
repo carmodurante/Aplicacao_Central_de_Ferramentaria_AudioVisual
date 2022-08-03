@@ -61,26 +61,18 @@ def filtrar_ferramentas(window, values):
         lista_ferramentas = list(filter(lambda linha: linha[8] == values['cfUnidade'].strip(), lista_ferramentas))
 
     window['-TABLE_CON_FERRAMENTAS-'].update(lista_ferramentas)
-    return lista_ferramentas
 
 
+# TODO: Fazer
 def filtrar_tecnicos(window, values):
     lista_tecnicos = cadastro.get_cadastrados('tecnico')
 
     return lista_tecnicos
 
 
+# TODO: Fazer
 def filtrar_reservas(window, values):
-    lista_ferramentas = []
-    # Imagem Tecnico
-    bio = get_imagem('46794179865', 'tecnico')
-    window["IMGTecnico_Reserva"].update(data=bio.getvalue())
-
-    # Imagem Ferramenta
-    bio = get_imagem('1001', 'ferramenta')
-    window["IMGFerramenta_Reserva"].update(data=bio.getvalue())
-
-    return lista_ferramentas
+    lista_ferramentas = cadastro.get_cadastrados('reserva')
 
 
 def limpar_filtros(window, tipo_consulta):
@@ -89,11 +81,15 @@ def limpar_filtros(window, tipo_consulta):
 
 
 def atualiza_imagem_selecao(lista, tipo, linha_selecionada, window):
-    identificador = lista[linha_selecionada][0]
-    data = get_imagem(tipo, identificador)
+    if tipo == "reserva":
+        window["IMGTecnico_Reserva"].update(data="bio.getvalue()")
+        window["IMGFerramenta_Reserva"].update(data='bio.getvalue()')
+    else:
+        identificador = lista[linha_selecionada][0]
+        data = get_imagem(tipo, identificador)
 
-    if tipo == 'ferramenta':
-        window["IMGFerramenta"].update(data=data)
+        if tipo == 'ferramenta':
+            window["IMGFerramenta"].update(data=data)
 
-    elif tipo == 'tecnico':
-        window['IMGTecnico'].update(data=data)
+        elif tipo == 'tecnico':
+            window['IMGTecnico'].update(data=data)

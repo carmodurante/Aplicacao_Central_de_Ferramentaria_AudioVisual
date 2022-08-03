@@ -1,3 +1,5 @@
+import traceback
+
 import PySimpleGUI as sg
 
 
@@ -65,7 +67,6 @@ def create_account():
         if event == 'CancelCadastro' or event == sg.WIN_CLOSED:
             break
         else:
-            print(event)
             if event == "SubmitCadastro":
                 try:
                     password = values['PasswordCadastro']
@@ -79,7 +80,8 @@ def create_account():
                     else:
                         sg.popup("Usuario e Senha são Obrigatórios", title='Error', font=8)
 
-                except:
+                except Exception:
+                    traceback.print_exc()
                     sg.popup("Operação Cancelada", title='Error', font=8)
                     break
     window.close()
@@ -116,7 +118,8 @@ def login():
 
                 elif event == 'CadastrarUsuario':
                     create_account()
-        except:
+        except Exception:
+            traceback.print_exc()
             sg.popup("Finalizando Aplicação", title='Information', font=8)
             break
 

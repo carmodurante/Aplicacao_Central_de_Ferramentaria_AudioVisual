@@ -79,14 +79,14 @@ if __name__ == '__main__':
                     # Eliminar
                     elif event == 'EliminarFerramenta':  # Eliminar Ferramenta
                         if linha_selecionada >= 0:
-                            cadastros.deletar_registro(linha_selecionada, 'ferramenta')
+                            cadastros.deletar_registro(linha_selecionada, 'ferramenta', sg)
                             window['-TABLE_CAD_FERRAMENTAS-'].update(cadastros.get_cadastrados('ferramenta'))
                             consultas.limpar_filtros(window, 'ferramenta_CAD')
                             linha_selecionada = -1
 
                     elif event == 'EliminarTecnico':  # Eliminar Tecnico
                         if linha_selecionada >= 0:
-                            cadastros.deletar_registro(linha_selecionada, 'tecnico')
+                            cadastros.deletar_registro(linha_selecionada, 'tecnico', sg)
                             window['-TABLE_CAD_TECNICOS-'].update(cadastros.get_cadastrados('tecnico'))
                             consultas.limpar_filtros(window, 'tecnico_CAD')
                             linha_selecionada = -1

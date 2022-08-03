@@ -15,7 +15,8 @@ def get_cadastrados(tipo):
 
         return lista_cadastrados
 
-    except:
+    except Exception:
+        traceback.print_exc()
         return lista_cadastrados
 
 
@@ -28,7 +29,8 @@ def salvar_imagem(tipo, id_number, filename, sg):
             shutil.copyfile(filename, filename_destino)
         else:
             sg.popup("Erro ao salvar caminho da imagem", title='Error', font=8)
-    except:
+    except Exception:
+        traceback.print_exc()
         sg.popup("Erro ao salvar imagem", title='Error', font=8)
 
 
@@ -73,25 +75,30 @@ def get_screen_keys(tipo):
     return lista_keys
 
 
-def deletar_registro(index, tipo):
-    new_list = []
-    with open(file=f'content/data/{tipo}.csv', mode='r') as lista_leitura:
-        for linhas in lista_leitura:
-            new_list.append(linhas)
-        linha_deletada = new_list.pop(index)
+def deletar_registro(index, tipo, sg):
+    try:
+        new_list = []
+        with open(file=f'content/data/{tipo}.csv', mode='r') as lista_leitura:
+            for linhas in lista_leitura:
+                new_list.append(linhas)
+            linha_deletada = new_list.pop(index)
 
-        # Deleta as imagens
-        if tipo == 'ferramenta':
-            filename = f'content/images/ferramenta_{linha_deletada[:4]}.jpg'
-            if os.path.exists(filename):  # Deleta imagem se ja existir
-                os.remove(filename)
-        elif tipo == 'tecnico':
-            filename = f'content/images/ferramenta_{linha_deletada[:12]}.jpg'
-            if os.path.exists(filename):  # Deleta imagem se ja existir
-                os.remove(filename)
+            # Deleta as imagens
+            if tipo == 'ferramenta':
+                filename = f'content/images/ferramenta_{linha_deletada[:4]}.jpg'
+                if os.path.exists(filename):  # Deleta imagem se ja existir
+                    os.remove(filename)
+            elif tipo == 'tecnico':
+                filename = f'content/images/ferramenta_{linha_deletada[:12]}.jpg'
+                if os.path.exists(filename):  # Deleta imagem se ja existir
+                    os.remove(filename)
 
-    with open(file=f'content/data/{tipo}.csv', mode='w') as lista_gravacao:
-        lista_gravacao.writelines(new_list)
+        with open(file=f'content/data/{tipo}.csv', mode='w') as lista_gravacao:
+            lista_gravacao.writelines(new_list)
+
+    except Exception:
+        sg.popup("Erro ao Deletar Registro", title='Error', font=8)
+        traceback.print_exc()
 
 
 def cadastrar_ferramenta(values, sg):
@@ -122,7 +129,8 @@ def cadastrar_ferramenta(values, sg):
 
         return lista_ferramenta
 
-    except:
+    except Exception:
+        traceback.print_exc()
         sg.popup("Erro ao salvar ferramenta", title='Error', font=8)
 
 
@@ -155,7 +163,8 @@ def cadastrar_tecnico(values, sg):
 
         return lista_tecnico
 
-    except:
+    except Exception:
+        traceback.print_exc()
         sg.popup("Erro ao salvar tecnico", title='Error', font=8)
 
 
