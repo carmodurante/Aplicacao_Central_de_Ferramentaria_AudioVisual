@@ -90,6 +90,7 @@ if __name__ == '__main__':
                             consultas.limpar_filtros(window, 'tecnico_CAD')
                             linha_selecionada = -1
 
+                    # Limpar
                     elif event == 'LimparFerramentaCAD':  # Limpar Ferramenta Cadastro
                         consultas.limpar_filtros(window, 'ferramenta_CAD')
 
