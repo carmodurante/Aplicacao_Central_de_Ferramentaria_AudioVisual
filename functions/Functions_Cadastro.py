@@ -86,12 +86,12 @@ def deletar_registro(index, tipo, sg):
             # Deleta as imagens
             if tipo == 'ferramenta':
                 filename = f'content/images/ferramenta_{linha_deletada[:4]}.jpg'
-                if os.path.exists(filename):  # Deleta imagem se ja existir
-                    os.remove(filename)
+
             elif tipo == 'tecnico':
                 filename = f'content/images/ferramenta_{linha_deletada[:12]}.jpg'
-                if os.path.exists(filename):  # Deleta imagem se ja existir
-                    os.remove(filename)
+
+            if os.path.exists(filename):  # Deleta imagem se ja existir
+                os.remove(filename)
 
         with open(file=f'content/data/{tipo}.csv', mode='w') as lista_gravacao:
             lista_gravacao.writelines(new_list)

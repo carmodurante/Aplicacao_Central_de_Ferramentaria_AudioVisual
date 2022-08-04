@@ -97,16 +97,8 @@ def layout_consulta_reservas(lista_consulta_reservas):
 
     center_column_reserva = [[sg.Text('Data da Retirada', size=(18, 1)), sg.Input('', key='crDTRetirada', size=8),
                               components.get_calendario('crDTRetirada')],
-                             [sg.Text('Horário da Retirada', size=(18, 1)),
-                              sg.Spin(values=components.get_horas_minutos(23), key='rHRRetirada', initial_value='12'),
-                              sg.Text(':', auto_size_text=True),
-                              sg.Spin(values=components.get_horas_minutos(59), key='rMinRetirada', initial_value='30')],
                              [sg.Text('Data da Devolução', size=(18, 1)), sg.Input('', key='crDTDevol', size=8),
                               components.get_calendario('crDTDevol')],
-                             [sg.Text('Horário da Devolução', size=(18, 1)),
-                              sg.Spin(values=components.get_horas_minutos(23), key='crHRDevol', initial_value='12'),
-                              sg.Text(':', auto_size_text=True),
-                              sg.Spin(values=components.get_horas_minutos(59), key='crMinDevol', initial_value='30')],
                              [sg.Text('Reservas em Atraso?', size=(18, 1)),
                               sg.Checkbox('', key='crAtraso', default=False)]]
 

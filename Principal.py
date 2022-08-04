@@ -6,7 +6,6 @@ import PySimpleGUI as sg
 import functions.Functions_Cadastro as cadastros
 import functions.Functions_Consulta as consultas
 import functions.Functions_Login as login
-import functions.Functions_Reserva as reservas
 from functions.Functions_Utils import get_link_url_dev5
 from layouts.Layout_Principal import layout_principal
 
@@ -26,7 +25,7 @@ if __name__ == '__main__':
             window = sg.Window('App Central de Ferramentaria AudioVisual',
                                layout_principal(cadastros.get_cadastrados('ferramenta'),
                                                 cadastros.get_cadastrados('tecnico'),
-                                                reservas.get_cadastro_reservas(),
+                                                cadastros.get_cadastrados('reserva'),
                                                 usuario_logado),
                                resizable=True, size=(1250, 670))
 
@@ -106,8 +105,8 @@ if __name__ == '__main__':
                     elif event == 'FiltrarTecnico':  # Filtrar Tecnico Consulta
                         consultas.filtrar_tecnicos(window, values)
 
-                    elif event == 'FiltrarReserva':  # Filtrar Reserva Consulta
-                        consultas.filtrar_reservas(window, values)
+                    # elif event == 'FiltrarReserva':  # Filtrar Reserva Consulta
+                    #     consultas.filtrar_reservas(window, values)
 
                     # Seleção Tabela Consulta
                     elif type(event) is tuple and event[0] == '-TABLE_CON_FERRAMENTAS-':
@@ -120,11 +119,11 @@ if __name__ == '__main__':
                             consultas.atualiza_imagem_selecao(
                                 window['-TABLE_CON_TECNICOS-'].get(), 'tecnico', event[2][0], window)
 
-                    elif type(event) is tuple and event[0] == '-TABLE_CON_RESERVAS-':
-                        pass
-                        # if event[2][0] >= 0:  # Linha selecionada Tabela de Consulta de Reservas
-                        #     consultas.atualiza_imagem_selecao(
-                        #         window['-TABLE_CON_RESERVAS-'].get(), 'reserva', event[2][0], window)
+                    # elif type(event) is tuple and event[0] == '-TABLE_CON_RESERVAS-':
+                    #     pass
+                    #     # if event[2][0] >= 0:  # Linha selecionada Tabela de Consulta de Reservas
+                    #     #     consultas.atualiza_imagem_selecao(
+                    #     #         window['-TABLE_CON_RESERVAS-'].get(), 'reserva', event[2][0], window)
 
                     # Limpar Tela
                     elif event == 'LimparFerramentaCON':  # Limpar Ferramenta Consulta
@@ -137,6 +136,15 @@ if __name__ == '__main__':
                         consultas.limpar_filtros(window, 'reserva_CON')
 
                     # TODO: TELA DE RESERVA
+                    elif event == 'ReservarReserva':  # Cadastrar Reserva
+                        pass
+
+                    elif event == 'ModificarReserva':  # Modificar Reserva
+                        pass
+
+                    elif event == 'DevolverReserva':  # Devolver Reserva
+                        pass
+
                     elif event == 'LimparReservaCAD':  # Limpar Reserva Cadastro
                         consultas.limpar_filtros(window, 'reserva_CAD')
 
