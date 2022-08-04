@@ -50,25 +50,34 @@ def filtrar_ferramentas(window, values):
     lista_ferramentas = cadastro.get_cadastrados('ferramenta')
 
     if values['cfFerramenta'].strip() != '':
-        lista_ferramentas = list(filter(lambda linha: linha[0] == values['cfFerramenta'].strip(), lista_ferramentas))
+        lista_ferramentas = list(filter(lambda linha: values['cfFerramenta'].strip() in linha[0], lista_ferramentas))
     if values['cfDescricao'].strip() != '':
-        lista_ferramentas = list(filter(lambda linha: linha[1] == values['cfDescricao'].strip(), lista_ferramentas))
+        lista_ferramentas = list(filter(lambda linha: values['cfDescricao'].strip() in linha[1], lista_ferramentas))
     if values['cfCodFabricante'].strip() != '':
-        lista_ferramentas = list(filter(lambda linha: linha[2] == values['cfCodFabricante'].strip(), lista_ferramentas))
+        lista_ferramentas = list(filter(lambda linha: values['cfCodFabricante'].strip() in linha[2], lista_ferramentas))
     if values['cfTamanho'].strip() != '':
-        lista_ferramentas = list(filter(lambda linha: linha[7] == values['cfTamanho'].strip(), lista_ferramentas))
+        lista_ferramentas = list(filter(lambda linha: values['cfTamanho'].strip() in linha[7], lista_ferramentas))
     if values['cfUnidade'].strip() != '':
-        lista_ferramentas = list(filter(lambda linha: linha[8] == values['cfUnidade'].strip(), lista_ferramentas))
+        lista_ferramentas = list(filter(lambda linha: values['cfUnidade'].strip() in linha[8], lista_ferramentas))
 
     window['-TABLE_CON_FERRAMENTAS-'].update(lista_ferramentas)
 
 
-# TODO: Fazer
 def filtrar_tecnicos(window, values):
     lista_tecnicos = cadastro.get_cadastrados('tecnico')
 
-    return lista_tecnicos
+    if values['ctCPF'].strip() != '':
+        lista_tecnicos = list(filter(lambda linha: values['ctCPF'].strip() in linha[0], lista_tecnicos))
+    elif values['ctNome'].strip() != '':
+        lista_tecnicos = list(filter(lambda linha: values['ctNome'].strip() in linha[1], lista_tecnicos))
+    elif values['ctTelefone'].strip() != '':
+        lista_tecnicos = list(filter(lambda linha: values['ctTelefone'].strip() in linha[2], lista_tecnicos))
+    elif values['cfTurno'].strip() != '':
+        lista_tecnicos = list(filter(lambda linha: values['cfTurno'].strip() in linha[3], lista_tecnicos))
+    elif values['ctEquipe'].strip() != '':
+        lista_tecnicos = list(filter(lambda linha: values['ctEquipe'].strip() in linha[4], lista_tecnicos))
 
+    window['-TABLE_CON_TECNICOS-'].update(lista_tecnicos)
 
 # TODO: Fazer
 def filtrar_reservas(window, values):
