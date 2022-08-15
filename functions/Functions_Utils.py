@@ -1,3 +1,5 @@
+import datetime
+
 from validate_docbr import CPF
 
 import functions.Functions_Cadastro as cadastro
@@ -26,14 +28,98 @@ def validar_cpf(cpf_id, cadastrar):
     if cpf.validate(cpf_id):
         if cadastrar:
             for linha in cadastro.get_cadastrados('tecnico'):
-                if linha[:12] == str(cpf_id):
+                if linha[0] == str(cpf_id):
                     return False
             return cpf.validate(cpf_id)
         else:
             return cpf.validate(cpf_id)
-
     else:
         return cpf.validate(cpf_id)
+
+
+def validar_cpf_reserva(cpf_id):
+    cpf = CPF()
+    # validar se ja existe esse CPF
+    if cpf.validate(cpf_id):
+        for linha in cadastro.get_cadastrados('tecnico'):
+            if linha[0] == str(cpf_id):
+                return True
+    else:
+        return False
+    return False
+
+
+def validar_reserva(ferramenta, cpf, values, sg):
+    valido = False
+
+    if not validar_cpf_reserva(cpf):
+        sg.popup("CPF Inválido ou Não Cadastrado", title='Error', font=8)
+        return False
+
+    datatime_retirada = datetime.datetime(year=int(f'20{values["rDTRetirada"][6:]}'),
+                                          month=int(values["rDTRetirada"][3:5]),
+                                          day=int(values["rDTRetirada"][:2]),
+                                          hour=int(values["rHRRetirada"]),
+                                          minute=int(values["rMinRetirada"]))
+
+    datatime_devol = datetime.datetime(year=int(f'20{values["rDTDevol"][6:]}'),
+                                       month=int(values["rDTDevol"][3:5]),
+                                       day=int(values["rDTDevol"][:2]),
+                                       hour=int(values["rHRDevol"]),
+                                       minute=int(values["rMinDevol"]))
+
+    if datatime_retirada >= datatime_devol:
+        #popup
+        return False
+
+    data_agora = datetime.datetime.now()
+    data_diferenca = datatime_retirada - data_agora
+    tempo_ate_retirada = data_diferenca.total_seconds()
+
+    data_diferenca = datatime_devol - datatime_retirada
+    tempo_reserva  = data_diferenca.total_seconds()
+
+
+    # Se selecionar uma data com menos de 24 horas para retirada
+    if tempo_ate_retirada > 86400: # Em segundos
+        # popup
+        return False
+
+    for linha in cadastro.get_cadastrados('ferramenta'):
+        # Ferramenta deve estar cadastrada
+        if linha[0] == ferramenta:
+            tempo_max_reserva = (int(linha[6]) * 3600) + ( int(linha[5]) * 60)
+            # tempo de reserva nao pode ser maior que o tempo maximo de reserva da ferramenta
+            if not tempo_reserva > tempo_max_reserva:
+                valido = True
+                break
+
+    if valido:
+        for linha in cadastro.get_cadastrados('reserva'):
+            if linha[0] == ferramenta:
+                datatime_retirada_db = datetime.datetime(year=int(f'20{linha[4][6:]}'),
+                                                         month=int(linha[4][3:5]),
+                                                         day=int(linha[4][:2]),
+                                                         hour=int(linha[5]),
+                                                         minute=int(linha[6]))
+
+                datatime_devol_db = datetime.datetime(year=int(f'20{linha[7][6:]}'),
+                                                      month=int(linha[7][3:5]),
+                                                      day=int(linha[7][:2]),
+                                                      hour=int(linha[8]),
+                                                      minute=int(linha[9]))
+                # Se a data de retirada estiver entre uma reserva
+                if datatime_devol_db >= datatime_retirada >= datatime_retirada_db:
+                    # popup
+                    return False
+                # Se a data de devolucao estiver entre uma reserva
+                if datatime_devol_db >= datatime_devol >= datatime_retirada_db:
+                    # popup
+                    return False
+    else:
+        # popup nao cadastrado
+        return False
+    return valido
 
 
 def validar_celular(celular):

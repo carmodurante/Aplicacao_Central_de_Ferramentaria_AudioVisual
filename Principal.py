@@ -137,7 +137,7 @@ if __name__ == '__main__':
 
                     # TODO: TELA DE RESERVA
                     elif event == 'ReservarReserva':  # Cadastrar Reserva
-                        pass
+                        cadastros.cadastrar_reserva(values, sg)
 
                     elif event == 'ModificarReserva':  # Modificar Reserva
                         pass

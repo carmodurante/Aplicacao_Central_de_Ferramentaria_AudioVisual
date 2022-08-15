@@ -168,6 +168,38 @@ def cadastrar_tecnico(values, sg):
         sg.popup("Erro ao salvar tecnico", title='Error', font=8)
 
 
+def cadastrar_reserva(values, sg):
+    try:
+            # sg.popup("CPF Inválido ou Não Cadastrado", title='Error', font=8)
+
+            # sg.popup("Data de Retirada deve ter no mínimo 24 horas de antecêndencia.", title='Error', font=8)
+
+        if utils.validar_reserva(values["rFerramenta"].strip(), values["rCPF"].strip(), sg):
+
+            with open("content/data/reserva.csv", "a") as reserva_arquivo:
+                lista_reserva = f'{values["rFerramenta"].strip()}' \
+                                f';{values["rCPF"].strip()}' \
+                                f';{values["rNomeTecnico"].strip()}' \
+                                f';{values["rDescricao"].strip()}' \
+                                f';{values["rDTRetirada"].strip()}' \
+                                f';{values["rHRRetirada"].strip()}' \
+                                f';{values["rMinRetirada"].strip()}' \
+                                f';{values["rDTDevol"].strip()}' \
+                                f';{values["rHRDevol"].strip()}' \
+                                f';{values["rMinDevol"].strip()}' \
+                                f';{values["rEmergencial"]}\n'
+
+                reserva_arquivo.writelines(lista_reserva)
+
+            return lista_reserva
+        else:
+            sg.popup("Não foi possível salvar a reserva", title='Information', font=8)
+
+    except Exception:
+        traceback.print_exc()
+        sg.popup("Erro ao salvar reserva", title='Error', font=8)
+
+
 def modificar_ferramenta(index, values, sg):
     try:
         with open("content/data/ferramenta.csv", "r") as ferramentas_leitura:
