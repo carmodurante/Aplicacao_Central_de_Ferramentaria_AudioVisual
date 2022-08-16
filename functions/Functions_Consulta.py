@@ -1,3 +1,4 @@
+import datetime
 import io
 import os
 
@@ -17,7 +18,7 @@ def get_keys_to_clean(tipo_consulta):
 
     elif tipo_consulta == 'reserva_CON':
         chaves_para_limpar = ['crReserva', 'crFerramenta', 'crCPF', 'crNomeTecnico', 'crDescricao', 'crEmergencial',
-                              'crDTRetirada', 'crDTDevol', 'crAtraso', 'crHRDevol', 'IMGTecnico_Reserva',
+                              'crDTRetirada', 'crDTDevol', 'crAtraso', 'crDevolvido', 'IMGTecnico_Reserva',
                               'IMGFerramenta_Reserva']
 
     elif tipo_consulta == 'ferramenta_CAD':
@@ -84,7 +85,40 @@ def filtrar_tecnicos(window, values):
 
 # TODO: Fazer
 def filtrar_reservas(window, values):
-    lista_ferramentas = cadastro.get_cadastrados('reserva')
+    lista_reservas = cadastro.get_cadastrados('reserva')
+
+    if values['crDevolvido']:
+        lista_reservas_hist = cadastro.get_cadastrados('reserva_hist')
+        if lista_reservas_hist:
+            lista_reservas.extend(lista_reservas_hist)
+
+    if values['crAtraso']:
+        data_agora = datetime.datetime.now()
+        lista_reservas = list(filter(lambda linha: data_agora > datetime.datetime(year=int(f'20{linha[8][6:]}'),
+                                                                                  month=int(linha[8][3:5]),
+                                                                                  day=int(linha[8][:2]),
+                                                                                  hour=int(linha[9]),
+                                                                                  minute=int(linha[10])),
+                                     lista_reservas))
+
+    if values['crReserva'].strip() != '':
+        lista_reservas = list(filter(lambda linha: values['crReserva'].strip() in linha[0], lista_reservas))
+    if values['crFerramenta'].strip() != '':
+        lista_reservas = list(filter(lambda linha: values['crFerramenta'].strip() in linha[1], lista_reservas))
+    if values['crCPF'].strip() != '':
+        lista_reservas = list(filter(lambda linha: values['crCPF'].strip() in linha[2], lista_reservas))
+    if values['crNomeTecnico'].strip() != '':
+        lista_reservas = list(filter(lambda linha: values['crNomeTecnico'].strip() in linha[3], lista_reservas))
+    if values['crDescricao'].strip() != '':
+        lista_reservas = list(filter(lambda linha: values['crDescricao'].strip() in linha[4], lista_reservas))
+    if values['crDTRetirada'].strip() != '':
+        lista_reservas = list(filter(lambda linha: values['crDTRetirada'].strip() in linha[5], lista_reservas))
+    if values['crDTDevol'].strip() != '':
+        lista_reservas = list(filter(lambda linha: values['crDTDevol'].strip() in linha[8], lista_reservas))
+    if values['crEmergencial'] != '' and (values['crEmergencial']) == True:
+        lista_reservas = list(filter(lambda linha: str(values['crEmergencial']) in linha[11], lista_reservas))
+
+    window['-TABLE_CON_RESERVAS-'].update(lista_reservas)
 
 
 def limpar_filtros(window, tipo_consulta):

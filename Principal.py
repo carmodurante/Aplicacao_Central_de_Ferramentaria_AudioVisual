@@ -105,8 +105,8 @@ if __name__ == '__main__':
                     elif event == 'FiltrarTecnico':  # Filtrar Tecnico Consulta
                         consultas.filtrar_tecnicos(window, values)
 
-                    # elif event == 'FiltrarReserva':  # Filtrar Reserva Consulta
-                    #     consultas.filtrar_reservas(window, values)
+                    elif event == 'FiltrarReserva':  # Filtrar Reserva Consulta
+                        consultas.filtrar_reservas(window, values)
 
                     # Seleção Tabela Consulta
                     elif type(event) is tuple and event[0] == '-TABLE_CON_FERRAMENTAS-':
