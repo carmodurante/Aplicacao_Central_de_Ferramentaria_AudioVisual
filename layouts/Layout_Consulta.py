@@ -2,6 +2,7 @@ import PySimpleGUI as sg
 
 import layouts.Layout_Components as components
 
+
 def layout_consulta_ferramentas(lista_consulta_ferramentas):
     # Define Layout Consulta Ferramentas
     left_column_ferramenta = [[sg.Text('ID Ferramenta', size=(18, 1)), sg.Input('', key='cfFerramenta', size=10)],
@@ -86,19 +87,20 @@ def layout_consulta_tecnicos(lista_consulta_tecnicos):
 
 def layout_consulta_reservas(lista_consulta_reservas):
     # Define Layout Consulta Reservas
-    left_column_reserva = [[sg.Text('ID Ferramenta', size=(18, 1)), sg.Input('', key='crFerramenta', size=13)],
+    left_column_reserva = [[sg.Text('ID Reserva', size=(18, 1)), sg.Input('', key='crReserva', size=13)]
+                           [sg.Text('ID Ferramenta', size=(18, 1)), sg.Input('', key='crFerramenta', size=13)],
                            [sg.Text('CPF do Técnico', size=(18, 1)), sg.Input('', key='crCPF', size=13)],
                            [sg.Text('Nome do Técnico', size=(18, 1)), sg.Input('', key='crNomeTecnico', size=35)],
                            [sg.Text('Descrição da Solicitação', size=(18, 1)),
-                            sg.Input('', key='crDescricao', size=35)],
-                           [sg.Text('Reserva Emergencial?', size=(18, 1),
-                                    tooltip=components.get_tooltip_layout('rEmergencial')),
-                            sg.Checkbox('', key='crEmergencial', default=False)]]
+                            sg.Input('', key='crDescricao', size=35)]]
 
     center_column_reserva = [[sg.Text('Data da Retirada', size=(18, 1)), sg.Input('', key='crDTRetirada', size=8),
                               components.get_calendario('crDTRetirada')],
                              [sg.Text('Data da Devolução', size=(18, 1)), sg.Input('', key='crDTDevol', size=8),
                               components.get_calendario('crDTDevol')],
+                             [sg.Text('Reserva Emergencial?', size=(18, 1),
+                                      tooltip=components.get_tooltip_layout('rEmergencial')),
+                              sg.Checkbox('', key='crEmergencial', default=False)]
                              [sg.Text('Reservas em Atraso?', size=(18, 1)),
                               sg.Checkbox('', key='crAtraso', default=False)]]
 

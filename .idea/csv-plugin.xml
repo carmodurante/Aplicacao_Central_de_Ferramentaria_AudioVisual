@@ -17,6 +17,13 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="\content\data\reserva_hist.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value=";" />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="\content\data\tecnico.csv">
           <value>
             <Attribute>

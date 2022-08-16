@@ -110,17 +110,17 @@ if __name__ == '__main__':
 
                     # Seleção Tabela Consulta
                     elif type(event) is tuple and event[0] == '-TABLE_CON_FERRAMENTAS-':
-                        if event[2][0] is not None and event[2][0] >= 0:  # Linha selecionada Tabela de Consulta de Ferramentas
+                        if event[2][0] is not None and event[2][0] >= 0:
                             consultas.atualiza_imagem_selecao(
                                 window['-TABLE_CON_FERRAMENTAS-'].get(), 'ferramenta', event[2][0], window)
 
                     elif type(event) is tuple and event[0] == '-TABLE_CON_TECNICOS-':
-                        if event[2][0] is not None and event[2][0] >= 0:  # Linha selecionada Tabela de Consulta de Tecnicos
+                        if event[2][0] is not None and event[2][0] >= 0:
                             consultas.atualiza_imagem_selecao(
                                 window['-TABLE_CON_TECNICOS-'].get(), 'tecnico', event[2][0], window)
 
                     elif type(event) is tuple and event[0] == '-TABLE_CON_RESERVAS-':
-                        if event[2][0] is not None and event[2][0] >= 0:  # Linha selecionada Tabela de Consulta de Reservas
+                        if event[2][0] is not None and event[2][0] >= 0:
                             consultas.atualiza_imagem_selecao(
                                 window['-TABLE_CON_RESERVAS-'].get(), 'reserva', event[2][0], window)
 
@@ -137,15 +137,29 @@ if __name__ == '__main__':
                     # Baixar CSV
 
                     # TODO: TELA DE RESERVA
+                    # Seleção Tabela Reserva
+                    elif type(event) is tuple and event[0] == '-TABLE_CAD_RESERVAS-':
+                        if event[2][0] is not None and event[2][0] >= 0:
+                            linha_selecionada = event[2][0]
+
                     elif event == 'ReservarReserva':  # Cadastrar Reserva
                         cadastros.cadastrar_reserva(values, sg)
                         window['-TABLE_CAD_RESERVAS-'].update(cadastros.get_cadastrados('reserva'))
 
                     elif event == 'DevolverReserva':  # Devolver Reserva
                         pass
+                        # if linha_selecionada >= 0:
+                        #     cadastros.deletar_registro(linha_selecionada, 'reserva', sg)
+                        #     window['-TABLE_CAD_RESERVAS-'].update(cadastros.get_cadastrados('reserva'))
+                        #     consultas.limpar_filtros(window, 'reserva_CAD')
+                        #     linha_selecionada = -1
 
                     elif event == 'ExcluirReserva':  # Excluir Reserva
-                        pass
+                        if linha_selecionada >= 0:
+                            cadastros.deletar_registro(linha_selecionada, 'reserva', sg)
+                            window['-TABLE_CAD_RESERVAS-'].update(cadastros.get_cadastrados('reserva'))
+                            consultas.limpar_filtros(window, 'reserva_CAD')
+                            linha_selecionada = -1
 
                     elif event == 'LimparReservaCAD':  # Limpar Reserva Cadastro
                         consultas.limpar_filtros(window, 'reserva_CAD')
