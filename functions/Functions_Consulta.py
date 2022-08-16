@@ -91,6 +91,7 @@ def filtrar_reservas(window, values):
         lista_reservas_hist = cadastro.get_cadastrados('reserva_hist')
         if lista_reservas_hist:
             lista_reservas.extend(lista_reservas_hist)
+            lista_reservas.sort()
 
     if values['crAtraso']:
         data_agora = datetime.datetime.now()
