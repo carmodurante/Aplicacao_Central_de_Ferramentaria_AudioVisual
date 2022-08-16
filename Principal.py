@@ -6,7 +6,7 @@ import PySimpleGUI as sg
 import functions.Functions_Cadastro as cadastros
 import functions.Functions_Consulta as consultas
 import functions.Functions_Login as login
-from functions.Functions_Utils import get_link_url_dev5
+from functions.Functions_Utils import get_link_url
 from layouts.Layout_Principal import layout_principal
 
 # Define o tema
@@ -64,13 +64,13 @@ if __name__ == '__main__':
 
                     # Seleção Tabela Cadastro
                     elif type(event) is tuple and event[0] == '-TABLE_CAD_FERRAMENTAS-':
-                        if event[2][0] >= 0:  # Linha selecionada Tabela de Cadastro de Ferramentas
+                        if event[2][0] is not None and event[2][0] >= 0:  # Linha selecionada Tabela de Cadastro de Ferramentas
                             linha_selecionada = event[2][0]
                             cadastros.carregar_dados_tela(cadastros.get_cadastrados('ferramenta')[event[2][0]],
                                                           'cadastro_ferramenta', window)
 
                     elif type(event) is tuple and event[0] == '-TABLE_CAD_TECNICOS-':
-                        if event[2][0] >= 0:  # Linha selecionada Tabela de Cadastro de Tecnicos
+                        if event[2][0] is not None and event[2][0] >= 0:  # Linha selecionada Tabela de Cadastro de Tecnicos
                             linha_selecionada = int(event[2][0])
                             cadastros.carregar_dados_tela(cadastros.get_cadastrados('tecnico')[event[2][0]],
                                                           'cadastro_tecnico', window)
@@ -110,20 +110,19 @@ if __name__ == '__main__':
 
                     # Seleção Tabela Consulta
                     elif type(event) is tuple and event[0] == '-TABLE_CON_FERRAMENTAS-':
-                        if event[2][0] >= 0:  # Linha selecionada Tabela de Consulta de Ferramentas
+                        if event[2][0] is not None and event[2][0] >= 0:  # Linha selecionada Tabela de Consulta de Ferramentas
                             consultas.atualiza_imagem_selecao(
                                 window['-TABLE_CON_FERRAMENTAS-'].get(), 'ferramenta', event[2][0], window)
 
                     elif type(event) is tuple and event[0] == '-TABLE_CON_TECNICOS-':
-                        if event[2][0] >= 0:  # Linha selecionada Tabela de Consulta de Tecnicos
+                        if event[2][0] is not None and event[2][0] >= 0:  # Linha selecionada Tabela de Consulta de Tecnicos
                             consultas.atualiza_imagem_selecao(
                                 window['-TABLE_CON_TECNICOS-'].get(), 'tecnico', event[2][0], window)
 
-                    # elif type(event) is tuple and event[0] == '-TABLE_CON_RESERVAS-':
-                    #     pass
-                    #     # if event[2][0] >= 0:  # Linha selecionada Tabela de Consulta de Reservas
-                    #     #     consultas.atualiza_imagem_selecao(
-                    #     #         window['-TABLE_CON_RESERVAS-'].get(), 'reserva', event[2][0], window)
+                    elif type(event) is tuple and event[0] == '-TABLE_CON_RESERVAS-':
+                        if event[2][0] is not None and event[2][0] >= 0:  # Linha selecionada Tabela de Consulta de Reservas
+                            consultas.atualiza_imagem_selecao(
+                                window['-TABLE_CON_RESERVAS-'].get(), 'reserva', event[2][0], window)
 
                     # Limpar Tela
                     elif event == 'LimparFerramentaCON':  # Limpar Ferramenta Consulta
@@ -135,24 +134,25 @@ if __name__ == '__main__':
                     elif event == 'LimparReservaCON':  # Limpar Reserva Consulta
                         consultas.limpar_filtros(window, 'reserva_CON')
 
+                    # Baixar CSV
+
                     # TODO: TELA DE RESERVA
                     elif event == 'ReservarReserva':  # Cadastrar Reserva
                         cadastros.cadastrar_reserva(values, sg)
-
-                    elif event == 'ModificarReserva':  # Modificar Reserva
-                        pass
+                        window['-TABLE_CAD_RESERVAS-'].update(cadastros.get_cadastrados('reserva'))
 
                     elif event == 'DevolverReserva':  # Devolver Reserva
+                        pass
+
+                    elif event == 'ExcluirReserva':  # Excluir Reserva
                         pass
 
                     elif event == 'LimparReservaCAD':  # Limpar Reserva Cadastro
                         consultas.limpar_filtros(window, 'reserva_CAD')
 
-                    # Baixar CSV
-
                     # Links
-                    elif event == 'URL_DEV5':
-                        web.open(get_link_url_dev5())
+                    elif event == 'URL_GITHUB':
+                        web.open(get_link_url())
 
 
                 except Exception:

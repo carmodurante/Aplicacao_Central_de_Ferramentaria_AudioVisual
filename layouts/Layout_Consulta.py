@@ -128,7 +128,7 @@ def layout_consulta_reservas(lista_consulta_reservas):
                                     display_row_numbers=True,
                                     justification='left',
                                     num_rows=5,
-                                    key='-TABLE_CAD_RESERVAS-',
+                                    key='-TABLE_CON_RESERVAS-',
                                     row_height=35,
                                     enable_click_events=True,
                                     vertical_scroll_only=False,

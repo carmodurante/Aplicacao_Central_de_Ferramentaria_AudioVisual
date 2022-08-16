@@ -35,7 +35,11 @@ def salvar_imagem(tipo, id_number, filename, sg):
 
 
 def get_new_sequencial_id(tipo):
-    id_number = 1000
+    id_number = 0
+    if tipo == 'reserva':
+        id_number = 7000
+    elif tipo == 'ferramenta':
+        id_number = 1000
     for linha in get_cadastrados(tipo):
         if int(linha[0]) > id_number:
             id_number = int(linha[0])
@@ -170,14 +174,12 @@ def cadastrar_tecnico(values, sg):
 
 def cadastrar_reserva(values, sg):
     try:
-            # sg.popup("CPF Inválido ou Não Cadastrado", title='Error', font=8)
 
-            # sg.popup("Data de Retirada deve ter no mínimo 24 horas de antecêndencia.", title='Error', font=8)
-
-        if utils.validar_reserva(values["rFerramenta"].strip(), values["rCPF"].strip(), sg):
+        if utils.validar_reserva(values["rFerramenta"].strip(), values["rCPF"].strip(), values, sg):
 
             with open("content/data/reserva.csv", "a") as reserva_arquivo:
-                lista_reserva = f'{values["rFerramenta"].strip()}' \
+                id_reserva = get_new_sequencial_id('reserva')
+                lista_reserva = f'{id_reserva}' \
                                 f';{values["rCPF"].strip()}' \
                                 f';{values["rNomeTecnico"].strip()}' \
                                 f';{values["rDescricao"].strip()}' \

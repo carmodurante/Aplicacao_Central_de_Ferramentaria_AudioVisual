@@ -20,8 +20,8 @@ def get_calendario(target_input):
 def get_table_header(table_name):
     if table_name == 'Reserva':
         header_reservas = ['ID Reserva', 'ID Ferramenta', 'CPF do Técnico', 'Nome do Técnico', 'Descrição',
-                           'Data Reserva', 'Hora Reserva', 'Data Devolução', 'Hora Devolução', 'Data Devol. Efetiva',
-                           'Hora Devol, Efetiva', 'Reserva Emergencial?']
+                           'Data Retirada', 'Hora Retirada', 'Minuto Retirada', 'Data Devolução', 'Hora Devolução',
+                           'Minuto Devolução', 'Reserva Emergencial?']
 
         return header_reservas
 
@@ -40,8 +40,8 @@ def get_table_header(table_name):
 def get_buttons(layout_name):
     if layout_name == 'CAD_RESERVA':
         buttons_cadastro_reserva = [[sg.Button('Reservar', key='ReservarReserva', pad=(15, 7), expand_x=True),
-                                     sg.Button('Modificar', key='ModificarReserva', pad=(15, 7), expand_x=True),
                                      sg.Button('Devolver', key='DevolverReserva', pad=(15, 7), expand_x=True),
+                                     sg.Button('Excluir', key='ExcluirReserva', pad=(15, 7), expand_x=True),
                                      sg.Button('Limpar', key='LimparReservaCAD', pad=(15, 7), expand_x=True)]]
         return buttons_cadastro_reserva
 

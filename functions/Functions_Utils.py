@@ -5,7 +5,7 @@ from validate_docbr import CPF
 import functions.Functions_Cadastro as cadastro
 
 
-def get_link_url_dev5():
+def get_link_url():
     url_aplication_git = 'https://github.com/carmodurante/Aplicacao_Central_de_Ferramentaria_AudioVisual'
     return url_aplication_git
 
@@ -53,7 +53,7 @@ def validar_reserva(ferramenta, cpf, values, sg):
     valido = False
 
     if not validar_cpf_reserva(cpf):
-        sg.popup("CPF Inválido ou Não Cadastrado", title='Error', font=8)
+        sg.popup("CPF Inválido ou Não Cadastrado.", title='Error', font=8)
         return False
 
     datatime_retirada = datetime.datetime(year=int(f'20{values["rDTRetirada"][6:]}'),
@@ -69,7 +69,7 @@ def validar_reserva(ferramenta, cpf, values, sg):
                                        minute=int(values["rMinDevol"]))
 
     if datatime_retirada >= datatime_devol:
-        #popup
+        sg.popup("Data de retirada deve ser anterior a de devolução.", title='Error', font=8)
         return False
 
     data_agora = datetime.datetime.now()
@@ -77,18 +77,19 @@ def validar_reserva(ferramenta, cpf, values, sg):
     tempo_ate_retirada = data_diferenca.total_seconds()
 
     data_diferenca = datatime_devol - datatime_retirada
-    tempo_reserva  = data_diferenca.total_seconds()
-
+    tempo_reserva = data_diferenca.total_seconds()
 
     # Se selecionar uma data com menos de 24 horas para retirada
-    if tempo_ate_retirada > 86400: # Em segundos
-        # popup
+    if tempo_ate_retirada < 86400:  # Em segundos
+        sg.popup("Data de Retirada deve ter no mínimo 24 horas de antecêndencia.", title='Error', font=8)
         return False
 
+    erro = "Ferramenta selecionada não está cadastrada no sistema."
     for linha in cadastro.get_cadastrados('ferramenta'):
         # Ferramenta deve estar cadastrada
         if linha[0] == ferramenta:
-            tempo_max_reserva = (int(linha[6]) * 3600) + ( int(linha[5]) * 60)
+            erro = "Tempo de Reserva da Ferramenta Excedido."
+            tempo_max_reserva = (int(linha[5]) * 3600) + (int(linha[6]) * 60)
             # tempo de reserva nao pode ser maior que o tempo maximo de reserva da ferramenta
             if not tempo_reserva > tempo_max_reserva:
                 valido = True
@@ -110,14 +111,14 @@ def validar_reserva(ferramenta, cpf, values, sg):
                                                       minute=int(linha[9]))
                 # Se a data de retirada estiver entre uma reserva
                 if datatime_devol_db >= datatime_retirada >= datatime_retirada_db:
-                    # popup
+                    sg.popup("Data de Retirada possui períodos conflitantes com outra reserva.", title='Error', font=8)
                     return False
                 # Se a data de devolucao estiver entre uma reserva
                 if datatime_devol_db >= datatime_devol >= datatime_retirada_db:
-                    # popup
+                    sg.popup("Data de Devolução possui períodos conflitantes com outra reserva.", title='Error', font=8)
                     return False
     else:
-        # popup nao cadastrado
+        sg.popup(erro, title='Error', font=8)
         return False
     return valido
 

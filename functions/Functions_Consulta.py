@@ -91,8 +91,15 @@ def limpar_filtros(window, tipo_consulta):
 
 def atualiza_imagem_selecao(lista, tipo, linha_selecionada, window):
     if tipo == "reserva":
-        window["IMGTecnico_Reserva"].update(data="bio.getvalue()")
-        window["IMGFerramenta_Reserva"].update(data='bio.getvalue()')
+
+        identificador = lista[linha_selecionada][2]
+        data = get_imagem('tecnico', identificador)
+        window["IMGTecnico_Reserva"].update(data=data)
+
+        identificador = lista[linha_selecionada][1]
+        data = get_imagem('ferramenta', identificador)
+        window["IMGFerramenta_Reserva"].update(data=data)
+
     else:
         identificador = lista[linha_selecionada][0]
         data = get_imagem(tipo, identificador)

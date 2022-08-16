@@ -17,7 +17,7 @@ def layout_principal(lista_ferramentas, lista_tecnicos, lista_reservas,
                      sg.Text('Admin: ', size=(5, 1)),
                      sg.Text(usuario_logado['admin'], size=(18, 1), text_color=get_color(usuario_logado['admin'])),
                      sg.Push(),
-                     sg.Text('@DevTeam_05', size=(15, 1), text_color='purple', enable_events=True, key='URL_DEV5',
+                     sg.Text('@carmodurante', size=(15, 1), text_color='purple', enable_events=True, key='URL_GITHUB',
                              tooltip='Abrir Documentação no Github')]
 
     layout_cadastros = [sg.Tab('Cadastros', layout_cadastro_principal(lista_ferramentas,

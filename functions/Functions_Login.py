@@ -106,6 +106,7 @@ def login():
         try:
             event, values = window.read()
             if event == "CancelLogin" or event == sg.WIN_CLOSED:
+                usuario_logado = {'validado': False}
                 break
             else:
                 if event == "SubmitLogin":
