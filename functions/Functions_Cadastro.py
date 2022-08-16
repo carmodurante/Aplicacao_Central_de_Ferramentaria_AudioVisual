@@ -38,8 +38,13 @@ def get_new_sequencial_id(tipo):
     id_number = 0
     if tipo == 'reserva':
         id_number = 7000
+        for linha in get_cadastrados('reserva_hist'):
+            if int(linha[0]) > id_number:
+                id_number = int(linha[0])
+
     elif tipo == 'ferramenta':
         id_number = 1000
+
     for linha in get_cadastrados(tipo):
         if int(linha[0]) > id_number:
             id_number = int(linha[0])
@@ -83,6 +88,12 @@ def deletar_registro(index, tipo, sg):
     try:
         new_list = []
         filename = ''
+        historico = False
+
+        if tipo == 'reserva_hist':
+            tipo = 'reserva'
+            historico = True
+
         with open(file=f'content/data/{tipo}.csv', mode='r') as lista_leitura:
             for linhas in lista_leitura:
                 new_list.append(linhas)
@@ -100,6 +111,10 @@ def deletar_registro(index, tipo, sg):
 
         with open(file=f'content/data/{tipo}.csv', mode='w') as lista_gravacao:
             lista_gravacao.writelines(new_list)
+
+        if historico:
+            with open("content/data/reserva_hist.csv", "a") as reserva_hist_arquivo:
+                reserva_hist_arquivo.writelines(linha_deletada)
 
     except Exception:
         sg.popup("Erro ao Deletar Registro", title='Error', font=8)
@@ -132,7 +147,7 @@ def cadastrar_ferramenta(values, sg):
             if os.path.exists(filename):  # Deleta imagem se ja existir
                 os.remove(filename)
 
-        return lista_ferramenta
+        return sg.popup("Ferramenta Cadastrada!", title='Sucesso', font=8)
 
     except Exception:
         traceback.print_exc()
@@ -166,7 +181,7 @@ def cadastrar_tecnico(values, sg):
             if os.path.exists(filename):  # Deleta imagem se ja existir
                 os.remove(filename)
 
-        return lista_tecnico
+        return sg.popup("Técnico Cadastrado!", title='Sucesso', font=8)
 
     except Exception:
         traceback.print_exc()
@@ -181,6 +196,7 @@ def cadastrar_reserva(values, sg):
             with open("content/data/reserva.csv", "a") as reserva_arquivo:
                 id_reserva = get_new_sequencial_id('reserva')
                 lista_reserva = f'{id_reserva}' \
+                                f';{values["rFerramenta"].strip()}' \
                                 f';{values["rCPF"].strip()}' \
                                 f';{values["rNomeTecnico"].strip()}' \
                                 f';{values["rDescricao"].strip()}' \
@@ -194,7 +210,7 @@ def cadastrar_reserva(values, sg):
 
                 reserva_arquivo.writelines(lista_reserva)
 
-            return lista_reserva
+            return sg.popup("Reserva Cadastrada!", title='Sucesso', font=8)
         else:
             sg.popup("Não foi possível salvar a reserva", title='Information', font=8)
 

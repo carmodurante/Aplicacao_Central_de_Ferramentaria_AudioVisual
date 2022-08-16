@@ -87,7 +87,7 @@ def layout_consulta_tecnicos(lista_consulta_tecnicos):
 
 def layout_consulta_reservas(lista_consulta_reservas):
     # Define Layout Consulta Reservas
-    left_column_reserva = [[sg.Text('ID Reserva', size=(18, 1)), sg.Input('', key='crReserva', size=13)]
+    left_column_reserva = [[sg.Text('ID Reserva', size=(18, 1)), sg.Input('', key='crReserva', size=13)],
                            [sg.Text('ID Ferramenta', size=(18, 1)), sg.Input('', key='crFerramenta', size=13)],
                            [sg.Text('CPF do Técnico', size=(18, 1)), sg.Input('', key='crCPF', size=13)],
                            [sg.Text('Nome do Técnico', size=(18, 1)), sg.Input('', key='crNomeTecnico', size=35)],
@@ -98,9 +98,11 @@ def layout_consulta_reservas(lista_consulta_reservas):
                               components.get_calendario('crDTRetirada')],
                              [sg.Text('Data da Devolução', size=(18, 1)), sg.Input('', key='crDTDevol', size=8),
                               components.get_calendario('crDTDevol')],
-                             [sg.Text('Reserva Emergencial?', size=(18, 1),
+                             [sg.Text('Reservas Emergenciais?', size=(18, 1),
                                       tooltip=components.get_tooltip_layout('rEmergencial')),
-                              sg.Checkbox('', key='crEmergencial', default=False)]
+                              sg.Checkbox('', key='crEmergencial', default=False)],
+                             [sg.Text('Reservas Devolvidas', size=(18, 1)),
+                              sg.Checkbox('', key='crDevolvido', default=False)],
                              [sg.Text('Reservas em Atraso?', size=(18, 1)),
                               sg.Checkbox('', key='crAtraso', default=False)]]
 
@@ -129,7 +131,7 @@ def layout_consulta_reservas(lista_consulta_reservas):
                                     auto_size_columns=True,
                                     display_row_numbers=True,
                                     justification='left',
-                                    num_rows=5,
+                                    num_rows=4,
                                     key='-TABLE_CON_RESERVAS-',
                                     row_height=35,
                                     enable_click_events=True,

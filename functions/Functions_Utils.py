@@ -80,7 +80,7 @@ def validar_reserva(ferramenta, cpf, values, sg):
     tempo_reserva = data_diferenca.total_seconds()
 
     # Se selecionar uma data com menos de 24 horas para retirada
-    if tempo_ate_retirada < 86400:  # Em segundos
+    if tempo_ate_retirada < 86400 and values['rEmergencial'] == False:  # Em segundos
         sg.popup("Data de Retirada deve ter no mínimo 24 horas de antecêndencia.", title='Error', font=8)
         return False
 

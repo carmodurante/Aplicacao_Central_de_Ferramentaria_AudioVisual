@@ -147,12 +147,11 @@ if __name__ == '__main__':
                         window['-TABLE_CAD_RESERVAS-'].update(cadastros.get_cadastrados('reserva'))
 
                     elif event == 'DevolverReserva':  # Devolver Reserva
-                        pass
-                        # if linha_selecionada >= 0:
-                        #     cadastros.deletar_registro(linha_selecionada, 'reserva', sg)
-                        #     window['-TABLE_CAD_RESERVAS-'].update(cadastros.get_cadastrados('reserva'))
-                        #     consultas.limpar_filtros(window, 'reserva_CAD')
-                        #     linha_selecionada = -1
+                        if linha_selecionada >= 0:
+                            cadastros.deletar_registro(linha_selecionada, 'reserva_hist', sg)
+                            window['-TABLE_CAD_RESERVAS-'].update(cadastros.get_cadastrados('reserva'))
+                            consultas.limpar_filtros(window, 'reserva_CAD')
+                            linha_selecionada = -1
 
                     elif event == 'ExcluirReserva':  # Excluir Reserva
                         if linha_selecionada >= 0:

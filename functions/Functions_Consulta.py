@@ -56,6 +56,8 @@ def filtrar_ferramentas(window, values):
         lista_ferramentas = list(filter(lambda linha: values['cfDescricao'].strip() in linha[1], lista_ferramentas))
     if values['cfCodFabricante'].strip() != '':
         lista_ferramentas = list(filter(lambda linha: values['cfCodFabricante'].strip() in linha[2], lista_ferramentas))
+    if values['cfFabricante'].strip() != '':
+        lista_ferramentas = list(filter(lambda linha: values['cfFabricante'].strip() in linha[3], lista_ferramentas))
     if values['cfTamanho'].strip() != '':
         lista_ferramentas = list(filter(lambda linha: values['cfTamanho'].strip() in linha[7], lista_ferramentas))
     if values['cfUnidade'].strip() != '':
@@ -69,13 +71,13 @@ def filtrar_tecnicos(window, values):
 
     if values['ctCPF'].strip() != '':
         lista_tecnicos = list(filter(lambda linha: values['ctCPF'].strip() in linha[0], lista_tecnicos))
-    elif values['ctNome'].strip() != '':
+    if values['ctNome'].strip() != '':
         lista_tecnicos = list(filter(lambda linha: values['ctNome'].strip() in linha[1], lista_tecnicos))
-    elif values['ctTelefone'].strip() != '':
+    if values['ctTelefone'].strip() != '':
         lista_tecnicos = list(filter(lambda linha: values['ctTelefone'].strip() in linha[2], lista_tecnicos))
-    elif values['cfTurno'].strip() != '':
+    if values['cfTurno'].strip() != '':
         lista_tecnicos = list(filter(lambda linha: values['cfTurno'].strip() in linha[3], lista_tecnicos))
-    elif values['ctEquipe'].strip() != '':
+    if values['ctEquipe'].strip() != '':
         lista_tecnicos = list(filter(lambda linha: values['ctEquipe'].strip() in linha[4], lista_tecnicos))
 
     window['-TABLE_CON_TECNICOS-'].update(lista_tecnicos)
