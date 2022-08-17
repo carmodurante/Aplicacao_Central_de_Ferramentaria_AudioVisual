@@ -97,18 +97,18 @@ def validar_reserva(ferramenta, cpf, values, sg):
 
     if valido:
         for linha in cadastro.get_cadastrados('reserva'):
-            if linha[0] == ferramenta:
-                datatime_retirada_db = datetime.datetime(year=int(f'20{linha[4][6:]}'),
-                                                         month=int(linha[4][3:5]),
-                                                         day=int(linha[4][:2]),
-                                                         hour=int(linha[5]),
-                                                         minute=int(linha[6]))
+            if linha[1] == ferramenta:
+                datatime_retirada_db = datetime.datetime(year=int(f'20{linha[5][6:]}'),
+                                                         month=int(linha[5][3:5]),
+                                                         day=int(linha[5][:2]),
+                                                         hour=int(linha[6]),
+                                                         minute=int(linha[7]))
 
-                datatime_devol_db = datetime.datetime(year=int(f'20{linha[7][6:]}'),
-                                                      month=int(linha[7][3:5]),
-                                                      day=int(linha[7][:2]),
-                                                      hour=int(linha[8]),
-                                                      minute=int(linha[9]))
+                datatime_devol_db = datetime.datetime(year=int(f'20{linha[8][6:]}'),
+                                                      month=int(linha[8][3:5]),
+                                                      day=int(linha[8][:2]),
+                                                      hour=int(linha[9]),
+                                                      minute=int(linha[101]))
                 # Se a data de retirada estiver entre uma reserva
                 if datatime_devol_db >= datatime_retirada >= datatime_retirada_db:
                     sg.popup("Data de Retirada possui períodos conflitantes com outra reserva.", title='Error', font=8)
