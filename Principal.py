@@ -135,6 +135,17 @@ if __name__ == '__main__':
                         consultas.limpar_filtros(window, 'reserva_CON')
 
                     # Baixar CSV
+                    elif event == 'FerramentaCSV':
+                        consultas.baixar_csv(window['-TABLE_CON_FERRAMENTAS-'].get(), values['FerramentaCSV'],
+                                             'Ferramenta', sg)
+
+                    elif event == 'TecnicoCSV':
+                        consultas.baixar_csv(window['-TABLE_CON_TECNICOS-'].get(), values['TecnicoCSV'],
+                                             'Tecnico', sg)
+
+                    elif event == 'ReservaCSV':
+                        consultas.baixar_csv(window['-TABLE_CON_RESERVAS-'].get(), values['ReservaCSV'],
+                                             'Reserva', sg)
 
                     # TODO: TELA DE RESERVA
                     # Seleção Tabela Reserva

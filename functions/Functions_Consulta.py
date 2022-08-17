@@ -5,6 +5,7 @@ import os
 from PIL import Image
 
 import functions.Functions_Cadastro as cadastro
+import layouts.Layout_Components as components
 
 
 def get_keys_to_clean(tipo_consulta):
@@ -147,3 +148,18 @@ def atualiza_imagem_selecao(lista, tipo, linha_selecionada, window):
 
         elif tipo == 'tecnico':
             window['IMGTecnico'].update(data=data)
+
+
+def baixar_csv(lista, caminho, tipo, sg):
+    lista_csv = []
+    header = ';'.join(components.get_table_header(tipo)) # Header
+    print(header)
+    header = header+'\n'
+    lista_csv.append(header)
+    for linha in lista:
+        linha_formatada = ';'.join(linha)
+        lista_csv.append(linha_formatada)
+
+    if os.path.exists(caminho):
+        with open(file=f'{caminho}/{tipo}.csv', mode='w') as csv_gravacao:
+            csv_gravacao.writelines(lista_csv)
