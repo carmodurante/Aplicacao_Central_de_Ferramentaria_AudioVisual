@@ -314,3 +314,4 @@ def validar_preenchido(tipo, values, sg):
         if values[key].strip() == '':
             sg.popup(f"o Campo {key} deve ser preenchido!", title='Error', font=8)
             return False
+    return True
