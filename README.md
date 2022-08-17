@@ -72,8 +72,6 @@ porte.
 ## Fluxo e Funcionalidades
 ---
 
-### 📜 Fluxograma das Telas
-
 ### 🔜 Descrição das Funcionalidades
 
 * > **Tela_Inicial_Menu_Cockpit**
@@ -119,11 +117,12 @@ porte.
 |tipo|Tipo da Ferramenta|string|Nao|elétrica, mecânica, segurança|
 |material|Material da Ferramenta|string|Nao|ferro, madeira, plástico, borracha|
 |tempo_reserva|Tempo máximo de reserva|string|Nao|Mascara para Horas|
+|status_reserva| Status Reserva |boolean|Nao|Se está reservado ou não|
 
 ---
 
-#### **Tabela de Técnicos**
 
+#### **Tabela de Técnicos**
 | Nome Campo | Descrição | Tipo | Chave? | Informações |
 | -------- | -------- | -------- | -------- | -------- |
 | id_cpf | CPF   | int     | Sim     |  Mascara de CPF   |
@@ -133,9 +132,7 @@ porte.
 | nome_equipe | Nome da Equipe   | string     | Nao     |  Texto Livre  |
 
 ---
-
 #### **Tabela de Reservas**
-
 | Nome Campo | Descrição | Tipo | Chave? | Informações |
 | -------- | -------- | -------- | -------- | -------- |
 | id_reserva |ID Sequencial da reserva| int| Sim     |  Código gerado de forma automática pelo sistema|
@@ -145,7 +142,7 @@ porte.
 | hora_retirada_reserva |Hora ferramente retirada|time|Nao|Mascara de Horas|
 | data_devolução_reserva |Data ferramenta devolvida|date|Nao|Mascara de Datas|
 | hora_devolução_reserva |Hora ferramente devolvida|time|Nao|Mascara de Horas|
-| emergencial|Reserva Emergencial|string|Nao| Em caso de reservas emegerciais o tempo de antecedencia é ignorado|
+| reserva_emer |Reserva de Emergencia|Boolean|Nao| Reserva de Emergencia Ignora a Validação de Data, porém é necessário ter estoque |
 
 ---
 ## Linha do Tempo do Projeto
