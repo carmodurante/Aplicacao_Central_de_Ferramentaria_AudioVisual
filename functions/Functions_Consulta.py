@@ -155,7 +155,7 @@ def baixar_csv(lista, caminho, tipo, sg):
     lista_csv = [f"{';'.join(components.get_table_header(tipo))}" + '\n']  # Header
     for linha in lista:
         linha_formatada = ';'.join(linha)
-        lista_csv.append(linha_formatada) # Linhas
+        lista_csv.append(linha_formatada)  # Linhas
 
     if os.path.exists(caminho):
         with open(file=f'{caminho}/{tipo}.csv', mode='w') as csv_gravacao:
