@@ -84,6 +84,7 @@ def filtrar_tecnicos(window, values):
 
     window['-TABLE_CON_TECNICOS-'].update(lista_tecnicos)
 
+
 # TODO: Fazer
 def filtrar_reservas(window, values):
     lista_reservas = cadastro.get_cadastrados('reserva')
@@ -152,9 +153,9 @@ def atualiza_imagem_selecao(lista, tipo, linha_selecionada, window):
 
 def baixar_csv(lista, caminho, tipo, sg):
     lista_csv = []
-    header = ';'.join(components.get_table_header(tipo)) # Header
+    header = ';'.join(components.get_table_header(tipo))  # Header
     print(header)
-    header = header+'\n'
+    header = header + '\n'
     lista_csv.append(header)
     for linha in lista:
         linha_formatada = ';'.join(linha)

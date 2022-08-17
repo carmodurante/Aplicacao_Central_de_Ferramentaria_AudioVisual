@@ -64,13 +64,15 @@ if __name__ == '__main__':
 
                     # Seleção Tabela Cadastro
                     elif type(event) is tuple and event[0] == '-TABLE_CAD_FERRAMENTAS-':
-                        if event[2][0] is not None and event[2][0] >= 0:  # Linha selecionada Tabela de Cadastro de Ferramentas
+                        if event[2][0] is not None and event[2][
+                            0] >= 0:  # Linha selecionada Tabela de Cadastro de Ferramentas
                             linha_selecionada = event[2][0]
                             cadastros.carregar_dados_tela(cadastros.get_cadastrados('ferramenta')[event[2][0]],
                                                           'cadastro_ferramenta', window)
 
                     elif type(event) is tuple and event[0] == '-TABLE_CAD_TECNICOS-':
-                        if event[2][0] is not None and event[2][0] >= 0:  # Linha selecionada Tabela de Cadastro de Tecnicos
+                        if event[2][0] is not None and event[2][
+                            0] >= 0:  # Linha selecionada Tabela de Cadastro de Tecnicos
                             linha_selecionada = int(event[2][0])
                             cadastros.carregar_dados_tela(cadastros.get_cadastrados('tecnico')[event[2][0]],
                                                           'cadastro_tecnico', window)
