@@ -34,7 +34,7 @@ def layout_reserva(lista_cadastrado_reservas):
                                     element_justification='left', expand_x=True, pad=(10, 10))],
                           [sg.Table(values=lista_cadastrado_reservas,
                                     headings=components.get_table_header('Reserva'),
-                                    max_col_width=35,
+                                    max_col_width=70,
                                     auto_size_columns=True,
                                     display_row_numbers=True,
                                     justification='left',
