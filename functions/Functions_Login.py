@@ -7,11 +7,11 @@ import PySimpleGUI as sg
 def progress_bar(texto_popup):
     sg.theme('Black')
     layout = [[sg.Text(texto_popup)],
-              [sg.ProgressBar(1800, orientation='h', size=(30, 30), key='progbar')],
+              [sg.ProgressBar(1200, orientation='h', size=(30, 30), key='progbar')],
               [sg.Cancel()]]
 
     window = sg.Window('Executando...', layout)
-    for i in range(1800):
+    for i in range(1200):
         event, values = window.read(timeout=1)
         if event == 'Cancel' or event == sg.WIN_CLOSED:
             break
