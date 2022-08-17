@@ -1,16 +1,23 @@
 Missão Certificação - Central de Ferramentas AudioVisual - Estácio
 ===
+## Informações do Curso
+---
+* ### Faculdade Estácio
+* Curso: Desenvolvimento Full Stack
+* Mundo: 1
+* Turma: 9001
+* Semestre: 1º
+* Grupo: DevTeam 5
+* 
 ## Membros da Equipe e Tutoria
 ---
-
 ### Equipe
 
-* Carmo Durante Neto
-* Gustavo Pereira Arruda
+* Aluno: Carmo Durante Neto
+* Matrícula: 202208090583
 
 ### Tutotes
 
-* Professor: André Sobral
 * Mestre dos Magos: Roberto Maia
 
 ## Objetivo
@@ -51,23 +58,21 @@ porte.
 
 ### ✔ Obrigatórios
 
-- [ ] Cadastro de ferramentas
-- [ ] Cadastro de técnicos
-- [ ] Consulta as ferramentas cadastradas
-- [ ] Consulta dos técnicos cadastrados
+- [X] Cadastro de ferramentas
+- [X] Cadastro de técnicos
+- [X] Consulta as ferramentas cadastradas
+- [X] Consulta dos técnicos cadastrados
 
 ### 🎉🙌 Bônus
 
-- [ ] Cadastro de reserva de ferramenta
-- [ ] Consulta de reservas de ferramentas
-- [ ] Impressão das reservas de ferramentas
+- [X] Cadastro de reserva de ferramenta
+- [X] Consulta de reservas de ferramentas
+- [X] Baixar CSV das reservas, ferramentas e técnicos
 
 ## Fluxo e Funcionalidades
 ---
 
 ### 📜 Fluxograma das Telas
-
-![](https://i.imgur.com/gN55fVT.png)
 
 ### 🔜 Descrição das Funcionalidades
 
@@ -114,7 +119,6 @@ porte.
 |tipo|Tipo da Ferramenta|string|Nao|elétrica, mecânica, segurança|
 |material|Material da Ferramenta|string|Nao|ferro, madeira, plástico, borracha|
 |tempo_reserva|Tempo máximo de reserva|string|Nao|Mascara para Horas|
-|status_reserva| Status Reserva |boolean|Nao|Se está reservado ou não|
 
 ---
 
@@ -137,15 +141,11 @@ porte.
 | id_reserva |ID Sequencial da reserva| int| Sim     |  Código gerado de forma automática pelo sistema|
 | id_ferramenta | ID Sequencial da Ferramenta     | int| Sim |Código gerado de forma automática pelo sistema|
 | id_cpf | CPF do Técnico   | int     | Sim     |  Mascara de CPF|
-| data_reserva |Data que foi planejada a reserva|date|Nao|Mascara de Datas|
-| hora_reserva |Hora que foi planejada a reserva|time|Nao|Mascara de Horas|
 | data_retirada_reserva |Data ferramenta retirada|date|Nao|Mascara de Datas|
 | hora_retirada_reserva |Hora ferramente retirada|time|Nao|Mascara de Horas|
 | data_devolução_reserva |Data ferramenta devolvida|date|Nao|Mascara de Datas|
 | hora_devolução_reserva |Hora ferramente devolvida|time|Nao|Mascara de Horas|
-| data_devolução_programada |Data ferramenta programada pra devolução|date|Nao|Mascara de Datas|
-| hora_devolução_programada |Hora ferramente programada pra devolucao|time|Nao|Mascara de Horas|
-| status |Status da Reserva|string|Nao|Em andamento, Em atraso, Reservado (Valor gerado de acordo com as datas) |
+| emergencial|Reserva Emergencial|string|Nao| Em caso de reservas emegerciais o tempo de antecedencia é ignorado|
 
 ---
 ## Linha do Tempo do Projeto
@@ -153,24 +153,27 @@ porte.
 
 ```mermaid
 gantt
-    title Timeline
+    title Linha do Tempo
     section Requisitos
     Documentação  :a1, 2022-06-20, 10d
-    Análise       :a1  , 5d
+    Análise do Aplicaçao :2d
+    Arquitetura     :5d
     
-    section Telas
-    Criação Layout  :a1, 2022-06-30, 10d
-    Funções Telas   :after a1  , 10d
+    section Funcionalidades
+    Regra de Negocio  :a2, 2022-06-30, 10d
+    Funcoes da Tela   :after a2  , 45d
     
-    section Aplicações
-    Cadastro 1      :2022-07-15  , 5d
-    Cadastro 2      : 5d
-    Cadastro 3      : 5d
-    Cadastro 4      : 5d
+    section Layout
+    Cadastro Ferramenta      :a3, 2022-07-10  , 5d
+    Cadastro Tecnicos      :5d
+    Cadastro Reserva      :5d
+    Consulta Ferramenta      :5d
+    Consulta Tecnicos      :5d
+    Consulta Reservas      :5d
     
-    section Banco de Dados
-    Definição  :a1, 2022-06-30, 8d
-    Integração   :after a1  , 30d
+    section Sistema de Arquivos
+    Definição  :a4, 2022-07-30, 8d
+    Integração   :after a4  , 25d
 ```
 
 ###### tags: `Documentation` `Projects` `Python`
