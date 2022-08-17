@@ -1,23 +1,19 @@
----
-title: 'Missão Certificação - Central de Ferramentaria AudioVisual'
-disqus: hackmd
----
-
-##  Missão Certificação - Central de Ferramentas AudioVisual
-<center><img src="https://i.imgur.com/yy0xmSC.png" width="200"></center>
-
+<p align="center"><img align="center" src="https://i.imgur.com/yy0xmSC.png" width="250"></img><p/></br>
+   
+# Central de Ferramentas AudioVisual
 ## Como Usar e Depências
 ---
 * Link: [Vídeo da Aplicação em Funcionamento](https://github.com/carmodurante/Aplicacao_Central_de_Ferramentaria_AudioVisual)
+ 
 * Bibliotecas Necessárias:
-    * > Pillow	9.2.0	9.2.0
-        PySimpleGUI	4.60.1	4.60.3
-        numpy	1.23.1	1.23.2
-        pip	22.2	22.2.2
-        setuptools	63.2.0	65.0.2
-        tkTimePicker	2.0.2	2.0.2
-        validate-docbr	1.10.0	1.10.0
-        wheel	0.37.1	0.37.1
+
+      Pillow         9.2.0	
+      PySimpleGUI    4.60.1
+      numpy          1.23.1
+      pip            22.2
+      setuptools     63.2.0
+      tkTimePicker   2.0.2	
+      validate-docbr 1.10.0
 
 ## Informações do Curso
 ---
@@ -26,21 +22,21 @@ disqus: hackmd
 * Turma: 9001
 * Semestre: 1º
 * Grupo: DevTeam 5
-## Membros da Equipe e Tutoria
+## Membros da Equipe e Professor
 ---
 ### Equipe
 
 * Aluno: Carmo Durante Neto
 * Matrícula: 202208090583
 
-### Tutotes
+### Professor
 
 * Mestre dos Magos: Roberto Maia
 
 ## Objetivo
 ---
 ### 📌 Objetivo da Aplicação
-Desenvolver uma aplicação para gerenciamento de ferramentas em um ambiente de produção de conteúdo audiovisual de grande porte.
+      Desenvolver uma aplicação para gerenciamento de ferramentas em um ambiente de produção de conteúdo audiovisual de grande porte.
 
 ## Contexto Geral da Aplicação e Processo
 ---
@@ -68,7 +64,7 @@ Desenvolver uma aplicação para gerenciamento de ferramentas em um ambiente de 
 - [X] Cadastro de técnicos
 - [X] Consulta as ferramentas cadastradas
 - [X] Consulta dos técnicos cadastrados
-- 
+
 ### 🎉🙌 Bônus
 - [X] Cadastro de reserva de ferramenta
 - [X] Consulta de reservas de ferramentas
@@ -76,6 +72,7 @@ Desenvolver uma aplicação para gerenciamento de ferramentas em um ambiente de 
 
 ## Fluxo e Funcionalidades
 ---
+
 ### ⬅️⬆️ Fluxo das Telas
 
 ```mermaid
@@ -126,7 +123,6 @@ graph LR;
 |tipo|Tipo da Ferramenta|string|Nao|elétrica, mecânica, segurança|
 |material|Material da Ferramenta|string|Nao|ferro, madeira, plástico, borracha|
 |tempo_reserva|Tempo máximo de reserva|string|Nao|Mascara para Horas|
-|status_reserva| Status Reserva |boolean|Nao|Se está reservado ou não|
 
 ---
 
@@ -146,12 +142,13 @@ graph LR;
 | -------- | -------- | -------- | -------- | -------- |
 | id_reserva |ID Sequencial da reserva| int| Sim     |  Código gerado de forma automática pelo sistema|
 | id_ferramenta | ID Sequencial da Ferramenta     | int| Sim |Código gerado de forma automática pelo sistema|
-| id_cpf | CPF do Técnico   | int     | Sim     |  Mascara de CPF|
-| data_retirada_reserva |Data ferramenta retirada|date|Nao|Mascara de Datas|
+| id_cpf | CPF do Técnico   | int     | Sim     |  |
+| nome| Nome do Técnico   | string    | Sim     |  |
+| Descricao | Descricao da solicitação|String|Nao||
 | hora_retirada_reserva |Hora ferramente retirada|time|Nao|Mascara de Horas|
 | data_devolução_reserva |Data ferramenta devolvida|date|Nao|Mascara de Datas|
 | hora_devolução_reserva |Hora ferramente devolvida|time|Nao|Mascara de Horas|
-| reserva_emer |Reserva de Emergencia|Boolean|Nao| Reserva de Emergencia Ignora a Validação de Data, porém é necessário ter estoque |
+| emergencial |Reserva de Emergencia|Boolean|Nao| Reserva de Emergencia Ignora a Validação de Data, porém é necessário ter estoque |
 
 ---
 
@@ -163,8 +160,7 @@ graph LR;
 | senha | Senha | string | Nao |  Nome do Usuário|
 | admin | Administrador | boolean | Nao |  Usuário Administrador ?|
 
-    1. O usuário ou email não podem repetir na hora do cadastro.
-    2. Somente o usuário Administrador pode fazer cadastro e consultsa
+> Obs: Somente o usuário Administrador pode fazer cadastro e reserva.
     
 ## Linha do Tempo do Projeto
 ---
@@ -194,7 +190,7 @@ gantt
 ```
 
 ## Links e Referências
----
+
 **Referências** 
  >[GitHub - Central de Ferramentaria](https://github.com/carmodurante/Aplicacao_Central_de_Ferramentaria_AudioVisual)
 
