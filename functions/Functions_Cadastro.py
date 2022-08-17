@@ -81,6 +81,10 @@ def get_screen_keys(tipo):
     elif tipo == 'cadastro_tecnico':
         lista_keys = ['tCPF', 'tNome', 'tTelefone', 'tTurno', 'tEquipe']
 
+    elif tipo == 'cadastro_reserva':
+        lista_keys = ['rFerramenta', 'rCPF', 'rNomeTecnico', 'rDescricao', 'rDTRetirada', 'rHRRetirada', 'rMinRetirada',
+                      'rDTDevol', 'rHRDevol', 'rMinDevol']
+
     return lista_keys
 
 
@@ -124,6 +128,8 @@ def deletar_registro(index, tipo, sg):
 def cadastrar_ferramenta(values, sg):
     try:
         id_ferramenta = get_new_sequencial_id('ferramenta')
+        if not validar_preenchido('cadastro_ferramenta', values, sg):
+            return
         with open("content/data/ferramenta.csv", "a") as ferramentas_arquivo:
             lista_ferramenta = f'{id_ferramenta}' \
                                f';{values["fDescricao"].strip()}' \
@@ -157,6 +163,8 @@ def cadastrar_ferramenta(values, sg):
 def cadastrar_tecnico(values, sg):
     try:
         # Validacoes de CPF e Celular/Telefone
+        if not validar_preenchido('cadastro_tecnico', values, sg):
+            return
         if not utils.validar_cpf(values["tCPF"].strip(), True):
             sg.popup("CPF Inválido ou já Cadastrado", title='Error', font=8)
             return
@@ -190,6 +198,8 @@ def cadastrar_tecnico(values, sg):
 
 def cadastrar_reserva(values, sg):
     try:
+        if not validar_preenchido('cadastro_reserva', values, sg):
+            return
 
         if utils.validar_reserva(values["rFerramenta"].strip(), values["rCPF"].strip(), values, sg):
 
@@ -297,3 +307,10 @@ def modificar_tecnico(index, values, sg):
     except Exception:
         traceback.print_exc()
         sg.popup("Erro ao modificar tecnico", title='Error', font=8)
+
+
+def validar_preenchido(tipo, values, sg):
+    for key in get_screen_keys(tipo):
+        if values[key].strip() == '':
+            sg.popup(f"o Campo {key} deve ser preenchido!", title='Error', font=8)
+            return False
