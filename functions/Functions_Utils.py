@@ -108,7 +108,7 @@ def validar_reserva(ferramenta, cpf, values, sg):
                                                       month=int(linha[8][3:5]),
                                                       day=int(linha[8][:2]),
                                                       hour=int(linha[9]),
-                                                      minute=int(linha[101]))
+                                                      minute=int(linha[10]))
                 # Se a data de retirada estiver entre uma reserva
                 if datatime_devol_db >= datatime_retirada >= datatime_retirada_db:
                     sg.popup("Data de Retirada possui períodos conflitantes com outra reserva.", title='Error', font=8)
