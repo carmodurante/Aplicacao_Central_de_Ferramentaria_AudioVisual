@@ -1,4 +1,4 @@
-<p align="center"><img align="center" src="https://i.imgur.com/yy0xmSC.png" width="250"></img><p/></br>
+<p align="center"><img align="center" src="https://github.com/carmodurante/carmodurante/blob/17b6d7166b386f1a6c34c82b1358293ec1d4853f/imagens/pngwing.com.png" width="300"></img><p/></br>
    
 # Central de Ferramentas AudioVisual
 ## Como Usar e Depências
