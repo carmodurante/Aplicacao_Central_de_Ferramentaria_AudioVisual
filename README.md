@@ -37,7 +37,7 @@
 ## Objetivo
 ---
 ### 📌 Objetivo da Aplicação
-      Desenvolver uma aplicação para gerenciamento de ferramentas em um ambiente de produção de conteúdo audiovisual de grande porte.
+   > Desenvolver uma aplicação para gerenciamento de ferramentas em um ambiente de produção de conteúdo audiovisual de grande porte.
 
 ## Contexto Geral da Aplicação e Processo
 ---
