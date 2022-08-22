@@ -58,8 +58,8 @@ def layout_cadastro_tecnicos(lista_cadastrado_tecnicos):
     left_column_tecnicos = [[sg.Text('CPF', size=(18, 1)), sg.Input('', key='tCPF', size=15)],
                             [sg.Text('Nome Completo', size=(18, 1)), sg.Input('', key='tNome')],
                             [sg.Text('Celular/Rádio', size=(18, 1)), sg.Input('', key='tTelefone', size=11)],
-                            [sg.Text('Turno', size=(18, 1)), sg.Combo(['Manhã', 'Tarde', 'Noite'],
-                                                                      default_value='Manhã', key='tTurno', size=9)],
+                            [sg.Text('Turno', size=(18, 1)), sg.Combo(['Manha', 'Tarde', 'Noite'],
+                                                                      default_value='Manha', key='tTurno', size=9)],
                             [sg.Text('Nome da Equipe', size=(18, 1)), sg.Input('', key='tEquipe')]]
 
     right_column_tecnicos = [[sg.Text('Imagem do Técnico', size=(18, 1)), sg.Input('', key="tImagem"),
