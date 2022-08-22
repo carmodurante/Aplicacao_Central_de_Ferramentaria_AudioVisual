@@ -17,6 +17,8 @@
       setuptools     63.2.0
       tkTimePicker   2.0.2	
       validate-docbr 1.10.0
+      
+* Instalar as bibliotecas e executar o file Principal.py localizado na raíz da aplicacão.
 
 ## Informações do Curso
 ---
