@@ -5,7 +5,7 @@
 ## Como Usar e Depências
 ---
 
-* Link: [Vídeo da Aplicação em Funcionamento](https://github.com/carmodurante/Aplicacao_Central_de_Ferramentaria_AudioVisual)
+* Link: [Vídeo da Aplicação em Funcionamento](https://youtu.be/fSOs5JsaHp4)
 * Documentação Completa: [Documentação](https://hackmd.io/@carmodurante/HJOtWkM9c)
 
 * Bibliotecas Necessárias:
