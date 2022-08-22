@@ -5,7 +5,7 @@
 ## Como Usar e Depências
 ---
 
-* Link: [Vídeo da Aplicação em Funcionamento](https://github.com/carmodurante/Aplicacao_Central_de_Ferramentaria_AudioVisual)
+* Link: [Vídeo da Aplicação em Funcionamento](https://youtu.be/fSOs5JsaHp4)
 * Documentação Completa: [Documentação](https://hackmd.io/@carmodurante/HJOtWkM9c)
 
 * Bibliotecas Necessárias:
@@ -17,6 +17,8 @@
       setuptools     63.2.0
       tkTimePicker   2.0.2	
       validate-docbr 1.10.0
+      
+* Instalar as bibliotecas e executar o file Principal.py localizado na raíz da aplicacão.
 
 ## Informações do Curso
 ---
