@@ -8,7 +8,7 @@ import functions.Functions_Utils as utils
 def get_cadastrados(tipo):
     lista_cadastrados = []
     try:
-        with open(f'content/data/{tipo}.csv', "r") as cadastrados_arquivo:
+        with open(f'content/data/{tipo}.csv', "r", encoding='utf-8') as cadastrados_arquivo:
             for linha in cadastrados_arquivo:
                 linha_separada = linha.split(";")
                 lista_cadastrados.append(linha_separada)
@@ -98,7 +98,7 @@ def deletar_registro(index, tipo, sg):
             tipo = 'reserva'
             historico = True
 
-        with open(file=f'content/data/{tipo}.csv', mode='r') as lista_leitura:
+        with open(file=f'content/data/{tipo}.csv', mode='r', encoding='utf-8') as lista_leitura:
             for linhas in lista_leitura:
                 new_list.append(linhas)
             linha_deletada = new_list.pop(index)
@@ -113,11 +113,11 @@ def deletar_registro(index, tipo, sg):
             if os.path.exists(filename):  # Deleta imagem se ja existir
                 os.remove(filename)
 
-        with open(file=f'content/data/{tipo}.csv', mode='w') as lista_gravacao:
+        with open(file=f'content/data/{tipo}.csv', mode='w', encoding='utf-8') as lista_gravacao:
             lista_gravacao.writelines(new_list)
 
         if historico:
-            with open("content/data/reserva_hist.csv", "a") as reserva_hist_arquivo:
+            with open("content/data/reserva_hist.csv", "a", encoding='utf-8') as reserva_hist_arquivo:
                 reserva_hist_arquivo.writelines(linha_deletada)
 
     except Exception:
@@ -130,7 +130,7 @@ def cadastrar_ferramenta(values, sg):
         id_ferramenta = get_new_sequencial_id('ferramenta')
         if not validar_preenchido('cadastro_ferramenta', values, sg):
             return
-        with open("content/data/ferramenta.csv", "a") as ferramentas_arquivo:
+        with open("content/data/ferramenta.csv", "a", encoding='utf-8') as ferramentas_arquivo:
             lista_ferramenta = f'{id_ferramenta}' \
                                f';{values["fDescricao"].strip()}' \
                                f';{values["fCodFabricante"].strip()}' \
@@ -172,7 +172,7 @@ def cadastrar_tecnico(values, sg):
             sg.popup("Celular/Telefone Inválido", title='Error', font=8)
             return
 
-        with open("content/data/tecnico.csv", "a") as tecnico_arquivo:
+        with open("content/data/tecnico.csv", "a", encoding='utf-8') as tecnico_arquivo:
             lista_tecnico = f'{values["tCPF"].strip()}' \
                             f';{values["tNome"].strip()}' \
                             f';{values["tTelefone"].strip()}' \
@@ -203,7 +203,7 @@ def cadastrar_reserva(values, sg):
 
         if utils.validar_reserva(values["rFerramenta"].strip(), values["rCPF"].strip(), values, sg):
 
-            with open("content/data/reserva.csv", "a") as reserva_arquivo:
+            with open("content/data/reserva.csv", "a", encoding='utf-8') as reserva_arquivo:
                 id_reserva = get_new_sequencial_id('reserva')
                 lista_reserva = f'{id_reserva}' \
                                 f';{values["rFerramenta"].strip()}' \
@@ -231,7 +231,7 @@ def cadastrar_reserva(values, sg):
 
 def modificar_ferramenta(index, values, sg):
     try:
-        with open("content/data/ferramenta.csv", "r") as ferramentas_leitura:
+        with open("content/data/ferramenta.csv", "r", encoding='utf-8') as ferramentas_leitura:
             new_list = []
             for linhas in ferramentas_leitura:
                 new_list.append(linhas)
@@ -251,7 +251,7 @@ def modificar_ferramenta(index, values, sg):
                                f';{values["fTipo"].strip()}' \
                                f';{values["fMaterial"].strip()}\n'
 
-        with open("content/data/ferramenta.csv", "w") as ferramentas_gravacao:
+        with open("content/data/ferramenta.csv", "w", encoding='utf-8') as ferramentas_gravacao:
             new_list.insert(index, lista_ferramenta)  # Insere valor novo da tela
             ferramentas_gravacao.writelines(new_list)
 
@@ -278,7 +278,7 @@ def modificar_tecnico(index, values, sg):
             sg.popup("Celular/Telefone Inválido", title='Error', font=8)
             return
 
-        with open("content/data/tecnico.csv", "r") as tecnicos_leitura:
+        with open("content/data/tecnico.csv", "r", encoding='utf-8') as tecnicos_leitura:
             new_list = []
             for linhas in tecnicos_leitura:
                 new_list.append(linhas)
@@ -292,7 +292,7 @@ def modificar_tecnico(index, values, sg):
                             f';{values["tTurno"].strip()}' \
                             f';{values["tEquipe"].strip()}\n'
 
-        with open("content/data/tecnico.csv", "w") as tecnicos_gravacao:
+        with open("content/data/tecnico.csv", "w", encoding='utf-8') as tecnicos_gravacao:
             new_list.insert(index, lista_tecnico)  # Insere valor novo da tela
             tecnicos_gravacao.writelines(new_list)
 

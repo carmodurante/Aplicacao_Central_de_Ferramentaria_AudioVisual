@@ -158,5 +158,5 @@ def baixar_csv(lista, caminho, tipo, sg):
         lista_csv.append(linha_formatada)  # Linhas
 
     if os.path.exists(caminho):
-        with open(file=f'{caminho}/{tipo}.csv', mode='w') as csv_gravacao:
+        with open(file=f'{caminho}/{tipo}.csv', mode='w', encoding='utf-8') as csv_gravacao:
             csv_gravacao.writelines(lista_csv)
