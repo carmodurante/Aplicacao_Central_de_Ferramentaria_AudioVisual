@@ -1,6 +1,6 @@
 <p align="center"><img align="center" src="https://github.com/carmodurante/carmodurante/blob/17b6d7166b386f1a6c34c82b1358293ec1d4853f/imagens/pngwing.com.png" width="300"></p>
 
-# Central de Ferramentas AudioVisual
+# Central de Ferramentaria AudioVisual
 
 ## Como Usar e Depências
 ---
